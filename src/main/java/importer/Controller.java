@@ -34,6 +34,7 @@ public class Controller {
             newItems.add(item);
             counter++;
             logger.info("Built item " + counter + " of total " + total);
+
         }
         session.close();
         new ItemService().saveItems(newItems);

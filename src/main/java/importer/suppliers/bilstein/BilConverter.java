@@ -63,8 +63,10 @@ public class BilConverter {
 
         String[] split = allPics.split("\r\n");
         for (String s : split) {
-            ItemPic pic = convertToPic(s, item);
-            pics.add(pic);
+           if (s.length()>0){
+               ItemPic pic = convertToPic(s, item);
+               pics.add(pic);
+           }
         }
     }
 
