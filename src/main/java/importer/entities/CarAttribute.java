@@ -36,6 +36,14 @@ public class CarAttribute {
                 '}';
     }
 
+    public CarAttribute(String carAttName, String carAttValue) {
+        this.carAttName = carAttName;
+        this.carAttValue = carAttValue;
+    }
+
+    public CarAttribute() {
+    }
+
     public int getCarAttID() {
         return carAttID;
     }

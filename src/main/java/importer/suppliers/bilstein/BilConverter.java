@@ -44,9 +44,10 @@ public class BilConverter {
         setItemType(item, shock);
         setItemAttributes(item, shock);
         setItemPics(item, shock);
+      //  setItemParams(item, shock);
     }
 
-    private void setItemPics(ProductionItem item, BilShock shock) {
+       private void setItemPics(ProductionItem item, BilShock shock) {
         Set<ItemPic> pics = new HashSet<>();
         item.setPics(pics);
 
@@ -70,9 +71,9 @@ public class BilConverter {
         }
     }
 
-    private ItemPic convertToPic(String mainImgLink, ProductionItem item) {
+    private ItemPic convertToPic(String imgLink, ProductionItem item) {
         ItemPic result = new ItemPic();
-        result.setPicUrl(mainImgLink);
+        result.setPicUrl(imgLink);
         result.setItem(item);
 
         return result;
@@ -210,8 +211,10 @@ public class BilConverter {
         Set<BilSpec>specs = shock.getBilSpecs();
         specs.forEach(spec->{
             ItemAttribute attribute = new ItemAttribute();
+            checkForLength(spec, item);//sets lengths to item, if present. Also modifies spec name in that case
             attribute.setItemAttName(spec.getSpecName());
             attribute.setItemAttValue(spec.getSpecValue());
+          //  modifyLengthAttribute(spec, attribute);
             shockParameters.add(attribute);
         });
 
@@ -221,6 +224,41 @@ public class BilConverter {
         shockParameters.add(attribute);
 
         item.setItemAttributes(shockParameters);
+    }
+
+    private void checkForLength(BilSpec spec, ProductionItem item) {
+        String name = spec.getSpecName();
+        if (name.equals("Extended Length (IN)")){
+           spec.setSpecName("Extended Length");
+           double length = checkLengthFormat(spec);
+           item.getParams().setExtLength(length);
+        }
+        if (name.equals("Collapsed Length (IN)")){
+            spec.setSpecName("Collapsed Length");
+            double length = checkLengthFormat(spec);
+            item.getParams().setColLength(length);
+        }
+    }
+
+    private double checkLengthFormat(BilSpec spec) {
+        double length = 0d;
+        try {
+            length = Double.parseDouble(spec.getSpecValue());
+        }
+        catch (NumberFormatException ignored){
+            logger.error("illegal length format at spec " + spec);
+        }
+
+        return length;
+    }
+
+
+    private void modifyLengthAttribute(BilSpec spec, ItemAttribute attribute) {
+        String name = spec.getSpecName();
+        if (name.equals("Collapsed Length (IN)")||name.equals("Extended Length (IN)")){
+            name = name.replace(" (IN)", "");
+            attribute.setItemAttName(name);
+        }
     }
 
     private Set<ItemAttribute> getShockParameters(BilShock shock) {

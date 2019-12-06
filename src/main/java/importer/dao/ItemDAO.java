@@ -4,6 +4,7 @@ import importer.HibernateUtil;
 import importer.entities.ItemAttribute;
 import importer.entities.ProductionFitment;
 import importer.entities.ProductionItem;
+import importer.suppliers.keystone.entities.KeyItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -48,6 +49,33 @@ public class ItemDAO {
             transaction = session.getTransaction();
             transaction.begin();
             session.save(item);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static List<ProductionItem> getAllItemsByMake(String itemMake, Session session) {
+        List<ProductionItem> allItemList = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionItem> crQ = builder.createQuery(ProductionItem.class);
+        Root<ProductionItem> root = crQ.from(ProductionItem.class);
+        crQ.where(builder.equal(root.get("itemManufacturer"), itemMake));
+        Query q = session.createQuery(crQ);
+        allItemList = q.getResultList();
+
+        return allItemList;
+    }
+
+    public static void updateItem(ProductionItem item, Session prodSession) {
+        Transaction transaction = null;
+        try {
+            transaction = prodSession.getTransaction();
+            transaction.begin();
+            prodSession.update(item);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package importer.dao;
 
+import importer.HibernateUtil;
 import importer.entities.CarAttribute;
 import importer.entities.ProductionCar;
 import org.apache.logging.log4j.LogManager;
@@ -107,4 +108,40 @@ public class CarDAO {
     }
 
 
+    public static String getExistingModel(String rawModelStr) {
+        logger.info(rawModelStr);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionCar> crQ = builder.createQuery(ProductionCar.class);
+        Root<ProductionCar> root = crQ.from(ProductionCar.class);
+        crQ.where(builder.equal(root.get("model"), rawModelStr));
+        Query q = session.createQuery(crQ);
+        List<ProductionCar> resultList = q.getResultList();
+        session.close();
+        if (resultList.size()!=0){
+            return rawModelStr;
+        }
+
+        return null;
+    }
+
+    public static List<ProductionCar> getSimilarCarsByMMY(ProductionCar car, int carYear) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<ProductionCar> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionCar> crQ = builder.createQuery(ProductionCar.class);
+        Root<ProductionCar> root = crQ.from(ProductionCar.class);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.lessThanOrEqualTo(root.get("yearStart"), carYear));
+        predicates.add(builder.greaterThanOrEqualTo(root.get("yearFinish"), carYear));
+        predicates.add(builder.equal(root.get("make"), car.getMake()));
+        predicates.add(builder.equal(root.get("model"), car.getModel()));
+        Predicate[] preds = predicates.toArray(new Predicate[0]);
+        crQ.where(builder.and(preds));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+        session.close();
+
+        return result;
+    }
 }

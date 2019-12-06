@@ -10,11 +10,22 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 public class ItemService {
     private static final Logger logger = LogManager.getLogger(ItemService.class.getName());
+
+    public static Set<ProductionItem> getAllItemsByMake(String itemMake, Session prodSession) {
+        List<ProductionItem> itemList = ItemDAO.getAllItemsByMake(itemMake, prodSession);
+
+        return new HashSet<>(itemList);
+    }
+
+    public static void updateItem(ProductionItem item, Session prodSession) {
+        ItemDAO.updateItem(item, prodSession);
+    }
 
     public void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
