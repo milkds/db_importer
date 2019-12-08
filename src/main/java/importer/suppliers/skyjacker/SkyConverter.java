@@ -7,7 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class SkyConverter {
@@ -43,14 +45,119 @@ public class SkyConverter {
     private Set<FitmentAttribute> getFitmentAttributes(SkyFitment skyFitment) {
         Set<FitmentNote> notes = skyFitment.getFitNotes();
         Set<FitmentAttribute> attributes = new HashSet<>();
+        Map<String, String> fNoteMap = getFitNoteMap();//k = wrong value, v = right value;
         notes.forEach(note->{
             FitmentAttribute attribute = new FitmentAttribute();
             attribute.setFitmentAttName("Note");
-            attribute.setFitmentAttValue(note.getFitNote());
+            String fNote = note.getFitNote();
+            if (fNoteMap.containsKey(fNote)){
+                fNote = fNoteMap.get(fNote);
+            }
+            if (fNote.equals("DELETE")){
+                return;
+            }
+            if (fNote.contains("Dual OE ")){
+                FitmentAttribute a1 = new FitmentAttribute();
+                a1.setFitmentAttName("Note");
+                a1.setFitmentAttValue("Dual OE");
+                attributes.add(a1);
+                fNote = fNote.replace("Dual OE ", "");
+                if (fNote.length()==0){
+                   return;
+                }
+            }
+            if (fNote.contains(" Forward of Axle")){
+                FitmentAttribute a1 = new FitmentAttribute();
+                a1.setFitmentAttName("Note");
+                a1.setFitmentAttValue("Forward of Axle");
+                attributes.add(a1);
+                fNote = fNote.replace(" Forward of Axle", "");
+            }
+
+            attribute.setFitmentAttValue(fNote);
             attributes.add(attribute);
         });
 
         return attributes;
+    }
+
+    private Map<String, String> getFitNoteMap() {
+        Map<String, String> result = new HashMap<>();
+        result.put("Rear with 7.5 in. Lif", "Rear with 7.5 in. Lift");
+        result.put("Rear with 5.5 in. Lif", "Rear with 5.5 in. Lift");
+        result.put("4WD", "DELETE");
+        result.put("Rear with 3 in.", "Rear with 3 in. Lift");
+        result.put("Rear with 2 in. L", "Rear with 2 in. Lift");
+        result.put("Rear with 2 in. Lif", "Rear with 2 in. Lift");
+        result.put("Rear with 1 in. L", "Rear with 1 in. Lift");
+        result.put("Rear with 4.5 in. Lif", "Rear with 4.5 in. Lift");
+        result.put("Rear with 4 in. Lif", "Rear with 4 in. Lift");
+        result.put("2WD", "DELETE");
+        result.put("1-2.5 inches of lift", "1-2.5 in. Lift");
+        result.put("RWD", "DELETE");
+        result.put("Rear with 5 in", "Rear with 5 in. Lift");
+        result.put("Front with 3.5 in.", "Front with 3.5 in. Lift");
+        result.put("Front Dual OE", "Dual OE "); //attention
+        result.put("Rear with 0.5", "Rear with 0.5 in. Lift");
+        result.put("Front with 5.5 in. Li", "Front with 5.5 in. Lift");
+        result.put("Front Dual OE with 2 in. Lift Forward o", "Front Dual OE with 2 in. Lift Forward of Axle");
+        result.put("Rear with 0 in.", "Rear with 0 in. Lift");
+        result.put("Rear with 4.5 i", "Rear with 4.5 in. Lift");
+        result.put("Rear with 5 in. Lif", "Rear with 5 in. Lift");
+        result.put("Rear with 3.5 in. Lif", "Rear with 3.5 in. Lift");
+        result.put("Rear with 8.5 in. Lif", "Rear with 8.5 in. Lift");
+        result.put("Rear with 6 in. L", "Rear with 6 in. Lift");
+        result.put("Rear with 1.5", "Rear with 1.5 in. Lift");
+        result.put("Rear with 5 in.", "Rear with 5 in. Lift");
+        result.put("Rear with 8 in", "Rear with 8 in. Lift");
+        result.put("Rear with 4 in. Li", "Rear with 4 in. Lift");
+        result.put("Rear with 8 in. Lif", "Rear with 8 in. Lift");
+        result.put("Rear with 9 in. Li", "Rear with 9 in. Lift");
+        result.put("Rear with 6.5 in", "Rear with 6.5 in. Lift");
+        result.put("Rear with 7 in. Li", "Rear with 7 in. Lift");
+        result.put("Rear with 5 in. Li", "Rear with 5 in. Lift");
+        result.put("Front with 9 in", "Front with 9 in. Lift");
+        result.put("Front Dual OE w", "Dual OE "); //attention
+        result.put("Front with 6 in", "Front with 6 in. Lift");
+        result.put("Rear with 0 in. Lif", "Rear with 0 in. Lift");
+        result.put("Front Dual OE with 5 in", "Front Dual OE with 5 in. Lift");
+        result.put("Front Dual OE with 7", "Front Dual OE with 7 in. Lift");
+        result.put("Front Dual OE with 7.5", "Front Dual OE with 7.5 in. Lift");
+        result.put("Front Dual OE with 4.", "Front Dual OE with 4.5 in. Lift");
+        result.put("Rear with 4.5 in.", "Rear with 4.5 in. Lift");
+        result.put("Rear with 1.5 in.", "Rear with 1.5 in. Lift");
+        result.put("Rear with 3 in. Li", "Rear with 3 in. Lift");
+        result.put("Front with 3 in.", "Front with 3 in. Lift");
+        result.put("Front Dual OE with", "Dual OE "); //attention
+        result.put("Front with 3", "Front with 3 in. Lift");
+        result.put("Rear with 4.5 in. Li", "Rear with 4.5 in. Lift");
+        result.put("Front with 5", "Front with 5. in Lift");
+        result.put("Front with 6", "Front with 6. in Lift");
+        result.put("Front with 6 in.", "Front with 6 in. Lift");
+        result.put("Front with 0.5 in. L", "Front with 0.5 in. Lift");
+        result.put("Front Dual OE with 2", "Front Dual OE with 2 in. Lift");
+        result.put("Front with 0", "Front with 0 in. Lift");
+        result.put("Rear with 3.5 in. L", "Rear with 3.5 in. Lift");
+        result.put("Rear with 3 in. Lif", "Rear with 3 in. Lift");
+        result.put("Front Dual OE with 6.5", "Front Dual OE with 6.5 in. Lift");
+        result.put("Rear with 1.5 in", "Rear with 1.5 in. Lift");
+        result.put("Rear with 2.5 in", "Rear with 2.5 in. Lift");
+        result.put("Rear with 8 in.", "Rear with 8 in. Lift");
+        result.put("Front Dual OE with 8.5 in. Lift Forw", "Front Dual OE with 8.5 in. Lift Forward Of Axle");
+        result.put("Rear with 4.5 in", "Rear with 4.5 in. Lift");
+        result.put("Rear with 0-1 in.", "Rear with 0-1 in. Lift");
+        result.put("Rear with 4 in.", "Rear with 4 in. Lift");
+        result.put("Rear with 1 in. Li", "Rear with 1 in. Lift");
+        result.put("Front with 7", "Front with 7 in. Lift");
+        result.put("Rear with 6 in. Li", "Rear with 6 in. Lift");
+        result.put("Front with 2.5 in.", "Front with 2.5 in. Lift");
+        result.put("Front with 7 in.", "Front with 7 in. Lift");
+        result.put("Rear with 3 in. L", "Rear with 3 in. Lift");
+        result.put("Rear with 2 in. Li", "Rear with 2 in. Lift");
+        result.put("Rear with 0.5 in. L", "Rear with 0.5 in. Lift");
+        result.put("Rear with 4.5-10 in.", "Rear with 4.5-10 in. Lift");
+
+        return result;
     }
 
     private ProductionCar buildProductionCar(String fitString, Session session) {
@@ -246,6 +353,82 @@ public class SkyConverter {
         setItemType(shock, item);
         setItemAttributes(shock, item);
         setItemPics(shock, item);
+        setShockParams(shock, item);
+    }
+
+    private void setShockParams(SkyShock shock, ProductionItem item) {
+        Set<ItemAttribute> itemAttributes = item.getItemAttributes();
+        ShockParameters params = new ShockParameters();
+        params.setItem(item);
+        item.setParams(params);
+        Map<String, String> mountMap = getMountMap(); //k = mount name from sj site, v = mount name from prod. db.
+        itemAttributes.forEach(itemAttribute -> {
+            String attName = itemAttribute.getItemAttName();
+            if (attName.equals("Collapsed Length")){
+                String val = itemAttribute.getItemAttValue();
+                double length = getLength(val, shock);
+                params.setColLength(length);
+            }
+            if (attName.equals("Extended Length")){
+                String val = itemAttribute.getItemAttValue();
+                double length = getLength(val, shock);
+                params.setExtLength(length);
+            }
+            if (attName.equals("Lower Mounting Code")){
+                String val = mountMap.get(itemAttribute.getItemAttValue());
+                if (val!=null&&val.length()>0){
+                    params.setLowerMount(val);
+                }
+            }
+            if (attName.equals("Upper Mounting Code")){
+                String val = mountMap.get(itemAttribute.getItemAttValue());
+                if (val!=null&&val.length()>0){
+                    params.setUpperMount(val);
+                }
+            }
+        });
+    }
+
+    private Map<String, String> getMountMap() {
+        Map<String, String> result = new HashMap<>();
+        result.put("ES25", "Eyelet");
+        result.put("ES34", "Eyelet");
+        result.put("ES82", "Eyelet");
+        result.put("ES24", "Eyelet");
+        result.put("ES36", "Eyelet");
+        result.put("ES113", "Eyelet");
+        result.put("Clevis", "Clevis");
+        result.put("EB4", "Eyelet");
+        result.put("BP4", "Bar Pin");
+        result.put("ES34, ES60", "Eyelet");
+        result.put("S1", "Stem");
+        result.put("ES60, ES113", "Eyelet");
+        result.put("ES22", "Eyelet");
+        result.put("ES37", "Eyelet");
+        result.put("BP13", "Bar Pin");
+        result.put("BP8", "Bar Pin");
+        result.put("ES33", "Eyelet");
+        result.put("BP12", "Bar Pin");
+        result.put("EB7", "Eyelet");
+        result.put("S38", "Stem");
+        result.put("ES31", "Eyelet");
+        result.put("S59", "Stem");
+        result.put("BP18", "Bar Pin");
+        result.put("ES27", "Eyelet");
+
+        return result;
+    }
+
+    private double getLength(String val, SkyShock s) {
+        double d = 0d;
+        try {
+            d = Double.parseDouble(val);
+        }
+        catch (NumberFormatException e){
+            logger.error("wrong length format for " + val + " at shock " + s);
+        }
+
+        return d;
     }
 
     private void setItemPics(SkyShock shock, ProductionItem item) {

@@ -67,6 +67,8 @@ public class Controller {
         int counter = 0;
         for (SkyShock shock : skyShocks) {
             if (shock.getSku()==null){
+                counter++;
+                logger.info("Built item " + counter + " of total " + total);
                 continue;
             }
             ProductionItem item = new SkyConverter().buildItem(shock, session);
