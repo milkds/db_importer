@@ -7,6 +7,8 @@ import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
 import importer.suppliers.bilstein.BilsteinDAO;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
+import importer.suppliers.keystone.KeyHibernateUtil;
+import importer.suppliers.keystone.KeySupplier;
 import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
@@ -23,10 +25,19 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        //importBilstein();
-        importSkyjacker();
-      //  TestClass.TestItemSave();
-      //  TestClass.testSplit();
+      //  importBilstein();
+        //importSkyjacker();
+        updateFromKeystone();
+    }
+
+    private static void updateFromKeystone() {
+        Session keySession = KeyHibernateUtil.getSession();
+        Session prodSession = HibernateUtil.getSessionFactory().openSession();
+        new KeySupplier().setLengthAndMounts(keySession, prodSession);
+        keySession.close();
+        prodSession.close();
+        HibernateUtil.shutdown();
+        KeyHibernateUtil.shutdown();
     }
 
     private static void importBilstein() {

@@ -100,19 +100,11 @@ public class KeySupplier {
         return prodItemMap;
     }
 
-    public void setLengthAndMounts(){
-        Session keySession = KeyHibernateUtil.getSession();
-        Session prodSession = HibernateUtil.getSessionFactory().openSession();
+    public void setLengthAndMounts(Session keySession, Session prodSession){
         Set<KeyItem> keyItems = KeyService.getAllItems(keySession);
         Map<String, ProductionItem> prodItemMap = getProdItemMap(prodSession);
         Set<ProductionItem> prodItemsToUpdate = checkItemsForUpdates(keyItems, prodItemMap);
         prodItemsToUpdate.forEach(prodItem-> ItemService.updateItem(prodItem, prodSession));
-
-        keySession.close();
-        prodSession.close();
-        HibernateUtil.shutdown();
-        KeyHibernateUtil.shutdown();
-
     }
 
     private Set<ProductionItem> checkItemsForUpdates(Set<KeyItem> keyItems, Map<String, ProductionItem> prodItemMap) {
