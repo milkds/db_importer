@@ -36,7 +36,7 @@ public class ProductionItem {
     private Set<ItemPic> pics = new HashSet<>();
 
     @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
-    private ShockParameters params = new ShockParameters();
+    private ShockParameters params;
 
 
     @Override

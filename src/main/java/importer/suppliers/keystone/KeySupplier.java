@@ -112,6 +112,7 @@ public class KeySupplier {
         int count = 0;
         int total = keyItems.size();
         for (KeyItem keyItem : keyItems) {
+            logger.debug("Checking item " + keyItem);
             ProductionItem currentProdItem = prodItemMap.get(keyItem.getPartNo());
             if (currentProdItem!=null){
                 boolean updateNeeded = iterateSpecs(currentProdItem, keyItem);
@@ -121,6 +122,9 @@ public class KeySupplier {
             }
 
             count++;
+            if (count==2){
+                break;
+            }
             logger.info("Checked item " + count + " of total " + total);
         }
 

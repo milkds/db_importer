@@ -209,6 +209,7 @@ public class BilConverter {
        // Set<ItemAttribute> shockParameters = getShockParameters(shock);
         Set<ItemAttribute> shockParameters = new HashSet<>();
         Set<BilSpec>specs = shock.getBilSpecs();
+        initParams(item);
         specs.forEach(spec->{
             ItemAttribute attribute = new ItemAttribute();
             checkForLength(spec, item);//sets lengths to item, if present. Also modifies spec name in that case
@@ -224,6 +225,12 @@ public class BilConverter {
         shockParameters.add(attribute);
 
         item.setItemAttributes(shockParameters);
+    }
+
+    private void initParams(ProductionItem item) {
+        ShockParameters params = new ShockParameters();
+        item.setParams(params);
+        params.setItem(item);
     }
 
     private void checkForLength(BilSpec spec, ProductionItem item) {
