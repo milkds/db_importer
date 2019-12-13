@@ -83,6 +83,34 @@ public class ItemDAO {
         }
     }
 
+    public static List<ItemAttribute> getItemAttributesByName(Session session, String name) {
+        List<ItemAttribute> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ItemAttribute> crQ = builder.createQuery(ItemAttribute.class);
+        Root<ItemAttribute> root = crQ.from(ItemAttribute.class);
+        crQ.where(builder.equal(root.get("itemAttName"), name));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+        logger.info("Got " + result.size() + " attributes");
+
+        return result;
+    }
+
+    public static void updateItemAttribute(Session session, ItemAttribute att) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            session.update(att);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
     /*public static void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;

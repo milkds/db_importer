@@ -27,6 +27,16 @@ public class ItemService {
         ItemDAO.updateItem(item, prodSession);
     }
 
+    public static void updateItemAttributes(String oldVal, String newVal) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<ItemAttribute> itemAtts = ItemDAO.getItemAttributesByName(session, oldVal);
+        itemAtts.forEach(itemAttribute -> {
+            itemAttribute.setItemAttName(newVal);
+            ItemDAO.updateItemAttribute(session, itemAttribute);
+        });
+        session.close();
+    }
+
     public void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;

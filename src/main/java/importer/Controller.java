@@ -26,8 +26,10 @@ public class Controller {
 
     public static void main(String[] args) {
      //   importBilstein();
-        importSkyjacker();
+     //   importSkyjacker();
       //  updateFromKeystone();
+      //  renameProdItemAttribute("","");
+        renameProdItemAttribute("Upper Mounting Code","Upper Mount");
     }
 
     private static void updateFromKeystone() {
@@ -81,6 +83,12 @@ public class Controller {
         HibernateUtil.shutdown();
 
 
+    }
+
+    private static void renameProdItemAttribute(String oldVal, String newVal){
+        ItemService.updateItemAttributes(oldVal, newVal);
+        HibernateUtil.shutdown();
+        logger.info("Update finished");
     }
 
 
