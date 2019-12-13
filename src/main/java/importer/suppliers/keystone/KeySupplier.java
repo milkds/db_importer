@@ -122,9 +122,6 @@ public class KeySupplier {
             }
 
             count++;
-            if (count==2){
-                break;
-            }
             logger.info("Checked item " + count + " of total " + total);
         }
 

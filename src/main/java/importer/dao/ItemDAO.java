@@ -32,12 +32,10 @@ public class ItemDAO {
         crQ.where(builder.and(preds));
         Query q = session.createQuery(crQ);
         ItemAttribute testAtt = null;
-        try {
-            testAtt = (ItemAttribute) q.getSingleResult();
+        List<ItemAttribute> attributes = q.getResultList();
+        if (attributes.size()>0){
+            testAtt = attributes.get(0);
             logger.debug("item attribute exists " + testAtt);
-        } catch (NoResultException e) {
-            logger.debug("item attribute doesn't exist " + attribute);
-            return null;
         }
 
         return testAtt;

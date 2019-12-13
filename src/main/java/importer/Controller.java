@@ -25,9 +25,9 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-      //  importBilstein();
-        //importSkyjacker();
-        updateFromKeystone();
+     //   importBilstein();
+        importSkyjacker();
+      //  updateFromKeystone();
     }
 
     private static void updateFromKeystone() {
@@ -51,7 +51,6 @@ public class Controller {
             newItems.add(item);
             counter++;
             logger.info("Built item " + counter + " of total " + total);
-
         }
         session.close();
         new ItemService().saveItems(newItems);
