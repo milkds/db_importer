@@ -26,7 +26,7 @@ public class ProductionCar {
     private String model;
 
     @Column(name = "CAR_SUBMODEL")
-    private String subModel = "base";
+    private String subModel = "N/A";
 
     @Column(name = "CAR_DRIVE")
     private String drive = "";

@@ -61,4 +61,11 @@ public class ItemAttribute {
     public void setItems(Set<ProductionItem> items) {
         this.items = items;
     }
+
+    public ItemAttribute(String itemAttName, String itemAttValue) {
+        this.itemAttName = itemAttName;
+        this.itemAttValue = itemAttValue;
+    }
+
+    public ItemAttribute() {}
 }

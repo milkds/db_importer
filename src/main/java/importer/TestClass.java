@@ -1,9 +1,20 @@
 package importer;
 
+import importer.dao.CarDAO;
 import importer.dao.ItemDAO;
 import importer.entities.*;
+import importer.suppliers.fox.FoxHibernateUtil;
+import importer.suppliers.fox.dao.FoxCarDAO;
+import importer.suppliers.fox.entities.FoxCar;
+import importer.suppliers.skyjacker.SkyConverter;
+import importer.suppliers.skyjacker.SkyDAO;
+import importer.suppliers.skyjacker.SkyHibernateUtil;
+import importer.suppliers.skyjacker.sky_entities.SkyFitment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.util.List;
+import java.util.Set;
 
 public class TestClass {
 
@@ -70,5 +81,52 @@ public class TestClass {
         String split[] = spl.split("\n");
         System.out.println(split.length);
         System.out.println(split[0].length());
+    }
+
+    public static void testFoxProdCarMerge(){
+        Set<FoxCar> allCars = FoxCarDAO.getAllCars();
+         allCars.forEach(foxCar->{
+           ProductionCar testProdCar = new ProductionCar();
+           String drive = foxCar.getDrive();
+           testProdCar.setMake(foxCar.getMake());
+           testProdCar.setModel(foxCar.getModel().trim());
+           testProdCar.setDrive(foxCar.getDrive());
+           List<ProductionCar> similarCars = CarDAO.getSimilarCarsByMMY(testProdCar, foxCar.getYear());
+           if (similarCars.size()==0){
+               System.out.println(foxCar.getYear() + " " + foxCar.getMake() + " " + foxCar.getModel());
+           }
+           /*boolean carExists = false;
+           for (ProductionCar simCar: similarCars){
+               String simCarDrive = simCar.getDrive();
+               if (simCarDrive!=null){
+                   if (simCarDrive.equals(drive)){
+                       carExists = true;
+                       break;
+                   }
+               }
+           }
+           if (!carExists){
+               System.out.println(foxCar);
+           }*/
+       });
+         HibernateUtil.shutdown();
+        FoxHibernateUtil.shutdown();
+    }
+
+    public static void testSkyBilCarMerge(){
+        Session skySession = SkyHibernateUtil.getSession();
+        Set<String> allSkyFitLines = SkyDAO.getAllFitLines(skySession);
+        for (String fitLine: allSkyFitLines){
+            ProductionCar car = new SkyConverter().buildProductionCar(fitLine, skySession);
+            int year = Integer.parseInt(fitLine.split(" ")[0]);
+            List<ProductionCar> similarCars = CarDAO.getSimilarCarsByMMY(car, year );
+            if (similarCars.size()==0){
+                //System.out.println(year + " " + car.getMake() + " " + car.getModel());
+                System.out.println(car.getModel());
+            }
+        }
+        skySession.close();
+        HibernateUtil.shutdown();
+        SkyHibernateUtil.shutdown();
     }
 }

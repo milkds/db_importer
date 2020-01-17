@@ -1,22 +1,23 @@
-package importer.suppliers.skyjacker;
+package importer.suppliers.fox;
 
-import importer.suppliers.skyjacker.sky_entities.*;
-import org.hibernate.Session;
+import importer.suppliers.fox.entities.FoxCar;
+import importer.suppliers.fox.entities.FoxFit;
+import importer.suppliers.fox.entities.FoxItem;
+import importer.suppliers.fox.entities.FoxItemSpec;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class SkyHibernateUtil {
+public class FoxHibernateUtil {
     private static StandardServiceRegistry registry;
     private static SessionFactory sessionFactory;
 
-    private static SessionFactory getSessionFactory() {
+    public static SessionFactory getFoxSessionFactory() {
         if (sessionFactory == null) {
             try {
                 StandardServiceRegistryBuilder registryBuilder =
@@ -24,15 +25,14 @@ public class SkyHibernateUtil {
 
                 Map<String, String> settings = new HashMap<>();
                 settings.put("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-                settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/skyjacker?" +
-                        "useUnicode=true&" +
+                settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/fox_shocks?useUnicode=true&" +
                         "useJDBCCompliantTimezoneShift=true&" +
                         "useLegacyDatetimeCode=false&" +
                         "serverTimezone=UTC&" +
                         "useSSL=false");
                 settings.put("hibernate.connection.username", "root");
                 settings.put("hibernate.connection.password", "root");
-                settings.put("hibernate.show_sql", "false");
+                settings.put("hibernate.show_sql", "true");
                 settings.put("hibernate.hbm2ddl.auto", "none");
 
                 registryBuilder.applySettings(settings);
@@ -40,12 +40,10 @@ public class SkyHibernateUtil {
                 registry = registryBuilder.build();
 
                 MetadataSources sources = new MetadataSources(registry);
-                sources.addAnnotatedClass(SkyShock.class);
-                sources.addAnnotatedClass(SkyFitment.class);
-                sources.addAnnotatedClass(FitmentNote.class);
-                sources.addAnnotatedClass(Category.class);
-                sources.addAnnotatedClass(SpecAndKitNote.class);
-                sources.addAnnotatedClass(CarMergeEntity.class);
+                sources.addAnnotatedClass(FoxCar.class);
+                sources.addAnnotatedClass(FoxFit.class);
+                sources.addAnnotatedClass(FoxItem.class);
+                sources.addAnnotatedClass(FoxItemSpec.class);
                 Metadata metadata = sources.getMetadataBuilder().build();
 
                 sessionFactory = metadata.getSessionFactoryBuilder().build();
@@ -64,10 +62,6 @@ public class SkyHibernateUtil {
         if (registry != null) {
             StandardServiceRegistryBuilder.destroy(registry);
         }
-    }
-
-    public static Session getSession(){
-        return getSessionFactory().openSession();
     }
 
 

@@ -7,6 +7,10 @@ import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
 import importer.suppliers.bilstein.BilsteinDAO;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
+import importer.suppliers.fox.FoxHibernateUtil;
+import importer.suppliers.fox.FoxSupplier;
+import importer.suppliers.fox.dao.FoxItemDAO;
+import importer.suppliers.fox.entities.FoxItem;
 import importer.suppliers.keystone.KeyHibernateUtil;
 import importer.suppliers.keystone.KeySupplier;
 import importer.suppliers.skyjacker.SkyConverter;
@@ -29,7 +33,9 @@ public class Controller {
      //   importSkyjacker();
       //  updateFromKeystone();
       //  renameProdItemAttribute("","");
-        renameProdItemAttribute("Upper Mounting Code","Upper Mount");
+   //     TestClass.testFoxProdCarMerge();
+        TestClass.testSkyBilCarMerge();
+
     }
 
     private static void updateFromKeystone() {
@@ -57,6 +63,25 @@ public class Controller {
         session.close();
         new ItemService().saveItems(newItems);
         BilHibernateUtil.shutdown();
+        HibernateUtil.shutdown();
+    }
+
+    private static void importFox(){
+        Session foxSession = FoxHibernateUtil.getFoxSessionFactory().openSession();
+        Set<FoxItem> foxItems = FoxItemDAO.getAllItems(foxSession);
+        Set<ProductionItem> newItems = new HashSet<>();
+        int total = foxItems.size();
+        int counter = 0;
+        for (FoxItem foxItem: foxItems){
+            ProductionItem prodItem = new FoxSupplier().buildItem(foxItem, foxSession);
+            newItems.add(prodItem);
+            counter++;
+            logger.info("Built item " + counter + " of total " + total);
+        }
+
+        foxSession.close();
+        new ItemService().saveItems(newItems);
+        SkyHibernateUtil.shutdown();
         HibernateUtil.shutdown();
     }
 

@@ -77,4 +77,11 @@ public class FitmentAttribute {
     public int hashCode() {
         return Objects.hash(getFitmentAttName(), getFitmentAttValue());
     }
+
+    public FitmentAttribute(String fitmentAttName, String fitmentAttValue) {
+        this.fitmentAttName = fitmentAttName;
+        this.fitmentAttValue = fitmentAttValue;
+    }
+
+    public FitmentAttribute() {}
 }
