@@ -2,6 +2,7 @@ package importer;
 
 import importer.dao.ItemDAO;
 import importer.entities.ProductionItem;
+import importer.entities.ShockParameters;
 import importer.service.ItemService;
 import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
@@ -23,19 +24,14 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-     //   importBilstein();
-     //   importSkyjacker();
-      //  updateFromKeystone();
-      //  renameProdItemAttribute("","");
-   //     TestClass.testFoxProdCarMerge();
-        TestClass.testSkyBilCarMerge();
-
+        checkAlreadyParsedShocks("Bilstein");
     }
 
     private static void updateFromKeystone() {
@@ -115,6 +111,32 @@ public class Controller {
         HibernateUtil.shutdown();
         logger.info("Update finished");
     }
+
+    private static void checkAlreadyParsedShocks(String make){
+        Set<ProductionItem> allItemsForMake = new HashSet<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        allItemsForMake = ItemService.getAllItemsByMake(make, session);
+        List<String> allKeyItemLinks = Utils.readImportFile();
+        Set<String> linksToRemove = new HashSet<>();
+        allItemsForMake.forEach(prodItem->{
+            ShockParameters params = prodItem.getParams();
+            if (Utils.paramsFilled(params)){
+                String partNo = prodItem.getItemPartNo();
+                allKeyItemLinks.forEach(link->{
+                    if (link.contains(partNo)){
+                        linksToRemove.add(link);
+                        return;
+                    }
+                });
+            }
+        });
+        allKeyItemLinks.removeAll(linksToRemove);
+        allKeyItemLinks.forEach(System.out::println);
+        session.close();
+        HibernateUtil.shutdown();
+    }
+
+
 
 
 }
