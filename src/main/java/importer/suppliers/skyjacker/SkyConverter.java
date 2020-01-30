@@ -30,7 +30,34 @@ public class SkyConverter {
             ProductionFitment fitment = getFitment(skyFitment, session);
             prodFits.add(fitment);
         });
+        verifyModels(prodFits, session);
+        setCarYearPeriods(prodFits, session);
         item.setProductionFitments(prodFits);
+    }
+
+    private void verifyModels(Set<ProductionFitment> prodFits, Session session) {
+        prodFits.forEach(productionFitment -> {
+            ProductionCar prodCar = productionFitment.getCar();
+            ProductionCar testCar = SkyService.getExistingCar(prodCar, prodCar.getYearStart());
+            if (testCar!=null){
+                return; //it means that make and model exist and its ok for us
+            }
+            CarMergeEntity carMergeEntity = SkyService.getCarMergeEntity(prodCar, session);
+            if (carMergeEntity!=null){
+                prodCar.setMake(carMergeEntity.getProdMake());
+                prodCar.setModel(carMergeEntity.getProdModel());
+            }
+            else {
+                logger.error("No car merge entity for car " + prodCar);
+            }
+        });
+    }
+
+    private void setCarYearPeriods(Set<ProductionFitment> prodFits, Session session) {
+        SkyHibernateUtil.shutdown();
+        HibernateUtil.shutdown();
+        System.exit(1);
+     //   Map<ProductionCar, Set<ProductionFitment>> carGroupedMap = groupCars(prodFits, session);
     }
 
     private ProductionFitment getFitment(SkyFitment skyFitment, Session session) {
@@ -167,13 +194,13 @@ public class SkyConverter {
         setDrive(car, fitString);
         setMake(car, fitString);
         setModel(car, fitString, session);
-        setStartFinish(car, fitString, session);
+        setStartFinish(car, fitString, session);//sets year from fitStr to start and finish
         setCarAttributes(car, fitString);
 
-        int carYear = Integer.parseInt(fitString.split(" ")[0]);;
+      /*  int carYear = Integer.parseInt(fitString.split(" ")[0]);;
         getModelCarMergeInfo(car, carYear, session);
 
-        logger.info("Built car " + car);
+        logger.info("Built car " + car);*/
 
         return car;
     }
@@ -235,14 +262,17 @@ public class SkyConverter {
 
     private void setStartFinish(ProductionCar car, String fitString, Session session) {
         int carYear = Integer.parseInt(fitString.split(" ")[0]);
-        ProductionCar existingCar = SkyService.getExistingCar(car, carYear);
+        car.setYearStart(carYear);
+        car.setYearFinish(carYear);
+
+      /*  ProductionCar existingCar = SkyService.getExistingCar(car, carYear);
         if (existingCar==null){
             car.setYearStart(carYear);
             car.setYearFinish(carYear);
             return;
         }
         car.setYearStart(existingCar.getYearStart());
-        car.setYearFinish(existingCar.getYearFinish());
+        car.setYearFinish(existingCar.getYearFinish());*/
     }
 
     private void setModel(ProductionCar car, String fitString, Session session) {
