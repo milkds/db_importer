@@ -8,10 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SkyConverter {
     private static final Logger logger = LogManager.getLogger(SkyConverter.class.getName());
@@ -54,10 +51,74 @@ public class SkyConverter {
     }
 
     private void setCarYearPeriods(Set<ProductionFitment> prodFits, Session session) {
-        SkyHibernateUtil.shutdown();
-        HibernateUtil.shutdown();
-        System.exit(1);
-     //   Map<ProductionCar, Set<ProductionFitment>> carGroupedMap = groupCars(prodFits, session);
+        Map<ProductionCar, Set<ProductionFitment>> carGroupedMap = groupCars(prodFits, session);
+        carGroupedMap.forEach((k,v)->{
+            setPeriodsForSet(v);
+        });
+
+    }
+
+    private void setPeriodsForSet(Set<ProductionFitment> prodFitments) {
+        TreeMap<Integer, ProductionFitment> yearMap = new TreeMap<>();
+        prodFitments.forEach(productionFitment -> {
+            yearMap.put(productionFitment.getCar().getYearStart(), productionFitment);//year start equals year finish at this point
+        });
+        Integer yearStart = yearMap.firstKey();
+        Integer currentYear = yearStart;
+        Integer yearFinish = yearStart;
+        Set<ProductionFitment> periodFits = new HashSet<>();
+        for (Map.Entry<Integer, ProductionFitment> entry : yearMap.entrySet()) {
+            Integer k = entry.getKey();
+            ProductionFitment v = entry.getValue();
+            if (k.equals(yearStart)) {
+                periodFits.add(v);
+                continue;
+            }
+            if (k == currentYear + 1) {
+                yearFinish = k;
+                currentYear = k;
+                periodFits.add(v);
+                continue;
+            }
+            //we get here if break in period is found
+            for (ProductionFitment productionFitment : periodFits) {
+                ProductionCar car = productionFitment.getCar();
+                car.setYearStart(yearStart);
+                car.setYearFinish(yearFinish);
+            }
+            yearStart = k;
+            currentYear = yearStart;
+            yearFinish = yearStart;
+            periodFits = new HashSet<>();
+            periodFits.add(v);
+        }
+    }
+
+    private Map<ProductionCar, Set<ProductionFitment>> groupCars(Set<ProductionFitment> prodFits, Session session) {
+        Map<ProductionCar, Set<ProductionFitment>> result = new HashMap<>();
+        prodFits.forEach(prodFit->{
+            ProductionCar car = prodFit.getCar();
+            String make = car.getMake();
+            String model = car.getModel();
+            String drive = car.getDrive();
+            boolean carPresent = false;
+            for (Map.Entry<ProductionCar, Set<ProductionFitment>> entry : result.entrySet()) {
+                ProductionCar k = entry.getKey();
+                Set<ProductionFitment> v = entry.getValue();
+                if (k.getMake().equals(make) && k.getModel().equals(model)&&k.getDrive().equals(drive)) {
+                    v.add(prodFit);
+                    carPresent = true;
+                    break;
+                }
+            }
+            if (!carPresent){
+                Set<ProductionFitment> currSet = new HashSet<>();
+                currSet.add(prodFit);
+                result.put(car, currSet);
+            }
+        });
+
+        return result;
     }
 
     private ProductionFitment getFitment(SkyFitment skyFitment, Session session) {
