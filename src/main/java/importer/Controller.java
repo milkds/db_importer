@@ -31,7 +31,7 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        checkAlreadyParsedShocks("Bilstein");
+        importSkyjacker();
     }
 
     private static void updateFromKeystone() {
@@ -102,8 +102,6 @@ public class Controller {
         new ItemService().saveItems(newItems);
         SkyHibernateUtil.shutdown();
         HibernateUtil.shutdown();
-
-
     }
 
     private static void renameProdItemAttribute(String oldVal, String newVal){

@@ -43,6 +43,13 @@ public class SkyConverter {
             if (carMergeEntity!=null){
                 prodCar.setMake(carMergeEntity.getProdMake());
                 prodCar.setModel(carMergeEntity.getProdModel());
+                String att = carMergeEntity.getProdCarAttribute();
+                if (att!=null&&att.length()>0){
+                    CarAttribute attribute = new CarAttribute();
+                    attribute.setCarAttName("Model Attribute");
+                    attribute.setCarAttValue(att);
+                    prodCar.getAttributes().add(attribute);
+                }
             }
             else {
                 logger.error("No car merge entity for car " + prodCar);
@@ -52,9 +59,7 @@ public class SkyConverter {
 
     private void setCarYearPeriods(Set<ProductionFitment> prodFits, Session session) {
         Map<ProductionCar, Set<ProductionFitment>> carGroupedMap = groupCars(prodFits, session);
-        carGroupedMap.forEach((k,v)->{
-            setPeriodsForSet(v);
-        });
+        carGroupedMap.forEach((k,v)-> setPeriodsForSet(v));
 
     }
 
@@ -62,6 +67,11 @@ public class SkyConverter {
         TreeMap<Integer, ProductionFitment> yearMap = new TreeMap<>();
         prodFitments.forEach(productionFitment -> {
             yearMap.put(productionFitment.getCar().getYearStart(), productionFitment);//year start equals year finish at this point
+        });
+        logger.info("Period Map");
+        yearMap.forEach((k,v)->{
+            logger.info(k + " " + v.getCar());
+            v.getCar().getAttributes().forEach(logger::info);
         });
         Integer yearStart = yearMap.firstKey();
         Integer currentYear = yearStart;
@@ -91,6 +101,12 @@ public class SkyConverter {
             yearFinish = yearStart;
             periodFits = new HashSet<>();
             periodFits.add(v);
+
+        }
+        for (ProductionFitment productionFitment : periodFits) {
+            ProductionCar car = productionFitment.getCar();
+            car.setYearStart(yearStart);
+            car.setYearFinish(yearFinish);
         }
     }
 
@@ -101,11 +117,12 @@ public class SkyConverter {
             String make = car.getMake();
             String model = car.getModel();
             String drive = car.getDrive();
+            Set<CarAttribute> attributes = car.getAttributes();
             boolean carPresent = false;
             for (Map.Entry<ProductionCar, Set<ProductionFitment>> entry : result.entrySet()) {
                 ProductionCar k = entry.getKey();
                 Set<ProductionFitment> v = entry.getValue();
-                if (k.getMake().equals(make) && k.getModel().equals(model)&&k.getDrive().equals(drive)) {
+                if (k.getMake().equals(make) && k.getModel().equals(model)&&k.getDrive().equals(drive)&&k.getAttributes().equals(attributes)) {
                     v.add(prodFit);
                     carPresent = true;
                     break;

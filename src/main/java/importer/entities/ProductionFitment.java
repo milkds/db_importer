@@ -2,6 +2,7 @@ package importer.entities;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -68,5 +69,20 @@ public class ProductionFitment {
                 ", item=" + item +
                 ", fitmentAttributes=" + fitmentAttributes +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProductionFitment)) return false;
+        ProductionFitment fitment = (ProductionFitment) o;
+        return Objects.equals(getCar(), fitment.getCar()) &&
+                Objects.equals(getItem(), fitment.getItem()) &&
+                Objects.equals(getFitmentAttributes(), fitment.getFitmentAttributes());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCar());
     }
 }
