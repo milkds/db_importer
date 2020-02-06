@@ -166,4 +166,23 @@ public class CarDAO {
 
         return result;
     }
+
+    public static void saveCarMergeEntities(Set<CarMergeEntity> entities) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            entities.forEach(session::persist);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+
+        session.close();
+        HibernateUtil.shutdown();
+    }
 }

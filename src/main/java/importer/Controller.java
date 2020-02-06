@@ -1,6 +1,8 @@
 package importer;
 
+import importer.dao.CarDAO;
 import importer.dao.ItemDAO;
+import importer.entities.CarMergeEntity;
 import importer.entities.ProductionItem;
 import importer.entities.ShockParameters;
 import importer.service.ItemService;
@@ -32,6 +34,12 @@ public class Controller {
 
     public static void main(String[] args) {
         importSkyjacker();
+    }
+
+    private void fillMergingTable() {
+        String filePath = "C:\\Users\\Jakson\\Desktop\\skyFinal.xlsx";
+        Set<CarMergeEntity> entities = ExcelUtil.getMergeInfoFromFile(filePath);
+        CarDAO.saveCarMergeEntities(entities);
     }
 
     private static void updateFromKeystone() {

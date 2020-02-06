@@ -35,6 +35,12 @@ public class CarMergeEntity {
     @Column(name = "PROD_CAR_ATT")
     private String prodCarAttribute;
 
+    @Column(name = "PROD_SUBMODEL")
+    private String prodSubModel;
+
+    @Column(name = "PROD_BODY")
+    private String prodBody;
+
 
     @Override
     public String toString() {
@@ -47,6 +53,8 @@ public class CarMergeEntity {
                 ", prodMake='" + prodMake + '\'' +
                 ", prodModel='" + prodModel + '\'' +
                 ", prodCarAttribute='" + prodCarAttribute + '\'' +
+                ", prodSubModel='" + prodSubModel + '\'' +
+                ", prodBody='" + prodBody + '\'' +
                 '}';
     }
 
@@ -133,5 +141,21 @@ public class CarMergeEntity {
 
     public void setEntityID(int entityID) {
         this.entityID = entityID;
+    }
+
+    public String getProdSubModel() {
+        return prodSubModel;
+    }
+
+    public void setProdSubModel(String prodSubModel) {
+        this.prodSubModel = prodSubModel;
+    }
+
+    public String getProdBody() {
+        return prodBody;
+    }
+
+    public void setProdBody(String prodBody) {
+        this.prodBody = prodBody;
     }
 }
