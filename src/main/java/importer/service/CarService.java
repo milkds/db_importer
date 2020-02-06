@@ -2,8 +2,10 @@ package importer.service;
 
 import importer.dao.CarDAO;
 import importer.entities.CarAttribute;
+import importer.entities.CarMergeEntity;
 import importer.entities.ProductionCar;
 import importer.entities.ProductionFitment;
+import importer.suppliers.skyjacker.SkyDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -45,5 +47,15 @@ public class CarService {
         }
 
         return car;
+    }
+
+    public static CarMergeEntity getCarMergeEntity(ProductionCar car) {
+        CarMergeEntity result = null;
+        List<CarMergeEntity> entities = CarDAO.getMergeEntities(car);
+        if (entities.size()!=0){
+            result = entities.get(0);
+        }
+
+        return result;
     }
 }

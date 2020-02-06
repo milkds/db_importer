@@ -1,4 +1,4 @@
-package importer.suppliers.skyjacker.sky_entities;
+package importer.entities;
 
 import javax.persistence.*;
 
@@ -12,13 +12,13 @@ public class CarMergeEntity {
     private int entityID;
 
     @Column(name = "SKY_YEAR")
-    private int skyYear;
+    private int excelYear;
 
     @Column(name = "SKY_MAKE")
-    private String skyMake;
+    private String excelMake;
 
     @Column(name = "SKY_MODEL")
-    private String skyModel;
+    private String excelModel;
 
     @Column(name = "PROD_START")
     private int prodStart;
@@ -39,9 +39,9 @@ public class CarMergeEntity {
     @Override
     public String toString() {
         return "CarMergeEntity{" +
-                "skyYear=" + skyYear +
-                ", skyMake='" + skyMake + '\'' +
-                ", skyModel='" + skyModel + '\'' +
+                "excelYear=" + excelYear +
+                ", excelMake='" + excelMake + '\'' +
+                ", excelModel='" + excelModel + '\'' +
                 ", prodStart=" + prodStart +
                 ", prodFinish=" + prodFinish +
                 ", prodMake='" + prodMake + '\'' +
@@ -54,8 +54,8 @@ public class CarMergeEntity {
     }
 
     public CarMergeEntity(CarMergeEntity entity) {
-        this.skyMake = entity.getSkyMake();
-        this.skyModel = entity.getSkyModel();
+        this.excelMake = entity.getExcelMake();
+        this.excelModel = entity.getExcelModel();
         this.prodStart = entity.getProdStart();
         this.prodFinish = entity.getProdFinish();
         this.prodMake = entity.getProdMake();
@@ -63,28 +63,28 @@ public class CarMergeEntity {
         this.prodCarAttribute = entity.getProdCarAttribute();
     }
 
-    public int getSkyYear() {
-        return skyYear;
+    public int getExcelYear() {
+        return excelYear;
     }
 
-    public void setSkyYear(int skyYear) {
-        this.skyYear = skyYear;
+    public void setExcelYear(int excelYear) {
+        this.excelYear = excelYear;
     }
 
-    public String getSkyMake() {
-        return skyMake;
+    public String getExcelMake() {
+        return excelMake;
     }
 
-    public void setSkyMake(String skyMake) {
-        this.skyMake = skyMake;
+    public void setExcelMake(String excelMake) {
+        this.excelMake = excelMake;
     }
 
-    public String getSkyModel() {
-        return skyModel;
+    public String getExcelModel() {
+        return excelModel;
     }
 
-    public void setSkyModel(String skyModel) {
-        this.skyModel = skyModel;
+    public void setExcelModel(String excelModel) {
+        this.excelModel = excelModel;
     }
 
     public int getProdStart() {

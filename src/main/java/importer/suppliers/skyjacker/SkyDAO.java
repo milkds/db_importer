@@ -1,8 +1,7 @@
 package importer.suppliers.skyjacker;
 
 import importer.entities.ProductionCar;
-import importer.suppliers.bilstein.bilstein_entities.BilShock;
-import importer.suppliers.skyjacker.sky_entities.CarMergeEntity;
+import importer.entities.CarMergeEntity;
 import importer.suppliers.skyjacker.sky_entities.SkyFitment;
 import importer.suppliers.skyjacker.sky_entities.SkyShock;
 import org.hibernate.Session;
@@ -42,25 +41,5 @@ public class SkyDAO {
         Set<String> makeSet = new HashSet<>(fitLines);
 
         return makeSet;
-    }
-
-
-
-    public static List<CarMergeEntity> getMergeEntities(ProductionCar car, Session skySession) {
-        List<CarMergeEntity> result = new ArrayList<>();
-        CriteriaBuilder builder = skySession.getCriteriaBuilder();
-        CriteriaQuery<CarMergeEntity> crQ = builder.createQuery(CarMergeEntity.class);
-        Root<CarMergeEntity> root = crQ.from(CarMergeEntity.class);
-        List<Predicate> predicates = new ArrayList<>();
-        predicates.add(builder.lessThanOrEqualTo(root.get("skyYear"), car.getYearStart()));
-        predicates.add(builder.greaterThanOrEqualTo(root.get("skyYear"), car.getYearFinish()));
-        predicates.add(builder.equal(root.get("skyMake"), car.getMake()));
-        predicates.add(builder.equal(root.get("skyModel"), car.getModel()));
-        Predicate[] preds = predicates.toArray(new Predicate[0]);
-        crQ.where(builder.and(preds));
-        Query q = skySession.createQuery(crQ);
-        result = q.getResultList();
-
-        return result;
     }
 }

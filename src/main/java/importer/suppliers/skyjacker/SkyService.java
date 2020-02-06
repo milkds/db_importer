@@ -2,7 +2,7 @@ package importer.suppliers.skyjacker;
 
 import importer.dao.CarDAO;
 import importer.entities.ProductionCar;
-import importer.suppliers.skyjacker.sky_entities.CarMergeEntity;
+import importer.entities.CarMergeEntity;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -22,13 +22,4 @@ public class SkyService {
         return result;
     }
 
-    public static CarMergeEntity getCarMergeEntity(ProductionCar car, Session skySession) {
-        CarMergeEntity result = null;
-        List<CarMergeEntity> entities = SkyDAO.getMergeEntities(car, skySession);
-        if (entities.size()!=0){
-            result = entities.get(0);
-        }
-
-        return result;
-    }
 }

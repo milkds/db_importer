@@ -32,7 +32,7 @@ public class FoxHibernateUtil {
                         "useSSL=false");
                 settings.put("hibernate.connection.username", "root");
                 settings.put("hibernate.connection.password", "root");
-                settings.put("hibernate.show_sql", "true");
+                settings.put("hibernate.show_sql", "false");
                 settings.put("hibernate.hbm2ddl.auto", "none");
 
                 registryBuilder.applySettings(settings);

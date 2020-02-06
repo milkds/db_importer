@@ -2,6 +2,7 @@ package importer.dao;
 
 import importer.HibernateUtil;
 import importer.entities.CarAttribute;
+import importer.entities.CarMergeEntity;
 import importer.entities.ProductionCar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -141,6 +142,27 @@ public class CarDAO {
         Query q = session.createQuery(crQ);
         result = q.getResultList();
         session.close();
+
+        return result;
+    }
+
+    public static List<CarMergeEntity> getMergeEntities(ProductionCar car) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<CarMergeEntity> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CarMergeEntity> crQ = builder.createQuery(CarMergeEntity.class);
+        Root<CarMergeEntity> root = crQ.from(CarMergeEntity.class);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.lessThanOrEqualTo(root.get("skyYear"), car.getYearStart()));
+        predicates.add(builder.greaterThanOrEqualTo(root.get("skyYear"), car.getYearFinish()));
+        predicates.add(builder.equal(root.get("skyMake"), car.getMake()));
+        predicates.add(builder.equal(root.get("skyModel"), car.getModel()));
+        Predicate[] preds = predicates.toArray(new Predicate[0]);
+        crQ.where(builder.and(preds));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+        session.close();
+
 
         return result;
     }

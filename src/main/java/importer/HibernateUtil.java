@@ -46,6 +46,7 @@ public class HibernateUtil {
                 sources.addAnnotatedClass(ProductionItem.class);
                 sources.addAnnotatedClass(ItemPic.class);
                 sources.addAnnotatedClass(ShockParameters.class);
+                sources.addAnnotatedClass(CarMergeEntity.class);
 
                 Metadata metadata = sources.getMetadataBuilder().build();
 

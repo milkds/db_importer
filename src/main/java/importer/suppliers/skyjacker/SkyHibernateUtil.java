@@ -1,5 +1,6 @@
 package importer.suppliers.skyjacker;
 
+import importer.entities.CarMergeEntity;
 import importer.suppliers.skyjacker.sky_entities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,7 +46,6 @@ public class SkyHibernateUtil {
                 sources.addAnnotatedClass(FitmentNote.class);
                 sources.addAnnotatedClass(Category.class);
                 sources.addAnnotatedClass(SpecAndKitNote.class);
-                sources.addAnnotatedClass(CarMergeEntity.class);
                 Metadata metadata = sources.getMetadataBuilder().build();
 
                 sessionFactory = metadata.getSessionFactoryBuilder().build();

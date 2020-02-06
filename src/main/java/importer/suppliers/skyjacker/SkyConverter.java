@@ -2,6 +2,7 @@ package importer.suppliers.skyjacker;
 
 import importer.HibernateUtil;
 import importer.entities.*;
+import importer.service.CarService;
 import importer.suppliers.skyjacker.sky_entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +40,7 @@ public class SkyConverter {
             if (testCar!=null){
                 return; //it means that make and model exist and its ok for us
             }
-            CarMergeEntity carMergeEntity = SkyService.getCarMergeEntity(prodCar, session);
+            CarMergeEntity carMergeEntity = CarService.getCarMergeEntity(prodCar);
             if (carMergeEntity!=null){
                 prodCar.setMake(carMergeEntity.getProdMake());
                 prodCar.setModel(carMergeEntity.getProdModel());
@@ -293,7 +294,7 @@ public class SkyConverter {
         if (simCar!=null){
             return;
         }
-        CarMergeEntity entity = SkyService.getCarMergeEntity(car, session);
+        CarMergeEntity entity = CarService.getCarMergeEntity(car);
         if (entity==null){
             logger.error("NO CarMergeEntity for " + car);
             HibernateUtil.shutdown();
