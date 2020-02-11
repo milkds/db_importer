@@ -54,12 +54,12 @@ public class FoxSupplier {
             prodCar.setYearFinish(carYear);
         }
         else {
-            Session skySession = SkyHibernateUtil.getSession();
+            prodCar.setYearStart(carYear);
+            prodCar.setYearFinish(carYear);
             CarMergeEntity entity = CarService.getCarMergeEntity(prodCar);
             if (entity==null){
                 System.out.println(prodCar.getMake() + "  " + prodCar.getModel() + "  " + carYear);
             }
-            skySession.close();
         }
         /*else {
             prodCar.setYearStart(existingCar.getYearStart());

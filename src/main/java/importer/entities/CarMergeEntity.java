@@ -41,7 +41,6 @@ public class CarMergeEntity {
     @Column(name = "PROD_BODY")
     private String prodBody;
 
-
     @Override
     public String toString() {
         return "CarMergeEntity{" +

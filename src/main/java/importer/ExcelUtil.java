@@ -143,6 +143,7 @@ public class ExcelUtil {
     private static void setSkyModel(Row row, CarMergeEntity entity) {
         Cell cell = row.getCell(3);
         String model = getCellValue(cell); //will return string value (will convert to string if necessary)
+        model = model.trim();
         entity.setExcelModel(model);
     }
 

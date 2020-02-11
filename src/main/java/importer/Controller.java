@@ -33,11 +33,13 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        importSkyjacker();
+    //    importSkyjacker();
+     //   fillMergingTable();
+        importFox();
     }
 
-    private void fillMergingTable() {
-        String filePath = "C:\\Users\\Jakson\\Desktop\\skyFinal.xlsx";
+    private static void fillMergingTable() {
+        String filePath = "C:\\Users\\jackson\\Desktop\\carMergeAdd.xlsx";
         Set<CarMergeEntity> entities = ExcelUtil.getMergeInfoFromFile(filePath);
         CarDAO.saveCarMergeEntities(entities);
     }
@@ -84,9 +86,10 @@ public class Controller {
         }
 
         foxSession.close();
-        new ItemService().saveItems(newItems);
+     //   new ItemService().saveItems(newItems);
         SkyHibernateUtil.shutdown();
         HibernateUtil.shutdown();
+        FoxHibernateUtil.shutdown();
     }
 
     private static void importSkyjacker(){
