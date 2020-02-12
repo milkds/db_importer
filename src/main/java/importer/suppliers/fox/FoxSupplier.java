@@ -1,5 +1,6 @@
 package importer.suppliers.fox;
 
+import importer.dao.CarDAO;
 import importer.entities.*;
 import importer.service.CarService;
 import importer.suppliers.fox.entities.FoxCar;
@@ -12,10 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class FoxSupplier {
     private static final Logger logger = LogManager.getLogger(FoxSupplier.class.getName());
@@ -38,6 +36,7 @@ public class FoxSupplier {
             fitment.setItem(prodItem);
             prodFits.add(fitment);
         });
+        CarService.setCarYearPeriods(prodFits);
     }
 
     private void setCar(FoxFit foxFit, ProductionFitment prodFit) {
@@ -49,24 +48,36 @@ public class FoxSupplier {
         // prodCar.setSubModel("N/A");
         int carYear = foxCar.getYear();
         ProductionCar existingCar = SkyService.getExistingCar(prodCar, carYear); //we use Sky method as it does exactly what we need
-        if (existingCar!=null){
-            prodCar.setYearStart(carYear);
-            prodCar.setYearFinish(carYear);
-        }
-        else {
-            prodCar.setYearStart(carYear);
-            prodCar.setYearFinish(carYear);
+        prodCar.setYearStart(foxCar.getYear());
+        prodCar.setYearFinish(foxCar.getYear());
+        if (existingCar==null){
             CarMergeEntity entity = CarService.getCarMergeEntity(prodCar);
             if (entity==null){
-                System.out.println(prodCar.getMake() + "  " + prodCar.getModel() + "  " + carYear);
+                System.out.println(prodCar.getMake() + "    " + prodCar.getModel() + "  " + prodCar.getYearStart());
+            }
+            else {
+                  prodCar.setMake(entity.getProdMake());
+                  prodCar.setModel(entity.getProdModel());
+                  String carAtt = entity.getProdCarAttribute();
+                  if (carAtt!=null){
+                      CarAttribute carAttribute = new CarAttribute();
+                      carAttribute.setCarAttName("Model Attribute");
+                      carAttribute.setCarAttValue(carAtt);
+                  }
+                  String subModel = entity.getProdSubModel();
+                  if (subModel!=null){
+                      prodCar.setSubModel(subModel);
+                  }
+                  String body = entity.getProdBody();
+                  if (body!=null){
+                      CarAttribute carAttribute = new CarAttribute();
+                      carAttribute.setCarAttName("Body");
+                      carAttribute.setCarAttValue(body);
+                  }
             }
         }
-        /*else {
-            prodCar.setYearStart(existingCar.getYearStart());
-            prodCar.setYearFinish(existingCar.getYearFinish());
-        }
+
         prodFit.setCar(prodCar);
-        prodCar.getProductionFitments().add(prodFit);*/
     }
 
     private void setFitmentAtts(FoxFit foxFit, ProductionFitment prodFit) {

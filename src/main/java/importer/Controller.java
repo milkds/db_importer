@@ -86,8 +86,8 @@ public class Controller {
         }
 
         foxSession.close();
-     //   new ItemService().saveItems(newItems);
-        SkyHibernateUtil.shutdown();
+        new ItemService().saveItems(newItems);
+        SkyHibernateUtil.shutdown(); //under question - seems like we use sky methods with sky session
         HibernateUtil.shutdown();
         FoxHibernateUtil.shutdown();
     }
