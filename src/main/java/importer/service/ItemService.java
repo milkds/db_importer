@@ -37,6 +37,15 @@ public class ItemService {
         session.close();
     }
 
+    public static Set<String> getAllPicLinks() {
+        Set<String> result = new HashSet<>();
+        result = ItemDAO.getAllPicLinks();
+        result.remove("https://productdesk.cart.bilsteinus.com/media/products/bilstein/image_generic_02_1.jpg");
+        result.remove("NO IMG LINK");
+
+        return result;
+    }
+
     public void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;

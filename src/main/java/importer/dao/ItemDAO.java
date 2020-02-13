@@ -2,6 +2,7 @@ package importer.dao;
 
 import importer.HibernateUtil;
 import importer.entities.ItemAttribute;
+import importer.entities.ItemPic;
 import importer.entities.ProductionFitment;
 import importer.entities.ProductionItem;
 import importer.suppliers.keystone.entities.KeyItem;
@@ -109,6 +110,20 @@ public class ItemDAO {
                 transaction.rollback();
             }
         }
+    }
+
+    public static Set<String> getAllPicLinks() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<String> picUrls = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<String> crQ = builder.createQuery(String.class);
+        Root<ItemPic> root = crQ.from(ItemPic.class);
+        crQ.select(root.get("picUrl")).distinct(true);
+        Query q = session.createQuery(crQ);
+        picUrls = q.getResultList();
+        session.close();
+
+        return new HashSet<>(picUrls);
     }
 
     /*public static void saveItems(Set<ProductionItem> newItems) {

@@ -1,7 +1,6 @@
 package importer;
 
 import importer.dao.CarDAO;
-import importer.dao.ItemDAO;
 import importer.entities.CarMergeEntity;
 import importer.entities.ProductionItem;
 import importer.entities.ShockParameters;
@@ -19,7 +18,6 @@ import importer.suppliers.keystone.KeySupplier;
 import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
-import importer.suppliers.skyjacker.SkyService;
 import importer.suppliers.skyjacker.sky_entities.SkyShock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,11 +33,18 @@ public class Controller {
     public static void main(String[] args) {
     //    importSkyjacker();
      //   fillMergingTable();
-        importFox();
+           importFox();
+           downloadAllPics();
+    }
+        /*
+
+        * */
+    private static void downloadAllPics() {
+        Utils.downloadAllPics();
     }
 
     private static void fillMergingTable() {
-        String filePath = "C:\\Users\\jackson\\Desktop\\carMergeAdd.xlsx";
+        String filePath = "C:\\Users\\jackson\\Desktop\\car_merge.xlsx";
         Set<CarMergeEntity> entities = ExcelUtil.getMergeInfoFromFile(filePath);
         CarDAO.saveCarMergeEntities(entities);
     }

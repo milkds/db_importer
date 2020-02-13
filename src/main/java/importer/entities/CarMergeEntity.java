@@ -68,6 +68,8 @@ public class CarMergeEntity {
         this.prodMake = entity.getProdMake();
         this.prodModel = entity.getProdModel();
         this.prodCarAttribute = entity.getProdCarAttribute();
+        this.prodSubModel = entity.getProdSubModel();
+        this.prodBody = entity.getProdBody();
     }
 
     public int getExcelYear() {

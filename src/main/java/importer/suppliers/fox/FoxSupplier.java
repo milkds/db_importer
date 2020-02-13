@@ -63,6 +63,7 @@ public class FoxSupplier {
                       CarAttribute carAttribute = new CarAttribute();
                       carAttribute.setCarAttName("Model Attribute");
                       carAttribute.setCarAttValue(carAtt);
+                      prodCar.getAttributes().add(carAttribute);
                   }
                   String subModel = entity.getProdSubModel();
                   if (subModel!=null){
@@ -73,6 +74,7 @@ public class FoxSupplier {
                       CarAttribute carAttribute = new CarAttribute();
                       carAttribute.setCarAttName("Body");
                       carAttribute.setCarAttValue(body);
+                      prodCar.getAttributes().add(carAttribute);
                   }
             }
         }
@@ -110,7 +112,7 @@ public class FoxSupplier {
         specs.forEach(spec->{
             String parName = spec.getSpecName();
             String parVal = spec.getSpecVal();
-            if (parName==null){
+            if (parName==null||parVal==null){
                 return;
             }
             if (parName.equals("Extended (in)")){
