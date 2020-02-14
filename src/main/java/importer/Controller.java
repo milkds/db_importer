@@ -14,7 +14,10 @@ import importer.suppliers.fox.FoxSupplier;
 import importer.suppliers.fox.dao.FoxItemDAO;
 import importer.suppliers.fox.entities.FoxItem;
 import importer.suppliers.keystone.KeyHibernateUtil;
+import importer.suppliers.keystone.KeyService;
 import importer.suppliers.keystone.KeySupplier;
+import importer.suppliers.keystone.entities.KeyItem;
+import importer.suppliers.keystone.entities.KeyItemBuilder;
 import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
@@ -33,12 +36,18 @@ public class Controller {
     public static void main(String[] args) {
     //    importSkyjacker();
      //   fillMergingTable();
-           importFox();
-           downloadAllPics();
     }
-        /*
 
-        * */
+    private static void importKeystone(){
+        Session keySession = KeyHibernateUtil.getSession();
+        Set<KeyItem> items = KeyService.getAllItems(keySession);
+        items.forEach(keyItem->{
+            new KeyItemBuilder().buildItem(keyItem, keySession);
+        });
+        keySession.close();
+        HibernateUtil.shutdown();
+    }
+
     private static void downloadAllPics() {
         Utils.downloadAllPics();
     }
