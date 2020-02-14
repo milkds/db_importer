@@ -17,7 +17,7 @@ import importer.suppliers.keystone.KeyHibernateUtil;
 import importer.suppliers.keystone.KeyService;
 import importer.suppliers.keystone.KeySupplier;
 import importer.suppliers.keystone.entities.KeyItem;
-import importer.suppliers.keystone.entities.KeyItemBuilder;
+import importer.suppliers.keystone.KeyItemBuilder;
 import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
@@ -34,8 +34,7 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-    //    importSkyjacker();
-     //   fillMergingTable();
+        importKeystone();
     }
 
     private static void importKeystone(){

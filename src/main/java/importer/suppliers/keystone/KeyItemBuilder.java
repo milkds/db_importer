@@ -1,6 +1,7 @@
-package importer.suppliers.keystone.entities;
+package importer.suppliers.keystone;
 
 import importer.entities.*;
+import importer.suppliers.keystone.entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
@@ -45,7 +46,9 @@ public class KeyItemBuilder {
         String attStr = keyCar.getAttString();
         attStr = checkDrives(attStr, prodCar);
         attStr = checkEngines(attStr, prodCar);
-        System.out.println(attStr);
+       if (attStr!=null&&attStr.length()>0){
+           System.out.println(attStr);
+       }
     }
 
     private String checkEngines(String attStr, ProductionCar prodCar) {

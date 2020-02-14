@@ -81,6 +81,7 @@ public class Utils {
         try {
             FileWriter fw = new FileWriter(SAVED_PICS,true);
             fw.write(picUrl);
+            fw.write(System.lineSeparator());
             fw.close();
         }
         catch(IOException ioe) {
