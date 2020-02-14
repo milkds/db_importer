@@ -46,9 +46,133 @@ public class KeyItemBuilder {
         String attStr = keyCar.getAttString();
         attStr = checkDrives(attStr, prodCar);
         attStr = checkEngines(attStr, prodCar);
+        attStr = checkSuspension(attStr, prodCar);
+        attStr = checkBodyStyle(attStr, prodCar);
+        attStr = checkCab(attStr, prodCar);
+
+
        if (attStr!=null&&attStr.length()>0){
            System.out.println(attStr);
        }
+    }
+
+    private String checkCab(String attStr, ProductionCar prodCar) {
+        if (attStr==null||attStr.length()==0){
+            return attStr;
+        }
+        Set<String> cabs = getCabsSet();
+        for (String s : cabs) {
+            if (attStr.contains(s)) {
+                CarAttribute attribute = new CarAttribute();
+                attribute.setCarAttName("Cab");
+                attribute.setCarAttValue(s);
+                prodCar.getAttributes().add(attribute);
+                attStr = attStr.replace(s, "").trim();
+                return attStr;
+            }
+        }
+        cabs = new HashSet<>();
+        cabs.add("Crew Cab");
+        cabs.add("Standard Cab");
+        cabs.add("Double Cab");
+        cabs.add("Extended Cab");
+        cabs.add("Cab & Chassis");
+        for (String s : cabs) {
+            if (attStr.contains(s)) {
+                CarAttribute attribute = new CarAttribute();
+                attribute.setCarAttName("Cab");
+                attribute.setCarAttValue(s);
+                prodCar.getAttributes().add(attribute);
+                attStr = attStr.replace(s, "").trim();
+                return attStr;
+            }
+        }
+
+        return attStr;
+    }
+
+    private Set<String> getCabsSet() {
+        Set<String> result = new HashSet<>();
+        result.add("King Cab (Extended)");
+        result.add("SuperCab (Extended)");
+        result.add("Mega Cab (Long Crew)");
+        result.add("Quad Cab (Crew)");
+        result.add("Cab & Chassis - Crew Cab");
+        result.add("Cab & Chassis - Extended Cab");
+        result.add("Cab & Chassis - Standard Cab");
+        result.add("Quad Cab (Extended)");
+        result.add("Access Cab (Extended)");
+        result.add("Double Cab (Extended)");
+
+        return result;
+    }
+
+    private String checkBodyStyle(String attStr, ProductionCar prodCar) {
+        if (attStr==null||attStr.length()==0){
+            return attStr;
+        }
+        Set<String> bodyStyle = getBodyStyleSet();
+        for (String s : bodyStyle) {
+            if (attStr.contains(s)) {
+                CarAttribute attribute = new CarAttribute();
+                attribute.setCarAttName("Body Style");
+                attribute.setCarAttValue(s);
+                prodCar.getAttributes().add(attribute);
+                attStr = attStr.replace(s, "").trim();
+                return attStr;
+            }
+        }
+
+        return attStr;
+    }
+
+    private Set<String> getBodyStyleSet() {
+        Set<String> result = new HashSet<>();
+        result.add("Sedan");
+        result.add("Wagon");
+        result.add("Hardtop");
+        result.add("Coupe");
+        result.add("Hatchback");
+        result.add("Touring");
+        result.add("Cargo Van");
+        result.add("Passenger Van");
+        result.add("Cutaway Van");
+        result.add("Spider");
+        result.add("Convertible");
+
+        return result;
+    }
+
+    private String checkSuspension(String attStr, ProductionCar prodCar) {
+        if (attStr==null||attStr.length()==0){
+            return attStr;
+        }
+        Set<String> suspension = getSuspSet();
+        for (String s : suspension) {
+            if (attStr.contains(s)) {
+                CarAttribute attribute = new CarAttribute();
+                attribute.setCarAttName("Suspension");
+                attribute.setCarAttValue(s);
+                prodCar.getAttributes().add(attribute);
+                attStr = attStr.replace(s, "").trim();
+                return attStr;
+            }
+        }
+        return attStr;
+    }
+
+    private Set<String> getSuspSet() {
+        Set<String> result = new HashSet<>();
+        result.add("Front Coil");
+        result.add("Front Leaf");
+        result.add("Front Torsion Bar");
+        result.add("Rear Leaf");
+        result.add("Rear Coil");
+        result.add("Front Air");
+        result.add("Rear Air");
+
+
+        return result;
     }
 
     private String checkEngines(String attStr, ProductionCar prodCar) {
@@ -65,6 +189,7 @@ public class KeyItemBuilder {
         CarAttribute attribute = new CarAttribute();
         attribute.setCarAttName("Engine");
         attribute.setCarAttValue(engineStr);
+        prodCar.getAttributes().add(attribute);
 
         return attStr;
     }
