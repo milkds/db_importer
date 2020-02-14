@@ -5,6 +5,7 @@ import importer.suppliers.keystone.entities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,23 +61,7 @@ public class KeyItemBuilder {
         if (attStr==null||attStr.length()==0){
             return attStr;
         }
-        Set<String> cabs = getCabsSet();
-        for (String s : cabs) {
-            if (attStr.contains(s)) {
-                CarAttribute attribute = new CarAttribute();
-                attribute.setCarAttName("Cab");
-                attribute.setCarAttValue(s);
-                prodCar.getAttributes().add(attribute);
-                attStr = attStr.replace(s, "").trim();
-                return attStr;
-            }
-        }
-        cabs = new HashSet<>();
-        cabs.add("Crew Cab");
-        cabs.add("Standard Cab");
-        cabs.add("Double Cab");
-        cabs.add("Extended Cab");
-        cabs.add("Cab & Chassis");
+        List<String> cabs = getCabsList();
         for (String s : cabs) {
             if (attStr.contains(s)) {
                 CarAttribute attribute = new CarAttribute();
@@ -91,8 +76,8 @@ public class KeyItemBuilder {
         return attStr;
     }
 
-    private Set<String> getCabsSet() {
-        Set<String> result = new HashSet<>();
+    private List<String> getCabsList() {
+        List<String> result = new ArrayList<>();
         result.add("King Cab (Extended)");
         result.add("SuperCab (Extended)");
         result.add("Mega Cab (Long Crew)");
@@ -103,6 +88,15 @@ public class KeyItemBuilder {
         result.add("Quad Cab (Extended)");
         result.add("Access Cab (Extended)");
         result.add("Double Cab (Extended)");
+        result.add("Club Cab (Extended)");
+        result.add("Crew Max");
+        result.add("Xtra Cab (Extended)");
+        result.add("(Crew)");
+        result.add("Crew Cab");
+        result.add("Standard Cab");
+        result.add("Double Cab");
+        result.add("Extended Cab");
+        result.add("Cab & Chassis");
 
         return result;
     }
@@ -111,7 +105,7 @@ public class KeyItemBuilder {
         if (attStr==null||attStr.length()==0){
             return attStr;
         }
-        Set<String> bodyStyle = getBodyStyleSet();
+        List<String> bodyStyle = getBodyStyleList();
         for (String s : bodyStyle) {
             if (attStr.contains(s)) {
                 CarAttribute attribute = new CarAttribute();
@@ -126,8 +120,12 @@ public class KeyItemBuilder {
         return attStr;
     }
 
-    private Set<String> getBodyStyleSet() {
-        Set<String> result = new HashSet<>();
+    private List<String> getBodyStyleList() {
+        List<String> result = new ArrayList<>();
+        result.add("Extended Cargo Van");
+        result.add("Extended Passenger Van");
+        result.add("Standard Cargo Van");
+        result.add("Standard Passenger Van");
         result.add("Sedan");
         result.add("Wagon");
         result.add("Hardtop");
@@ -139,6 +137,10 @@ public class KeyItemBuilder {
         result.add("Cutaway Van");
         result.add("Spider");
         result.add("Convertible");
+        result.add("Limousine");
+        result.add("Koupe");
+        result.add("Roadster");
+        result.add("Estate");
 
         return result;
     }

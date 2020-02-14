@@ -45,6 +45,7 @@ public class Controller {
         });
         keySession.close();
         HibernateUtil.shutdown();
+        KeyHibernateUtil.shutdown();
     }
 
     private static void downloadAllPics() {
