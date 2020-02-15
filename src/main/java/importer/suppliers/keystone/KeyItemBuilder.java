@@ -1,7 +1,9 @@
 package importer.suppliers.keystone;
 
 import importer.entities.*;
+import importer.service.CarService;
 import importer.suppliers.keystone.entities.*;
+import importer.suppliers.skyjacker.SkyService;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
@@ -41,6 +43,19 @@ public class KeyItemBuilder {
         setMainCarFields(keyCar, prodCar);
         setCarAttributes(keyCar, prodCar);
         processCarAttString(keyCar, prodCar);
+        verifyModels(keyCar, prodCar);
+    }
+
+    private void verifyModels(KeyCar keyCar, ProductionCar prodCar) {
+        ProductionCar existingCar = SkyService.getExistingCar(prodCar, keyCar.getYear());
+        if (existingCar!=null){
+            return;
+        }
+        CarMergeEntity entity = CarService.getCarMergeEntity(prodCar);
+        if (entity==null){
+            System.out.println(prodCar.getMake() + "    " + prodCar.getModel() + "  " + keyCar);
+        }
+
     }
 
     private void processCarAttString(KeyCar keyCar, ProductionCar prodCar) {
@@ -50,11 +65,12 @@ public class KeyItemBuilder {
         attStr = checkSuspension(attStr, prodCar);
         attStr = checkBodyStyle(attStr, prodCar);
         attStr = checkCab(attStr, prodCar);
-
-
-       if (attStr!=null&&attStr.length()>0){
-           System.out.println(attStr);
-       }
+        if (attStr!=null&&attStr.length()>0){
+            CarAttribute attribute = new CarAttribute();
+            attribute.setCarAttName("Note");
+            attribute.setCarAttValue(attStr);
+            prodCar.getAttributes().add(attribute);
+        }
     }
 
     private String checkCab(String attStr, ProductionCar prodCar) {
@@ -97,6 +113,7 @@ public class KeyItemBuilder {
         result.add("Double Cab");
         result.add("Extended Cab");
         result.add("Cab & Chassis");
+        result.add("SuperCrew");
 
         return result;
     }
@@ -141,6 +158,7 @@ public class KeyItemBuilder {
         result.add("Koupe");
         result.add("Roadster");
         result.add("Estate");
+        result.add("Stripped Chassis");
 
         return result;
     }

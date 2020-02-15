@@ -153,8 +153,8 @@ public class CarDAO {
         CriteriaQuery<CarMergeEntity> crQ = builder.createQuery(CarMergeEntity.class);
         Root<CarMergeEntity> root = crQ.from(CarMergeEntity.class);
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(builder.equal(root.get("excelYear"), car.getYearStart()));
-     //   predicates.add(builder.greaterThanOrEqualTo(root.get("excelYear"), car.getYearFinish()));
+        predicates.add(builder.greaterThanOrEqualTo(root.get("excelYear"), car.getYearStart()));
+        predicates.add(builder.lessThanOrEqualTo(root.get("excelYear"), car.getYearFinish()));
         predicates.add(builder.equal(root.get("excelMake"), car.getMake()));
         predicates.add(builder.equal(root.get("excelModel"), car.getModel()));
         Predicate[] preds = predicates.toArray(new Predicate[0]);
