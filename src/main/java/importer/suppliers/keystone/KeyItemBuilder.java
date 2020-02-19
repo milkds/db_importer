@@ -53,7 +53,7 @@ public class KeyItemBuilder {
         }
         CarMergeEntity entity = CarService.getCarMergeEntity(prodCar);
         if (entity==null){
-            System.out.println(prodCar.getMake() + "    " + prodCar.getModel() + "  " + keyCar);
+            System.out.println(prodCar.getMake() + "    " + prodCar.getModel() + "  " + keyCar.getStartFinish());
         }
 
     }
@@ -256,10 +256,18 @@ public class KeyItemBuilder {
 
     private void setMainCarFields(KeyCar keyCar, ProductionCar prodCar) {
         prodCar.setMake(keyCar.getMake());
-        prodCar.setModel(keyCar.getModel());
+        String model = replaceSymbols(keyCar.getModel());
+        prodCar.setModel(model);
         String[] split = keyCar.getStartFinish().split("-");
         prodCar.setYearStart(Integer.parseInt(split[0]));
         prodCar.setYearFinish(Integer.parseInt(split[1]));
+    }
+
+    private String replaceSymbols(String model) {
+        String result = model.replace("%26", "&");
+        result = result.replace("%2F", "/");
+
+        return result;
     }
 
     private void setFitAttributes(ProductionFitment prodFit, ItemCar keyFit) {

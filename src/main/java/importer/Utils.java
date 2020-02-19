@@ -98,6 +98,10 @@ public class Utils {
             result = StringUtils.substringAfter(picUrl, "assets/");
             result = "fox/" + result;
         }
+        else if (picUrl.contains("KYB/Images/")){
+            result = StringUtils.substringAfter(picUrl, "KYB/Images/");
+            result = "kyb/" + result;
+        }
         else if (picUrl.contains("skyjacker")){
             result = StringUtils.substringAfterLast(picUrl, "/");
             result = "sky/" + result;

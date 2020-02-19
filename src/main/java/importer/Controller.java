@@ -34,15 +34,23 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        importKeystone();
+       // importKeystone();
+        //fillMergingTable();
+        downloadAllPics();
     }
 
     private static void importKeystone(){
         Session keySession = KeyHibernateUtil.getSession();
         Set<KeyItem> items = KeyService.getAllItems(keySession);
-        items.forEach(keyItem->{
-            new KeyItemBuilder().buildItem(keyItem, keySession);
-        });
+        Set<ProductionItem> newItems = new HashSet<>();
+        int total = items.size();
+        int counter = 0;
+        for (KeyItem keyItem : items) {
+            newItems.add(new KeyItemBuilder().buildItem(keyItem, keySession));
+            counter++;
+            logger.info("Built item " + counter + " of total " + total);
+        }
+        new ItemService().saveItems(newItems);
         keySession.close();
         HibernateUtil.shutdown();
         KeyHibernateUtil.shutdown();
