@@ -306,6 +306,9 @@ public class KeyItemBuilder {
             String[] split = rawPics.split(";;");
             String imgAtt = "";
             for (String line: split){
+                if (line.length()==0){
+                    continue;
+                }
                 String url = "http" + StringUtils.substringAfter(line, "http");
                 String curImgAtt = StringUtils.substringBefore(line, "http");
                 ItemPic itemPic = new ItemPic();
@@ -324,6 +327,14 @@ public class KeyItemBuilder {
                 }
             }
             addItemAttribute("Image Validity", imgAtt, prodItem);
+            //cutting pic attributes, if present (like &maxheight=250&maxwidth=400)
+            for (ItemPic pic: prodItem.getPics()){
+                String picUrl = pic.getPicUrl();
+                if (!picUrl.endsWith("jpg")){
+                    picUrl = StringUtils.substringBefore(picUrl, "&");
+                    pic.setPicUrl(picUrl);
+                }
+            }
         }
     }
 
