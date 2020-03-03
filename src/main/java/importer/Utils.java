@@ -72,7 +72,7 @@ public class Utils {
 
     private static void savePic(String picUrl) {
         String pName = getRawPicName(picUrl);
-        pName =  "C:/pics/"+pName;
+        pName =  "C:/pics/parsed/"+pName;
         try(InputStream in = new URL(picUrl).openStream()){
             Files.copy(in, Paths.get(pName));
         } catch (IOException e) {
@@ -101,6 +101,10 @@ public class Utils {
         else if (picUrl.contains("KYB/Images/")){
             result = StringUtils.substringAfter(picUrl, "KYB/Images/");
             result = "kyb/" + result;
+        }
+        else if (picUrl.contains("PRS/Images/")){
+            result = StringUtils.substringAfter(picUrl, "PRS/Images/");
+            result = "procomp/" + result;
         }
         else if (picUrl.contains("skyjacker")){
             result = StringUtils.substringAfterLast(picUrl, "/");

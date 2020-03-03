@@ -35,7 +35,7 @@ public class Controller {
 
     public static void main(String[] args) {
        // importKeystone();
-        //fillMergingTable();
+      //  fillMergingTable();
         downloadAllPics();
     }
 
@@ -54,10 +54,12 @@ public class Controller {
         keySession.close();
         HibernateUtil.shutdown();
         KeyHibernateUtil.shutdown();
+        SkyHibernateUtil.shutdown();
     }
 
     private static void downloadAllPics() {
         Utils.downloadAllPics();
+        HibernateUtil.shutdown();
     }
 
     private static void fillMergingTable() {

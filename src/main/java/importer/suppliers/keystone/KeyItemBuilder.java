@@ -25,8 +25,11 @@ public class KeyItemBuilder {
         Set<ItemCar> keyFits = new HashSet<>(keyItem.getItemCars());
         Set<ProductionFitment> prodFits = new HashSet<>();
         keyFits.forEach(keyFit->{
-            prodFits.add(getFitment(keyFit));
+            ProductionFitment fitment = getFitment(keyFit);
+            fitment.setItem(prodItem);
+            prodFits.add(fitment);
         });
+        prodItem.setProductionFitments(prodFits);
     }
 
     private ProductionFitment getFitment(ItemCar keyFit) {
@@ -41,9 +44,10 @@ public class KeyItemBuilder {
         KeyCar keyCar = keyFit.getCar();
         ProductionCar prodCar = new ProductionCar();
         setMainCarFields(keyCar, prodCar);
-        setCarAttributes(keyCar, prodCar);
+        //setCarAttributes(keyCar, prodCar);
         processCarAttString(keyCar, prodCar);
         verifyModels(keyCar, prodCar);
+        prodFit.setCar(prodCar);
     }
 
     private void verifyModels(KeyCar keyCar, ProductionCar prodCar) {
@@ -66,6 +70,7 @@ public class KeyItemBuilder {
         attStr = checkBodyStyle(attStr, prodCar);
         attStr = checkCab(attStr, prodCar);
         if (attStr!=null&&attStr.length()>0){
+           // System.out.println(attStr);
             CarAttribute attribute = new CarAttribute();
             attribute.setCarAttName("Note");
             attribute.setCarAttValue(attStr);
@@ -205,7 +210,10 @@ public class KeyItemBuilder {
         secondPart = StringUtils.substringBefore(secondPart, " ");
         engineStr = engineStr + "; " + secondPart;
         attStr = attStr.replace(engineStr, "").trim();
-
+        if (attStr.startsWith("Valves")){
+            engineStr = engineStr + " Valves";
+            attStr = attStr.replace("Valves", "").trim();
+        }
         CarAttribute attribute = new CarAttribute();
         attribute.setCarAttName("Engine");
         attribute.setCarAttValue(engineStr);
