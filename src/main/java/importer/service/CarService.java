@@ -16,6 +16,7 @@ public class CarService {
     private static final Logger logger = LogManager.getLogger(CarService.class.getName());
     public void saveCar(ProductionFitment fitment, Session session) {
         ProductionCar car = fitment.getCar();
+        new ProdCarChecker().checkCarFields(car);
         car = checkCarExistence(car, session);
         if (car.getCarID()==0){
             prepareCarAttributes(car, session);

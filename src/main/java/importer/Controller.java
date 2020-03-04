@@ -36,7 +36,7 @@ public class Controller {
     public static void main(String[] args) {
        // importKeystone();
       //  fillMergingTable();
-        downloadAllPics();
+      //  downloadAllPics();
     }
 
     private static void importKeystone(){
