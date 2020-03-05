@@ -390,6 +390,7 @@ public class KeyItemBuilder {
             }
         });
         prodItem.setParams(params);
+        params.setItem(prodItem);
     }
 
     private String getItemType(KeyItem keyItem) {

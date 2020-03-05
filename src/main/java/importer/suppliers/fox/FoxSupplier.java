@@ -138,6 +138,7 @@ public class FoxSupplier {
             }
         });
         prodItem.setParams(params);
+        params.setItem(prodItem);
     }
 
     private Map<String, String> getMountMap() {

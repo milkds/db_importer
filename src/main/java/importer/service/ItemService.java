@@ -84,7 +84,8 @@ public class ItemService {
         Set<ItemAttribute> attributes = item.getItemAttributes();
         Set<ItemAttribute> checkedAttributes = new HashSet<>();
         attributes.forEach(attribute->{
-            ItemAttribute checkedAtt = ItemDAO.checkAttribute (attribute, session);
+            new ProdItemAttChecker().checkAttributeContent(attribute);
+            ItemAttribute checkedAtt = ItemDAO.checkAttribute (attribute, session); //checks existence
             checkedAttributes.add(Objects.requireNonNullElse(checkedAtt, attribute));
         });
         item.setItemAttributes(checkedAttributes);
