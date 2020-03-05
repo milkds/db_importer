@@ -126,6 +126,35 @@ public class ItemDAO {
         return new HashSet<>(picUrls);
     }
 
+    public static List<ProductionItem> getAllItems() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<ProductionItem> allItemList = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionItem> crQ = builder.createQuery(ProductionItem.class);
+        Root<ProductionItem> root = crQ.from(ProductionItem.class);
+        Query q = session.createQuery(crQ);
+        allItemList = q.getResultList();
+        session.close();
+
+        return allItemList;
+
+    }
+
+    public static void updateItemPic(ItemPic pic, Session session) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            session.update(pic);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
     /*public static void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;

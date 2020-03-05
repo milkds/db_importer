@@ -15,6 +15,9 @@ public class ItemPic {
     @Column(name = "PIC_URL")
     private String picUrl;
 
+    @Column(name = "FILE_NAME")
+    private String fileName;
+
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
     private ProductionItem item;
@@ -55,5 +58,13 @@ public class ItemPic {
     @Override
     public int hashCode() {
         return Objects.hash(getPicUrl());
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

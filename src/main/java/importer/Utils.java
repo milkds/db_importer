@@ -1,14 +1,16 @@
 package importer;
 
+import importer.entities.ItemPic;
+import importer.entities.ProductionItem;
 import importer.entities.ShockParameters;
 import importer.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -19,6 +21,7 @@ import java.util.Set;
 
 public class Utils {
     public static final String SAVED_PICS = "src\\main\\resources\\savedPics.txt";
+    private static final Logger logger = LogManager.getLogger(Utils.class.getName());
 
     public static List<String> readImportFile(){
         List<String> result = new ArrayList<>();
@@ -52,8 +55,26 @@ public class Utils {
     }
 
     public static void downloadAllPics() {
-        Set<String> allPics = ItemService.getAllPicLinks();
-        List<String> savedPics = new ArrayList<>();
+       // Set<String> allPics = ItemService.getAllPicLinks();
+        List<ProductionItem> allItems = ItemService.getAllItems();
+        int total = allItems.size();
+        int counter = 0;
+        for (ProductionItem item : allItems) {
+            if (picDownloadNeeded(item)) {
+                setFileNames(item);
+                try {
+                    downloadPicsForItem(item);
+                    ItemService.updateItemPics(item.getPics());
+                } catch (IOException e) {
+                  logger.error("Couldn't save pic for " + item);
+                }
+            }
+            counter++;
+            System.out.println("saved pics for item " + counter + " of total " + total);
+        }
+
+
+      /*  List<String> savedPics = new ArrayList<>();
         try {
             savedPics = Files.readAllLines(Paths.get(SAVED_PICS),
                     Charset.defaultCharset());
@@ -61,13 +82,163 @@ public class Utils {
             e.printStackTrace();
         }
         allPics.removeAll(savedPics);
-        int total = allPics.size();
-        int counter = 0;
         for (String picUrl : allPics) {
             savePic(picUrl);
             counter++;
             System.out.println("saved pic " + counter + " of total " + total);
+        }*/
+    }
+
+    private static void downloadPicsForItem(ProductionItem item) throws IOException {
+        Set<ItemPic> pics = item.getPics();
+        for (ItemPic pic : pics) {
+            String fName = "C:/pics/parsed/" + pic.getFileName();
+            InputStream in = new URL(pic.getPicUrl()).openStream();
+            Files.copy(in, Paths.get(fName));
         }
+    }
+
+    private static void setFileNames(ProductionItem item) {
+        Set<ItemPic> pics = item.getPics();
+        String itemMake = item.getItemManufacturer();
+        switch (itemMake){
+            case "Bilstein" :{
+                for (ItemPic pic: pics){
+                    String end = "";
+                    if (pic.getPicUrl().equals("https://productdesk.cart.bilsteinus.com//media/products/bilstein/image_generic_02_1.jpg")){
+                        end = "a";
+                    }
+                    else {
+                        end = StringUtils.substringBetween(pic.getPicUrl(), "_", ".jpg");
+                    }
+                    if (!end.equals("a")){
+                        int index = Integer.parseInt(end);
+                        index = index-1;
+                        end = index + "";
+                    }
+                    String fName = itemMake + "-" + item.getItemPartNo() + "-" + end + ".jpg";
+                    pic.setFileName(fName);
+                }
+                break;
+            }
+            case "Skyjacker" :{
+                for (ItemPic pic: pics){
+                    String fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
+                    pic.setFileName(fName);
+                }
+                break;
+            }
+            case "FOX" :{
+                int counter = 1;
+                for (ItemPic pic: pics){
+                    if (pics.size()==1){
+                        String fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
+                        pic.setFileName(fName);
+                        break;
+                    }
+                    String picUrl = pic.getPicUrl();
+                    if (picUrl.endsWith("pr.png")){
+                        String fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
+                        pic.setFileName(fName);
+                        continue;
+                    }
+                    String fName = itemMake + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                    pic.setFileName(fName);
+                    counter++;
+                }
+                break;
+            }
+            case "KYB Shocks": {
+                if (pics.size()==1){
+                    ItemPic pic = pics.stream().findFirst().orElse(null);
+                    String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                    pic.setFileName(fName);
+                }
+                else {
+                    //we suppose that shortest item url is main.
+                  ItemPic main = null;
+                  int size = 5000;
+                  for (ItemPic tmp: pics){
+                      int curSize = tmp.getPicUrl().length();
+                      if (curSize<size){
+                          main = tmp;
+                          size = curSize;
+                      }
+                  }
+                  int counter = 1;
+                    for (ItemPic tmp: pics){
+                        if (tmp.equals(main)){
+                            String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                            tmp.setFileName(fName);
+                        }
+                        else {
+                            String fName = "KYB" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                            tmp.setFileName(fName);
+                            counter++;
+                        }
+                    }
+                }
+                break;
+            }
+            case "Pro Comp Suspension": {
+                if (pics.size()==1){
+                    ItemPic pic = pics.stream().findFirst().orElse(null);
+                    String fName = "ProComp" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                    pic.setFileName(fName);
+                }
+                else {
+                    ItemPic main = null;
+                    int size = 5000;
+                    for (ItemPic tmp: pics){
+                        int curSize = tmp.getPicUrl().length();
+                        if (curSize<size){
+                            main = tmp;
+                            size = curSize;
+                        }
+                    }
+                    int counter = 1;
+                    for (ItemPic tmp: pics){
+                        if (tmp.equals(main)){
+                            String fName = "ProComp" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                            tmp.setFileName(fName);
+                        }
+                        else {
+                            String fName = "ProComp" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                            tmp.setFileName(fName);
+                            counter++;
+                        }
+                    }
+                }
+                break;
+            }
+
+        }
+
+    }
+
+    private static boolean picDownloadNeeded(ProductionItem item) {
+        Set<ItemPic> pics = item.getPics();
+        int size = pics.size();
+        if (size==0){
+            return false;
+        }
+        if (size==1){
+            ItemPic pic = pics.stream().findFirst().orElse(null);
+            String url = pic.getPicUrl();
+            if (url.equals("NO IMG LINK")||url.equals("http")){
+                return false;
+            }
+            if (pic.getFileName()==null){
+                return true;
+            }
+        }
+        for (ItemPic pic: pics){
+            if (pic.getFileName()!=null){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static void savePic(String picUrl) {

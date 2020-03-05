@@ -3,16 +3,14 @@ package importer.service;
 import importer.HibernateUtil;
 import importer.dao.ItemDAO;
 import importer.entities.ItemAttribute;
+import importer.entities.ItemPic;
 import importer.entities.ProductionItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class ItemService {
     private static final Logger logger = LogManager.getLogger(ItemService.class.getName());
@@ -44,6 +42,18 @@ public class ItemService {
         result.remove("NO IMG LINK");
 
         return result;
+    }
+
+    public static List<ProductionItem> getAllItems() {
+        List<ProductionItem> result = new ArrayList<>();
+        result = ItemDAO.getAllItems();
+
+        return result;
+    }
+
+    public static void updateItemPics(Set<ItemPic> pics) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        pics.forEach(pic-> ItemDAO.updateItemPic(pic, session));
     }
 
     public void saveItems(Set<ProductionItem> newItems) {
