@@ -194,6 +194,7 @@ public class SkyConverter {
         setModel(car, fitString, session);
         setStartFinish(car, fitString, session);//sets year from fitStr to start and finish
         setCarAttributes(car, fitString);
+        checkDrive(car);
 
       /*  int carYear = Integer.parseInt(fitString.split(" ")[0]);;
         getModelCarMergeInfo(car, carYear, session);
@@ -201,6 +202,13 @@ public class SkyConverter {
         logger.info("Built car " + car);*/
 
         return car;
+    }
+
+    private void checkDrive(ProductionCar car) {
+        String drive = car.getDrive();
+        if (drive!=null&&drive.equals("2WD")){
+            car.setDrive("RWD");
+        }
     }
 
     private void getModelCarMergeInfo(ProductionCar car, int carYear, Session session) {
@@ -253,7 +261,7 @@ public class SkyConverter {
             car.getAttributes().add(attribute);
         }
         if (attPart.length()>0){
-            CarAttribute attribute = new CarAttribute("NoNameAttribute", attPart);
+            CarAttribute attribute = new CarAttribute("For", attPart);
             car.getAttributes().add(attribute);
         }
     }

@@ -34,9 +34,16 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-       // importKeystone();
+
+
+          //  importFox();
+      //  importSkyjacker();
+    //   updateFromKeystone();
+    //    importBilstein();
+    //    importKeystone();
       //  fillMergingTable();
-        downloadAllPics();
+    //    downloadAllPics();
+       // checkAlreadyParsedShocks("Bilstein");
     }
 
     private static void importKeystone(){

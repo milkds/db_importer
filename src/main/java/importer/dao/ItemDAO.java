@@ -134,7 +134,6 @@ public class ItemDAO {
         Root<ProductionItem> root = crQ.from(ProductionItem.class);
         Query q = session.createQuery(crQ);
         allItemList = q.getResultList();
-        session.close();
 
         return allItemList;
 

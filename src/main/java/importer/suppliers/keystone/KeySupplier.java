@@ -7,6 +7,7 @@ import importer.entities.ShockParameters;
 import importer.service.ItemService;
 import importer.suppliers.keystone.entities.KeyItem;
 import importer.suppliers.keystone.entities.KeyItemSpec;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -64,7 +65,7 @@ public class KeySupplier {
                         updateNeeded = true;
                     }
                     if (updateNeeded){
-                        ItemService.updateItem(item, prodSession);
+                      new ItemService().updateItem(item, prodSession);
                     }
 
                     counter++;
@@ -104,7 +105,7 @@ public class KeySupplier {
         Set<KeyItem> keyItems = KeyService.getAllItems(keySession);
         Map<String, ProductionItem> prodItemMap = getProdItemMap(prodSession);
         Set<ProductionItem> prodItemsToUpdate = checkItemsForUpdates(keyItems, prodItemMap);
-        prodItemsToUpdate.forEach(prodItem-> ItemService.updateItem(prodItem, prodSession));
+        prodItemsToUpdate.forEach(prodItem-> new ItemService().updateItem(prodItem, prodSession));
     }
 
     private Set<ProductionItem> checkItemsForUpdates(Set<KeyItem> keyItems, Map<String, ProductionItem> prodItemMap) {
@@ -185,11 +186,28 @@ public class KeySupplier {
 
     private double getLength(String specValue) {
         specValue = specValue.replace(" Inch", "");
+        if (specValue.contains("/")){
+            specValue = specValue.replace("-", ".");
+            specValue = modifyFractions(specValue);
+        }
         double result = 0d;
         try {
             result = Double.parseDouble(specValue);
         }
         catch (NumberFormatException ignored){}
+
+        return result;
+    }
+
+    private String modifyFractions(String specValue) {
+        String fraction = StringUtils.substringAfter(specValue, ".");
+        String[] split = fraction.split("/");
+        double num = Integer.parseInt(split[0]);
+        double den = Integer.parseInt(split[1]);
+        double dec = num/den;
+        String doub = dec+"";
+        doub = StringUtils.substringAfter(doub, ".");
+        String result = specValue.replace(fraction, doub);
 
         return result;
     }

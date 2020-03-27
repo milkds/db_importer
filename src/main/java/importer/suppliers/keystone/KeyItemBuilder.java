@@ -377,9 +377,11 @@ public class KeyItemBuilder {
                     }
                     break;
                 case "Upper Mounting Style":
+                case "Upper Mounting Type":
                     params.setUpperMount(spec.getSpecValue());
                     addItemAttribute("Upper Mount", spec.getSpecValue(), prodItem);
                     break;
+                case "Lower Mounting type":
                 case "Lower Mounting Style":
                     params.setLowerMount(spec.getSpecValue());
                     addItemAttribute("Lower Mount", spec.getSpecValue(), prodItem);
@@ -403,6 +405,10 @@ public class KeyItemBuilder {
 
     private double getLength(String specValue) {
         specValue = specValue.replace(" Inch", "");
+        if (specValue.contains("/")){
+            specValue = specValue.replace("-", ".");
+            specValue = modifyFractions(specValue);
+        }
         double result = 0d;
         try {
             result = Double.parseDouble(specValue);
@@ -417,5 +423,18 @@ public class KeyItemBuilder {
         attribute.setItemAttName(name);
         attribute.setItemAttValue(value);
         item.getItemAttributes().add(attribute);
+    }
+
+    private String modifyFractions(String specValue) {
+        String fraction = StringUtils.substringAfter(specValue, ".");
+        String[] split = fraction.split("/");
+        double num = Integer.parseInt(split[0]);
+        double den = Integer.parseInt(split[1]);
+        double dec = num/den;
+        String doub = dec+"";
+        doub = StringUtils.substringAfter(doub, ".");
+        String result = specValue.replace(fraction, doub);
+
+        return result;
     }
 }
