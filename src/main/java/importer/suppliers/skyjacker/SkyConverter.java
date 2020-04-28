@@ -62,6 +62,7 @@ public class SkyConverter {
         ProductionFitment fitment = new ProductionFitment();
         ProductionCar car = buildProductionCar(skyFitment.getFitString(), session);
         Set<FitmentAttribute> attributes = getFitmentAttributes(skyFitment);
+        new LiftBuilder(attributes).buildLifts();
         fitment.setCar(car);
         fitment.setFitmentAttributes(attributes);
 

@@ -4,6 +4,7 @@ import importer.dao.CarDAO;
 import importer.entities.CarMergeEntity;
 import importer.entities.ProductionItem;
 import importer.entities.ShockParameters;
+import importer.service.CarService;
 import importer.service.ItemService;
 import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
@@ -38,10 +39,10 @@ public class Controller {
 
           //  importFox();
       //  importSkyjacker();
-    //   updateFromKeystone();
-    //    importBilstein();
+   //    updateFromKeystone();
+     //   importBilstein();
     //    importKeystone();
-      //  fillMergingTable();
+     //   fillMergingTable();
     //    downloadAllPics();
        // checkAlreadyParsedShocks("Bilstein");
     }
@@ -50,10 +51,11 @@ public class Controller {
         Session keySession = KeyHibernateUtil.getSession();
         Set<KeyItem> items = KeyService.getAllItems(keySession);
         Set<ProductionItem> newItems = new HashSet<>();
+        Set<String> subModels = CarService.getSubModelSet();
         int total = items.size();
         int counter = 0;
         for (KeyItem keyItem : items) {
-            newItems.add(new KeyItemBuilder().buildItem(keyItem, keySession));
+            newItems.add(new KeyItemBuilder().buildItem(keyItem, subModels, keySession));
             counter++;
             logger.info("Built item " + counter + " of total " + total);
         }

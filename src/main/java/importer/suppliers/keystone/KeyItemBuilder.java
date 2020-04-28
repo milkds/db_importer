@@ -13,39 +13,39 @@ import java.util.List;
 import java.util.Set;
 
 public class KeyItemBuilder {
-    public ProductionItem buildItem(KeyItem keyItem, Session keySession) {
+    public ProductionItem buildItem(KeyItem keyItem, Set<String> subModels, Session keySession) {
         ProductionItem prodItem = new ProductionItem();
         setItemFields(prodItem, keyItem);
-        setFitments(prodItem, keyItem);
+        setFitments(prodItem, keyItem, subModels);
 
         return prodItem;
     }
 
-    private void setFitments(ProductionItem prodItem, KeyItem keyItem) {
+    private void setFitments(ProductionItem prodItem, KeyItem keyItem, Set<String> subModels) {
         Set<ItemCar> keyFits = new HashSet<>(keyItem.getItemCars());
         Set<ProductionFitment> prodFits = new HashSet<>();
         keyFits.forEach(keyFit->{
-            ProductionFitment fitment = getFitment(keyFit);
+            ProductionFitment fitment = getFitment(keyFit, subModels);
             fitment.setItem(prodItem);
             prodFits.add(fitment);
         });
         prodItem.setProductionFitments(prodFits);
     }
 
-    private ProductionFitment getFitment(ItemCar keyFit) {
+    private ProductionFitment getFitment(ItemCar keyFit, Set<String> subModels) {
         ProductionFitment result = new ProductionFitment();
         setFitAttributes(result, keyFit);
-        setCar(result, keyFit);
+        setCar(result, keyFit, subModels);
 
         return result;
     }
 
-    private void setCar(ProductionFitment prodFit, ItemCar keyFit) {
+    private void setCar(ProductionFitment prodFit, ItemCar keyFit, Set<String> subModels) {
         KeyCar keyCar = keyFit.getCar();
         ProductionCar prodCar = new ProductionCar();
         setMainCarFields(keyCar, prodCar);
         //setCarAttributes(keyCar, prodCar);
-        processCarAttString(keyCar, prodCar);
+        processCarAttString(keyCar, prodCar, subModels);
         verifyModels(keyCar, prodCar);
         prodFit.setCar(prodCar);
     }
@@ -62,20 +62,57 @@ public class KeyItemBuilder {
 
     }
 
-    private void processCarAttString(KeyCar keyCar, ProductionCar prodCar) {
+    private void processCarAttString(KeyCar keyCar, ProductionCar prodCar, Set<String> subModels) {
         String attStr = keyCar.getAttString();
         attStr = checkDrives(attStr, prodCar);
         attStr = checkEngines(attStr, prodCar);
         attStr = checkSuspension(attStr, prodCar);
         attStr = checkBodyStyle(attStr, prodCar);
         attStr = checkCab(attStr, prodCar);
+        attStr = checkDoors(attStr, prodCar);
+        attStr = checkSubModels(attStr, prodCar, subModels);
         if (attStr!=null&&attStr.length()>0){
-           // System.out.println(attStr);
+          //  System.out.println(attStr);
             CarAttribute attribute = new CarAttribute();
             attribute.setCarAttName("Note");
             attribute.setCarAttValue(attStr);
             prodCar.getAttributes().add(attribute);
         }
+    }
+
+    private String checkDoors(String attStr, ProductionCar prodCar) {
+        if (attStr==null||attStr.length()==0){
+            return "";
+        }
+        if (attStr.contains("(4 Door)")||attStr.contains("(2 Door)")){
+            String doors = "";
+            if (attStr.contains("(4 Door)")){
+                doors = "4 Door";
+                attStr = attStr.replace("(4 Door)", "").trim();
+            }
+            else {
+                doors = "2 Door";
+                attStr = attStr.replace("(2 Door)", "").trim();
+            }
+            CarAttribute attribute = new CarAttribute();
+            attribute.setCarAttName("Doors");
+            attribute.setCarAttValue(doors);
+            prodCar.getAttributes().add(attribute);
+
+        }
+
+        return attStr;
+    }
+
+    private String checkSubModels(String attStr, ProductionCar prodCar, Set<String> subModels) {
+        if (attStr!=null&&attStr.length()>0){
+            if (subModels.contains(attStr)){
+                prodCar.setSubModel(attStr);
+                attStr = "";
+            }
+        }
+
+        return attStr;
     }
 
     private String checkCab(String attStr, ProductionCar prodCar) {
@@ -109,16 +146,17 @@ public class KeyItemBuilder {
         result.add("Quad Cab (Extended)");
         result.add("Access Cab (Extended)");
         result.add("Double Cab (Extended)");
+        result.add("Double Cab (Crew)");
         result.add("Club Cab (Extended)");
         result.add("Crew Max");
         result.add("Xtra Cab (Extended)");
-        result.add("(Crew)");
         result.add("Crew Cab");
         result.add("Standard Cab");
         result.add("Double Cab");
         result.add("Extended Cab");
         result.add("Cab & Chassis");
         result.add("SuperCrew");
+        result.add("(Crew)");
 
         return result;
     }
@@ -130,6 +168,10 @@ public class KeyItemBuilder {
         List<String> bodyStyle = getBodyStyleList();
         for (String s : bodyStyle) {
             if (attStr.contains(s)) {
+                //Checking if att string contains subModel name "Power Wagon", because we have body style Wagon
+                if (attStr.contains("Power Wagon")){
+                    continue;
+                }
                 CarAttribute attribute = new CarAttribute();
                 attribute.setCarAttName("Body Style");
                 attribute.setCarAttValue(s);
@@ -214,10 +256,25 @@ public class KeyItemBuilder {
             engineStr = engineStr + " Valves";
             attStr = attStr.replace("Valves", "").trim();
         }
+        if (engineStr.endsWith("VIN")){
+            if (attStr.length()==1){
+                engineStr = engineStr + " " + attStr;
+                attStr = "";
+            }
+            else {
+                engineStr = engineStr + " " + attStr.charAt(0);
+                attStr = attStr.substring(1).trim();
+            }
+        }
+
         CarAttribute attribute = new CarAttribute();
         attribute.setCarAttName("Engine");
         attribute.setCarAttValue(engineStr);
         prodCar.getAttributes().add(attribute);
+
+        if (attStr.startsWith("ENG.")){
+            attStr = attStr.replace("ENG.","").trim();
+        }
 
         return attStr;
     }

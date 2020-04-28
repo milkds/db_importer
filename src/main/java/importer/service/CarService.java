@@ -14,6 +14,13 @@ import java.util.*;
 
 public class CarService {
     private static final Logger logger = LogManager.getLogger(CarService.class.getName());
+
+    public static Set<String> getSubModelSet() {
+        List<String> subModels = CarDAO.getAllSubModels();
+
+        return new HashSet<>(subModels);
+    }
+
     public void saveCar(ProductionFitment fitment, Session session) {
         ProductionCar car = fitment.getCar();
         new ProdCarChecker().checkCarFields(car);

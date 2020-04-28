@@ -185,4 +185,18 @@ public class CarDAO {
         session.close();
         HibernateUtil.shutdown();
     }
+
+    public static List<String> getAllSubModels() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<String> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<String> crQ = builder.createQuery(String.class);
+        Root<ProductionCar> root = crQ.from(ProductionCar.class);
+        crQ.select(root.get("subModel")).distinct(true);
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+        session.close();
+
+        return result;
+    }
 }

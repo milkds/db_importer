@@ -5,12 +5,12 @@ import importer.suppliers.bilstein.bilstein_entities.BilCar;
 import importer.suppliers.bilstein.bilstein_entities.BilFitment;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
 import importer.suppliers.bilstein.bilstein_entities.BilSpec;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class BilConverter {
     private static final Logger logger = LogManager.getLogger(BilConverter.class.getName());
@@ -105,11 +105,59 @@ public class BilConverter {
         }
         String notes = bilFitment.getNotes();
         if (notes!=null&&notes.length()>0){
-            FitmentAttribute noteAtt = new FitmentAttribute();
-            noteAtt.setFitmentAttName("Notes");
-            noteAtt.setFitmentAttValue(notes);
-            result.add(noteAtt);
+            result.addAll(processFitNotes(notes, bilFitment.getPosition()));
         }
+
+        return result;
+    }
+
+    private List<FitmentAttribute> processFitNotes(String notes, String position) {
+        List<FitmentAttribute> result = new ArrayList<>(getLifts(notes, position));
+        String[] split = notes.split("\r\n-");
+
+        for (String s: split){
+            result.add(new FitmentAttribute("Note", s));
+        }
+
+        return result;
+    }
+
+    private List<FitmentAttribute> getLifts(String notes, String position) {
+        List<FitmentAttribute> result = new ArrayList<>();
+        if (!notes.contains("Lift")){
+            return result;
+        }
+        String posFin = "";
+        if (!position.contains(" ")){
+            posFin = position;
+        }
+        else {
+            posFin = position.split(" ")[0];
+        }
+        if (!notes.contains(posFin)||!notes.contains("\"")){
+            return result;
+        }
+        String rawLift = StringUtils.substringBetween(notes, "Height:", "\"");
+        String lastPart = StringUtils.substringAfter(notes, rawLift);
+        if (lastPart.startsWith("\"-")){
+            String addPart = StringUtils.substringAfter(lastPart, "\"-");
+            addPart = StringUtils.substringBefore(addPart, "\"");
+            rawLift = rawLift + "-" + addPart;
+        }
+        rawLift = rawLift.trim();
+        String liftStart = "";
+        String liftFinish = "";
+        if (!rawLift.contains("-")){
+            liftStart = rawLift;
+            liftFinish = rawLift;
+        }
+        else {
+            String[] split = rawLift.split("-");
+            liftStart = split[0];
+            liftFinish = split[1];
+        }
+        result.add(new FitmentAttribute("Lift Start", liftStart));
+        result.add(new FitmentAttribute("Lift Finish", liftFinish));
 
         return result;
     }
@@ -219,9 +267,40 @@ public class BilConverter {
             shockParameters.add(attribute);
         });
 
+        setNonSpecFields(item, shock, shockParameters);
+
+    }
+
+    private void setNonSpecFields(ProductionItem item, BilShock shock, Set<ItemAttribute> shockParameters) {
         ItemAttribute attribute = new ItemAttribute();
         attribute.setItemAttName("Series");
         attribute.setItemAttValue(shock.getSeries());
+        shockParameters.add(attribute);
+
+        attribute = new ItemAttribute();
+        attribute.setItemAttName("Description");
+        attribute.setItemAttValue(shock.getProductDesc());
+        shockParameters.add(attribute);
+
+        attribute = new ItemAttribute();
+        attribute.setItemAttName("Warranty");
+        attribute.setItemAttValue(shock.getWarranty());
+
+        attribute = new ItemAttribute();
+        attribute.setItemAttName("Quantity per Vehicle");
+        attribute.setItemAttValue(shock.getQtyPerVehicle());
+
+        String docs = shock.getDocLinks();
+        String[] docSplit = docs.split(" ");
+        for (String s: docSplit){
+            String[] split = s.split("---");
+            if (split.length==2){
+                attribute = new ItemAttribute();
+                attribute.setItemAttName(split[0]);
+                attribute.setItemAttValue(split[1]);
+            }
+        }
+
         shockParameters.add(attribute);
 
         item.setItemAttributes(shockParameters);
