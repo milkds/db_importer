@@ -13,6 +13,7 @@ import java.util.*;
 
 public class SkyConverter {
     private static final Logger logger = LogManager.getLogger(SkyConverter.class.getName());
+    private boolean fitSplitNeeded = false;
     public ProductionItem buildItem(SkyShock shock, Session session) {
         ProductionItem item = new ProductionItem();
         setItemFields(shock, item);
@@ -30,7 +31,98 @@ public class SkyConverter {
         });
         verifyModels(prodFits, session);
         CarService.setCarYearPeriods(prodFits);
-        item.setProductionFitments(prodFits);
+        Set<ProductionFitment> finalFits = checkFitPositions(prodFits);
+        item.setProductionFitments(finalFits);
+    }
+
+    //Iterates all fits and splits those, where positions are both front and rear
+    private Set<ProductionFitment> checkFitPositions(Set<ProductionFitment> prodFits) {
+        Set<ProductionFitment> result = new HashSet<>();
+        prodFits.forEach(curFit->{
+            if (fitSplitNeeded){
+                result.addAll(getSplittedFits(curFit));
+            }
+            else {
+                renameFitAtts(curFit);
+                result.add(curFit);
+            }
+        });
+        
+        return result;
+    }
+
+    private Set<ProductionFitment> getSplittedFits(ProductionFitment curFit) {
+        Set<ProductionFitment> result = new HashSet<>();
+        ProductionFitment frontFit = new ProductionFitment();
+        frontFit.setCar(curFit.getCar());
+        Set<FitmentAttribute> frontAtts = new HashSet<>();
+        curFit.getFitmentAttributes().forEach(curFitAtt->{
+            String attName = curFitAtt.getFitmentAttName();
+            if (attName.equals("r_Lift_s")||attName.equals("r_Lift_f")){
+                return;
+            }
+            if (attName.equals("Position")&&curFitAtt.getFitmentAttValue().equals("Rear")){
+                return;
+            }
+            if (attName.contains("Rear")){
+                return;
+            }
+            if (attName.equals("f_Lift_s")){
+                frontAtts.add(new FitmentAttribute("Lift Start", curFitAtt.getFitmentAttValue()+""));
+                return;
+            }
+            if (attName.equals("f_Lift_f")){
+                frontAtts.add(new FitmentAttribute("Lift Finish", curFitAtt.getFitmentAttValue()+""));
+                return;
+            }
+            frontAtts.add(curFitAtt);
+        });
+        frontFit.setFitmentAttributes(frontAtts);
+        result.add(frontFit);
+
+        ProductionFitment rearFit = new ProductionFitment();
+        rearFit.setCar(curFit.getCar());
+        Set<FitmentAttribute> rearAtts = new HashSet<>();
+        curFit.getFitmentAttributes().forEach(curFitAtt->{
+            String attName = curFitAtt.getFitmentAttName();
+            if (attName.equals("f_Lift_s")||attName.equals("f_Lift_f")){
+                return;
+            }
+            if (attName.equals("Position")&&curFitAtt.getFitmentAttValue().equals("Front")){
+                return;
+            }
+            if (attName.contains("Front")){
+                return;
+            }
+            if (attName.equals("r_Lift_s")){
+                rearAtts.add(new FitmentAttribute("Lift Start", curFitAtt.getFitmentAttValue()+""));
+                return;
+            }
+            if (attName.equals("r_Lift_f")){
+                rearAtts.add(new FitmentAttribute("Lift Finish", curFitAtt.getFitmentAttValue()+""));
+                return;
+            }
+            rearAtts.add(curFitAtt);
+        });
+        rearFit.setFitmentAttributes(rearAtts);
+        result.add(rearFit);
+
+        return result;
+    }
+
+    private void renameFitAtts(ProductionFitment curFit) {
+        Set<FitmentAttribute> atts = curFit.getFitmentAttributes();
+        atts.forEach(att->{
+            String attName = att.getFitmentAttName();
+            switch (attName){
+                case "f_Lift_s":
+                case "r_Lift_s":
+                    att.setFitmentAttName("Lift Start"); break;
+                case "f_Lift_f":
+                case "r_Lift_f":
+                    att.setFitmentAttName("Lift Finish"); break;
+            }
+        });
     }
 
     private void verifyModels(Set<ProductionFitment> prodFits, Session session) {
@@ -62,7 +154,7 @@ public class SkyConverter {
         ProductionFitment fitment = new ProductionFitment();
         ProductionCar car = buildProductionCar(skyFitment.getFitString(), session);
         Set<FitmentAttribute> attributes = getFitmentAttributes(skyFitment);
-        new LiftBuilder(attributes).buildLifts();
+        fitSplitNeeded = new LiftBuilder().buildLifts(attributes);
         fitment.setCar(car);
         fitment.setFitmentAttributes(attributes);
 
