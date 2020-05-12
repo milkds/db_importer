@@ -26,7 +26,14 @@ public class LiftBuilder {
         else if (!value.contains("Front")){
             return;
         }
-        double curLift = getLift(value);
+        double[] curLift = getLift(value);
+        checkLiftSize(curLift[0], curPositionRear);
+        if (curLift.length==2){
+            checkLiftSize(curLift[1], curPositionRear);
+        }
+    }
+
+    private void checkLiftSize(double curLift, boolean curPositionRear) {
         if (curPositionRear){
             isRear = true;
             //start and finish always null together and always get their values together
@@ -60,8 +67,22 @@ public class LiftBuilder {
         }
     }
 
-    private double getLift(String value) {
+    private double[] getLift(String value) {
+        double[] result;
         String lift = StringUtils.substringBetween(value, "with ", " in.");
+        if (lift.contains("-")){
+            String[] split = lift.split("-");
+            result = new double[2];
+            try {
+                result[0] = Double.parseDouble(split[0]);
+                result[1] = Double.parseDouble(split[1]);
+                return result;
+            }
+            catch (NumberFormatException e){
+                logger.error("Wrong lift attribute: " + value);
+                System.exit(1);
+            }
+        }
         double res = 0d;
         try {
             res = Double.parseDouble(lift);
@@ -70,7 +91,10 @@ public class LiftBuilder {
             logger.error("Wrong lift attribute: " + value);
             System.exit(1);
         }
-        return 0;
+        result = new double[1];
+        result[0] = res;
+
+        return result;
     }
 
     public boolean buildLifts(Set<FitmentAttribute> attributes) {
