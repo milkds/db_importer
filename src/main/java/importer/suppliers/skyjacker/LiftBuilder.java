@@ -70,12 +70,16 @@ public class LiftBuilder {
     private double[] getLift(String value) {
         double[] result;
         String lift = StringUtils.substringBetween(value, "with ", " in.");
+        if (lift ==null){
+            logger.error("Wrong lift attribute: " + value);
+            System.exit(1);
+        }
         if (lift.contains("-")){
             String[] split = lift.split("-");
             result = new double[2];
             try {
-                result[0] = Double.parseDouble(split[0]);
-                result[1] = Double.parseDouble(split[1]);
+                result[0] = Double.parseDouble(split[0].trim());
+                result[1] = Double.parseDouble(split[1].trim());
                 return result;
             }
             catch (NumberFormatException e){

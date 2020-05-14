@@ -250,8 +250,8 @@ public class SkyConverter {
         result.put("Front Dual OE with", "Dual OE "); //attention
         result.put("Front with 3", "Front with 3 in. Lift");
         result.put("Rear with 4.5 in. Li", "Rear with 4.5 in. Lift");
-        result.put("Front with 5", "Front with 5. in Lift");
-        result.put("Front with 6", "Front with 6. in Lift");
+        result.put("Front with 5", "Front with 5 in. Lift");
+        result.put("Front with 6", "Front with 6 in. Lift");
         result.put("Front with 6 in.", "Front with 6 in. Lift");
         result.put("Front with 0.5 in. L", "Front with 0.5 in. Lift");
         result.put("Front Dual OE with 2", "Front Dual OE with 2 in. Lift");
@@ -275,6 +275,7 @@ public class SkyConverter {
         result.put("Rear with 2 in. Li", "Rear with 2 in. Lift");
         result.put("Rear with 0.5 in. L", "Rear with 0.5 in. Lift");
         result.put("Rear with 4.5-10 in.", "Rear with 4.5-10 in. Lift");
+        result.put("Rear 0 - 2 in. Lift", "Rear with 0-2 in. Lift");
 
         return result;
     }
