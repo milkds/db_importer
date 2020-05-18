@@ -85,7 +85,7 @@ public class FoxSupplier {
     private void setFitmentAtts(FoxFit foxFit, ProductionFitment prodFit) {
         Set<FitmentAttribute> prodAtts = new HashSet<>();
         prodAtts.add(new FitmentAttribute("Position",foxFit.getPosition()));
-        prodAtts.add(new FitmentAttribute("Lift", foxFit.getLift()));
+        addLifts(prodAtts, foxFit.getLift());
         String fitNote = foxFit.getFitNote();
         if (!fitNote.equals("N/A")){
             fitNote = fitNote.replace("(", "");
@@ -94,6 +94,21 @@ public class FoxSupplier {
         }
 
         prodFit.setFitmentAttributes(prodAtts);
+    }
+
+    private void addLifts(Set<FitmentAttribute> prodAtts, String lift) {
+        if (lift.equals("N/A")){
+            return;
+        }
+        lift = lift.replace("\"", "");
+        if (!lift.contains("-")){
+            prodAtts.add(new FitmentAttribute("Lift Start", lift));
+            prodAtts.add(new FitmentAttribute("Lift Finish", lift));
+            return;
+        }
+        String[] split = lift.split("-");
+        prodAtts.add(new FitmentAttribute("Lift Start", split[0]));
+        prodAtts.add(new FitmentAttribute("Lift Finish", split[1]));
     }
 
     private void setItemFields(FoxItem foxItem, ProductionItem prodItem) {
