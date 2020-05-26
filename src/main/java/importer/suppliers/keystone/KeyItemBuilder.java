@@ -7,10 +7,7 @@ import importer.suppliers.skyjacker.SkyService;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class KeyItemBuilder {
     public ProductionItem buildItem(KeyItem keyItem, Set<String> subModels, Session keySession) {
@@ -27,9 +24,48 @@ public class KeyItemBuilder {
         keyFits.forEach(keyFit->{
             ProductionFitment fitment = getFitment(keyFit, subModels);
             fitment.setItem(prodItem);
-            prodFits.add(fitment);
+            prodFits.addAll(splitFit(fitment)); //in case if position is front and rear simultaneously
         });
         prodItem.setProductionFitments(prodFits);
+    }
+
+    private List<ProductionFitment> splitFit(ProductionFitment fitment) {
+        List<ProductionFitment> result = new ArrayList<>();
+        Set<FitmentAttribute> atts = fitment.getFitmentAttributes();
+        boolean front = false;
+        boolean rear  = false;
+        for (FitmentAttribute att: atts){
+            String name = att.getFitmentAttName();
+            if (name.equals("Position")){
+                String val = att.getFitmentAttValue();
+                if (val.equals("Front")){
+                    front = true;
+                }
+                else {
+                    rear = true;
+                }
+            }
+        }
+        if (front&&rear){
+            Set<FitmentAttribute> baseAtts = new HashSet<>();
+            for (FitmentAttribute att: atts){
+                String name = att.getFitmentAttName();
+                if (!name.equals("Position")){
+                   baseAtts.add(att);
+                }
+            }
+            ProductionFitment newFit = new ProductionFitment();
+            newFit.setCar(fitment.getCar());
+            newFit.setItem(fitment.getItem());
+            Set<FitmentAttribute> newAtts = new HashSet<>(baseAtts);
+            newAtts.add(new FitmentAttribute("Position", "Rear"));
+            newFit.setFitmentAttributes(newAtts);
+            baseAtts.add(new FitmentAttribute("Position", "Front"));
+            fitment.setFitmentAttributes(baseAtts);
+        }
+        result.add(fitment);
+
+        return result;
     }
 
     private ProductionFitment getFitment(ItemCar keyFit, Set<String> subModels) {
@@ -342,9 +378,25 @@ public class KeyItemBuilder {
             FitmentAttribute prodAtt = new FitmentAttribute();
             prodAtt.setFitmentAttName(keyAtt.getAttName());
             prodAtt.setFitmentAttValue(keyAtt.getAttValue());
-            prodAtts.add(prodAtt);
+            List<FitmentAttribute> resAtts = new KeyLiftBuilder().buildLifts(keyAtt);
+            addPositionAttribute(resAtts, keyAtt);
+            prodAtts.addAll(resAtts);
         });
         prodFit.setFitmentAttributes(prodAtts);
+    }
+
+    private void addPositionAttribute(List<FitmentAttribute> resAtts, ItemCarAttribute keyAtt) {
+        String name = keyAtt.getAttName();
+        if (!name.equals("Position On Vehicle:")){
+            return;
+        }
+        String value = keyAtt.getAttValue();
+        if (value.contains("Front")){
+            resAtts.add(new FitmentAttribute("Position", "Front"));
+        }
+        if (value.contains("Rear")){
+            resAtts.add(new FitmentAttribute("Position", "Rear"));
+        }
     }
 
     private void setItemFields(ProductionItem prodItem, KeyItem keyItem) {
