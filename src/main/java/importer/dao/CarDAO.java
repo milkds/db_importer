@@ -40,6 +40,41 @@ public class CarDAO {
 
         return result;
     }
+    public static List<ProductionCar> getSimilarCarsYearsInPeriod(ProductionCar car, Session session) {
+        List<ProductionCar> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionCar> crQ = builder.createQuery(ProductionCar.class);
+        Root<ProductionCar> root = crQ.from(ProductionCar.class);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.lessThanOrEqualTo(root.get("yearStart"), car.getYearStart()));
+        predicates.add(builder.greaterThanOrEqualTo(root.get("yearFinish"), car.getYearFinish()));
+        predicates.add(builder.equal(root.get("make"), car.getMake()));
+        predicates.add(builder.equal(root.get("model"), car.getModel()));
+        Predicate[] preds = predicates.toArray(new Predicate[0]);
+        crQ.where(builder.and(preds));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public static List<ProductionCar> getSimilarCarsByMM(ProductionCar car, Session session) {
+        List<ProductionCar> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionCar> crQ = builder.createQuery(ProductionCar.class);
+        Root<ProductionCar> root = crQ.from(ProductionCar.class);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(root.get("make"), car.getMake()));
+        predicates.add(builder.equal(root.get("model"), car.getModel()));
+        Predicate[] preds = predicates.toArray(new Predicate[0]);
+        crQ.where(builder.and(preds));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+
     public static void saveCar(ProductionCar car, Session session) {
         Transaction transaction = null;
         try {

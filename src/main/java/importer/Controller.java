@@ -10,6 +10,12 @@ import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
 import importer.suppliers.bilstein.BilsteinDAO;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
+import importer.suppliers.eibach.EibController;
+import importer.suppliers.eibach.EibHibernateUtil;
+import importer.suppliers.eibach.eib_entities.EibCar;
+import importer.suppliers.eibach.eib_filters.EibItemFilter;
+import importer.suppliers.eibach.EibService;
+import importer.suppliers.eibach.eib_entities.EibItem;
 import importer.suppliers.fox.FoxHibernateUtil;
 import importer.suppliers.fox.FoxSupplier;
 import importer.suppliers.fox.dao.FoxItemDAO;
@@ -23,6 +29,7 @@ import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
 import importer.suppliers.skyjacker.sky_entities.SkyShock;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -35,15 +42,22 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
+        importEibach();
+    }
 
-          //  importFox();
-      //  importSkyjacker();
-   //    updateFromKeystone();
-     //   importBilstein();
-    //    importKeystone();
-     //   fillMergingTable();
-    //    downloadAllPics();
-       // checkAlreadyParsedShocks("Bilstein");
+    private static void mainMethodsKeeper(){
+        //  importFox();
+        //  importSkyjacker();
+        //  updateFromKeystone();
+        //  importBilstein();
+        //  importKeystone();
+        //  fillMergingTable();
+        //  downloadAllPics();
+        //  checkAlreadyParsedShocks("Bilstein");
+    }
+
+    private static void importEibach(){
+       EibController.importEibach();
     }
 
     private static void importKeystone(){

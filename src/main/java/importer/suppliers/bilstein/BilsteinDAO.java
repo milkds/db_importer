@@ -1,5 +1,6 @@
 package importer.suppliers.bilstein;
 
+import importer.suppliers.bilstein.bilstein_entities.BilCar;
 import importer.suppliers.bilstein.bilstein_entities.BilFitment;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
 import org.hibernate.Session;
@@ -34,5 +35,16 @@ public class BilsteinDAO {
         fitments = q.getResultList();
 
         return new HashSet<>(fitments);
+    }
+
+    public static List<BilCar> getAllCars(Session session) {
+        List<BilCar> cars;
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<BilCar> crQ = builder.createQuery(BilCar.class);
+        Root<BilCar> root = crQ.from(BilCar.class);
+        Query q = session.createQuery(crQ);
+        cars = q.getResultList();
+
+        return cars;
     }
 }
