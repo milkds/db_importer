@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +16,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Utils {
     public static final String SAVED_PICS = "src\\main\\resources\\savedPics.txt";
@@ -57,13 +56,14 @@ public class Utils {
     public static void downloadAllPics() {
        // Set<String> allPics = ItemService.getAllPicLinks();
         List<ProductionItem> allItems = ItemService.getAllItems();
+        Set<String> dowloadedPics = getDowloadedPicNameSet();
         int total = allItems.size();
         int counter = 0;
         for (ProductionItem item : allItems) {
             if (picDownloadNeeded(item)) {
                 setFileNames(item);
                 try {
-                    downloadPicsForItem(item);
+                    downloadPicsForItem(item, dowloadedPics);
                     ItemService.updateItemPics(item.getPics());
                 } catch (IOException e) {
                   logger.error("Couldn't save pic for " + item);
@@ -89,10 +89,24 @@ public class Utils {
         }*/
     }
 
-    private static void downloadPicsForItem(ProductionItem item) throws IOException {
+    public static Set<String> getDowloadedPicNameSet() {
+        Set<String> result = null;
+        String[] pathnames;
+        File f = new File("C:/pics/parsed/");
+        pathnames = f.list();
+        result = new HashSet<>(Arrays.asList(pathnames));
+
+        return result;
+    }
+
+    private static void downloadPicsForItem(ProductionItem item, Set<String> dowloadedPics) throws IOException {
         Set<ItemPic> pics = item.getPics();
         for (ItemPic pic : pics) {
-            String fName = "C:/pics/parsed/" + pic.getFileName();
+            String rawName = pic.getFileName();
+            if (dowloadedPics.contains(rawName)){
+                continue;
+            }
+            String fName = "C:/pics/parsed/" + rawName;
             InputStream in = new URL(pic.getPicUrl()).openStream();
             Files.copy(in, Paths.get(fName));
         }
@@ -204,6 +218,37 @@ public class Utils {
                         }
                         else {
                             String fName = "ProComp" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                            tmp.setFileName(fName);
+                            counter++;
+                        }
+                    }
+                }
+                break;
+            }
+            case "Rancho": {
+                if (pics.size()==1){
+                    ItemPic pic = pics.stream().findFirst().orElse(null);
+                    String fName = "Rancho" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                    pic.setFileName(fName);
+                }
+                else {
+                    ItemPic main = null;
+                    int size = 5000;
+                    for (ItemPic tmp: pics){
+                        int curSize = tmp.getPicUrl().length();
+                        if (curSize<size){
+                            main = tmp;
+                            size = curSize;
+                        }
+                    }
+                    int counter = 1;
+                    for (ItemPic tmp: pics){
+                        if (tmp.equals(main)){
+                            String fName = "Rancho" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                            tmp.setFileName(fName);
+                        }
+                        else {
+                            String fName = "Rancho" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
                             tmp.setFileName(fName);
                             counter++;
                         }
