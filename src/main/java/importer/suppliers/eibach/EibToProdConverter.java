@@ -43,6 +43,7 @@ public class EibToProdConverter {
         }
        if (desc!=null&&desc.length()>0){
            ItemAttribute descAtt = new ItemAttribute("Description", desc);
+           atts.add(descAtt);
        }
        if (atts.size()>0){
            prodItem.setItemAttributes(atts);
