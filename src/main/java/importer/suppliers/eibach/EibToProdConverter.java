@@ -35,12 +35,18 @@ public class EibToProdConverter {
     private void setItemAttributes(ProductionItem prodItem) {
         String note = eibItem.getProdNote();
         String desc = eibItem.getDesc();
-        ItemAttribute noteAtt = new ItemAttribute("Note", note);
-        ItemAttribute descAtt = new ItemAttribute("Description", desc);
+        String carNote = eibCar.getNote();
         Set<ItemAttribute> atts = new HashSet<>();
-        atts.add(noteAtt);
-        atts.add(descAtt);
-        prodItem.setItemAttributes(atts);
+        if (note!=null&&note.length()>0&&!note.equals(carNote)){
+            ItemAttribute noteAtt = new ItemAttribute("Note", note);
+            atts.add(noteAtt);
+        }
+       if (desc!=null&&desc.length()>0){
+           ItemAttribute descAtt = new ItemAttribute("Description", desc);
+       }
+       if (atts.size()>0){
+           prodItem.setItemAttributes(atts);
+       }
     }
 
     private void setFitments(ProductionItem prodItem, Map<String, Set<String>> bilMakeModelMap) {
@@ -117,6 +123,7 @@ public class EibToProdConverter {
             }
             fitment.setCar(car);
             car.getProductionFitments().add(fitment);
+            result.add(fitment);
             //    System.out.println(car.getYearStart()+ "\t"+ car.getYearFinish() + "\t" +car.getMake()+ "\t" + car.getModel()+ "\t" + car.getSubModel()+"\t"+eibCar.getNote());
         });
 
@@ -207,7 +214,6 @@ public class EibToProdConverter {
     }
 
     private void setItemType(ProductionItem prodItem) {
-        prodItem.setItemType(""); //tbd
         String itemType = "";
         String fit = eibItem.getFitTitle();
         String title = eibItem.getTitle();
@@ -218,9 +224,10 @@ public class EibToProdConverter {
             itemType = StringUtils.substringBefore(itemType, "(").trim();
         }
         Map<String, String> itemTypes = getItemTypesMap();
-        if (!itemTypes.containsKey(itemType)){
+       /* if (!itemTypes.containsKey(itemType)){
             System.out.println(itemType);
-        }
+        }*/
+       prodItem.setItemType(itemTypes.get(itemType));
     }
 
     private Map<String, String> getItemTypesMap() {

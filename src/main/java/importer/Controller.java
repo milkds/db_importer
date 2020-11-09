@@ -10,6 +10,7 @@ import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
 import importer.suppliers.bilstein.BilsteinDAO;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
+import importer.suppliers.eibach.EibController;
 import importer.suppliers.fox.FoxHibernateUtil;
 import importer.suppliers.fox.FoxSupplier;
 import importer.suppliers.fox.dao.FoxItemDAO;
@@ -35,14 +36,15 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-          //  importFox();
+        EibController.importEibach();
+         /* //  importFox();
       //  importSkyjacker();
    //    updateFromKeystone();
      //   importBilstein();
      //   importKeystone();
      //   fillMergingTable();
-        downloadAllPics();
-       // checkAlreadyParsedShocks("Bilstein");
+   //     downloadAllPics();
+       // checkAlreadyParsedShocks("Bilstein");*/
     }
 
     private static void importKeystone(){
