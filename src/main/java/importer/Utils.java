@@ -142,6 +142,13 @@ public class Utils {
                 }
                 break;
             }
+            case "Eibach" :{
+                for (ItemPic pic: pics){
+                    String fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
+                    pic.setFileName(fName);
+                }
+                break;
+            }
             case "FOX" :{
                 int counter = 1;
                 for (ItemPic pic: pics){
