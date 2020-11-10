@@ -36,14 +36,15 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        EibController.importEibach();
+        downloadAllPics();
+
          /* //  importFox();
       //  importSkyjacker();
    //    updateFromKeystone();
      //   importBilstein();
      //   importKeystone();
      //   fillMergingTable();
-   //     downloadAllPics();
+   //     EibController.importEibach();
        // checkAlreadyParsedShocks("Bilstein");*/
     }
 

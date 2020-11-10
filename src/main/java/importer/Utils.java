@@ -60,6 +60,10 @@ public class Utils {
         int total = allItems.size();
         int counter = 0;
         for (ProductionItem item : allItems) {
+            String make = item.getItemManufacturer();
+            if (!make.equals("Eibach")){
+                continue;
+            }
             if (picDownloadNeeded(item)) {
                 setFileNames(item);
                 try {
@@ -135,14 +139,8 @@ public class Utils {
                 }
                 break;
             }
-            case "Skyjacker" :{
-                for (ItemPic pic: pics){
-                    String fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
-                    pic.setFileName(fName);
-                }
-                break;
-            }
-            case "Eibach" :{
+            case "Skyjacker" :
+            case "Eibach" : {
                 for (ItemPic pic: pics){
                     String fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
                     pic.setFileName(fName);
