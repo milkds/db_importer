@@ -1,5 +1,6 @@
 package importer.suppliers.eibach;
 
+import importer.dao.CarDAO;
 import importer.entities.*;
 import importer.suppliers.eibach.eib_entities.EibCar;
 import importer.suppliers.eibach.eib_entities.EibItem;
@@ -58,7 +59,7 @@ public class EibToProdConverter {
             prodFit.setItem(prodItem);
         });
 
-        /*newCars.forEach(car->{
+        newCars.forEach(car->{
             List<ProductionCar> cars = CarDAO.getSimilarCarsByMM(car, prodSession);
             if (cars.size()==0){
                 //Checking if our car complies to Bilstein
@@ -67,7 +68,7 @@ public class EibToProdConverter {
                     System.out.println(car.getYearStart()+ "\t"+ car.getYearFinish() + "\t" +car.getMake()+ "\t" + car.getModel()+ "\t" + car.getSubModel());
                 }
             }
-        });*/  //test block for models check
+        });  //test block for models check
     }
 
     private List<ProductionFitment> buildFits(List<ProductionCar> newCars, ProductionItem prodItem) {
@@ -207,10 +208,14 @@ public class EibToProdConverter {
     private void setItemPics(ProductionItem prodItem) {
         String picUrl = eibItem.getImgLink();
         Set<ItemPic> pics = new HashSet<>();
-        ItemPic pic = new ItemPic();
-        pic.setPicUrl(picUrl);
-        pic.setItem(prodItem);
-        pics.add(pic);
+
+        String[] spl = picUrl.split("DDD");
+        for (String s : spl) {
+            ItemPic pic = new ItemPic();
+            pic.setPicUrl(s);
+            pic.setItem(prodItem);
+            pics.add(pic);
+        }
         prodItem.setPics(pics);
     }
 
@@ -218,14 +223,14 @@ public class EibToProdConverter {
         String itemType = "";
         String fit = eibItem.getFitTitle();
         String title = eibItem.getTitle();
-        if (title.contains(fit)){
-            itemType = StringUtils.substringBefore(title, fit);
+        if (fit!=null&&title.contains(fit)){
+            itemType = StringUtils.substringBefore(title, fit).trim();
         }
         if (itemType.contains("(")){
             itemType = StringUtils.substringBefore(itemType, "(").trim();
         }
         Map<String, String> itemTypes = getItemTypesMap();
-       /* if (!itemTypes.containsKey(itemType)){
+      /*  if (!itemTypes.containsKey(itemType.trim())){
             System.out.println(itemType);
         }*/
        prodItem.setItemType(itemTypes.get(itemType));
@@ -257,16 +262,18 @@ public class EibToProdConverter {
         result.put("PRO-ALIGNMENT Camber Shim Kit","Alignment");
         result.put("PRO-ALIGNMENT Camber Upper Mount Kit","Alignment");
         result.put("PRO-ALIGNMENT Camber/Caster Kit","Alignment");
+        result.put("PRO-ALIGNMENT Front Camber/Caster Kit","Alignment");
         result.put("PRO-ALIGNMENT Jeep JK Adjustable Front Upper Control Arm Kit","Alignment");
         result.put("PRO-ALIGNMENT Jeep JK Adjustable Rear Upper Control Arm Kit","Alignment");
         result.put("PRO-ALIGNMENT Jeep JK Front Lower Arm Kit","Alignment");
         result.put("PRO-ALIGNMENT Jeep JK Rear Lower Arm Kit","Alignment");
         result.put("PRO-ALIGNMENT Nissan Adjustable Front Upper Control Arm Kit","Alignment");
         result.put("PRO-ALIGNMENT Panhard Bar","Alignment");
+        result.put("PRO-ALIGNMENT Performance Lower Control Arms","Alignment");
         result.put("PRO-ALIGNMENT Porsche Adjustable Trailing Arm Kit","Alignment");
-        result.put("PRO-ALIGNMENT Toe Link Kit","Alignment");
         result.put("PRO-ALIGNMENT Toyota Adjustable Front Upper Control Arm Kit","Alignment");
         result.put("PRO-ALIGNMENT Toyota Rear Lower Control Arms","Alignment");
+        result.put("PRO-ALIGNMENT Toe Link Kit","Alignment");
         result.put("PRO-ALIGNMENT Trailing Arm Kit","Alignment");
         result.put("PRO-DAMPER","Shock absorber");
         result.put("PRO-DAMPER Kit","Shock absorber");
@@ -278,8 +285,11 @@ public class EibToProdConverter {
         result.put("PRO-STREET Coilover Kit","Coilover");
         result.put("PRO-SYSTEM Kit","Suspension kit");
         result.put("PRO-TRUCK Front Spring-Kit","Lift kit");
+        result.put("PRO-TRUCK Coilover","Coilover");
+        result.put("PRO-TRUCK COILOVER SYSTEM","Lift kit");
         result.put("PRO-TRUCK Kit","Lift kit");
         result.put("PRO-TRUCK LIFT SYSTEM","Lift kit");
+        result.put("PRO-TRUCK Progressive Bump Stop","Lift kit");
         result.put("PRO-TRUCK Rear Lift Block","Lift kit");
         result.put("PRO-TRUCK Rear Shackle Kit","Lift kit");
         result.put("PRO-TRUCK SPORT SHOCK","Shock absorber");

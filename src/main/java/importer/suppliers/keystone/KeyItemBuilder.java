@@ -10,12 +10,43 @@ import org.hibernate.Session;
 import java.util.*;
 
 public class KeyItemBuilder {
+    private Map<String, Set<String>> bilMakeModelMap;
+
+    public KeyItemBuilder(Map<String, Set<String>> bilMakeModelMap) {
+        this.bilMakeModelMap = bilMakeModelMap;
+    }
+
     public ProductionItem buildItem(KeyItem keyItem, Set<String> subModels, Session keySession) {
         ProductionItem prodItem = new ProductionItem();
         setItemFields(prodItem, keyItem);
+        if (wrongItemType(prodItem)){
+            return null;
+        }
+
         setFitments(prodItem, keyItem, subModels);
 
         return prodItem;
+    }
+
+    private boolean wrongItemType(ProductionItem prodItem) {
+        String type = prodItem.getItemType();
+        Set<String> wrongTypes = getWrongItemTypes();
+        if (wrongTypes.contains(type)){
+            return true;
+        }
+        return false;
+    }
+
+    private Set<String> getWrongItemTypes() {
+        Set<String>result = new HashSet<>();
+        result.add("Inner Fender");
+        result.add("Fender Vent Insert");
+        result.add("Auto Trans Shifter Linkage");
+        result.add("Shifter Knob");
+        result.add("Grease Gun Adapter Needle");
+        result.add("Wheel");
+
+        return result;
     }
 
     private void setFitments(ProductionItem prodItem, KeyItem keyItem, Set<String> subModels) {
@@ -82,7 +113,7 @@ public class KeyItemBuilder {
         setMainCarFields(keyCar, prodCar);
         //setCarAttributes(keyCar, prodCar);
         processCarAttString(keyCar, prodCar, subModels);
-        verifyModels(keyCar, prodCar);
+        //verifyModels(keyCar, prodCar);
         prodFit.setCar(prodCar);
     }
 
@@ -90,6 +121,13 @@ public class KeyItemBuilder {
         ProductionCar existingCar = SkyService.getExistingCar(prodCar, keyCar.getYear());
         if (existingCar!=null){
             return;
+        }
+        String make = prodCar.getMake();
+        if (bilMakeModelMap.containsKey(make)){
+            String model = prodCar.getModel();
+            if (bilMakeModelMap.get(make).contains(model)){
+                return;
+            }
         }
         CarMergeEntity entity = CarService.getCarMergeEntity(prodCar);
         if (entity==null){
@@ -356,12 +394,24 @@ public class KeyItemBuilder {
     }
 
     private void setMainCarFields(KeyCar keyCar, ProductionCar prodCar) {
-        prodCar.setMake(keyCar.getMake());
+        setMake(keyCar, prodCar);
         String model = replaceSymbols(keyCar.getModel());
         prodCar.setModel(model);
         String[] split = keyCar.getStartFinish().split("-");
         prodCar.setYearStart(Integer.parseInt(split[0]));
         prodCar.setYearFinish(Integer.parseInt(split[1]));
+    }
+
+    private void setMake(KeyCar keyCar, ProductionCar prodCar) {
+        String make = keyCar.getMake();
+        if (make.equals("Willys")){
+            String model = keyCar.getModel();
+            prodCar.setMake("Jeep");
+            keyCar.setModel("Willys");
+            prodCar.setSubModel(model);
+            return;
+        }
+        prodCar.setMake(make);
     }
 
     private String replaceSymbols(String model) {
@@ -508,6 +558,7 @@ public class KeyItemBuilder {
         String result = "";
         String rawStr = keyItem.getShortDescription();
         result = StringUtils.substringBefore(rawStr, ";");
+        //System.out.println(result);
 
         return result;
     }

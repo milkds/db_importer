@@ -76,6 +76,9 @@ public class EibCarBuilder {
         if (model.contains(";")){
             splitModel(";", baseCar, productionCars);
         }
+        else if (model.contains("|")){
+            splitModel("\\|", baseCar, productionCars);
+        }
         else if (model.contains("/")){
             splitModel("/", baseCar, productionCars); //Modified BMW Z3 M-Roadster/M-Coupe in DB as its was only case /w complex split
         }
@@ -132,11 +135,20 @@ public class EibCarBuilder {
     private void setYears(ProductionCar result) {
         String year = eibCar.getYear();
         String[] split = year.split(" to ");
+        if (split.length==1){
+            split = year.split("-");
+        }
         String start = split[0];
         if (start.contains("/")){
             start = StringUtils.substringAfter(start, "/");
         }
-        String finish = split[1];
+        String finish = "";
+        if (split.length==1){
+            finish = split[0];
+        }
+        else {
+            finish = split[1];
+        }
         if (finish.contains("/")){
             finish = StringUtils.substringAfter(finish, "/");
         }

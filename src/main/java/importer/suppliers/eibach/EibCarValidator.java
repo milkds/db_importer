@@ -206,13 +206,16 @@ public class EibCarValidator {
         rawCars.forEach(prodCar->{
             String model = prodCar.getModel();
             if (!model.equals("Z3 M-Roadster")&&!model.equals("Z3 M-Coupe")){
-                result.add(prodCar);
+                if (model.equals("M-Coupe")){
+                    prodCar.setModel("Z3");
+                    prodCar.setSubModel("M-Coupe");
+                }
             }
             else {
                 prodCar.setModel("Z3");
                 prodCar.setSubModel(StringUtils.substringAfter(model, "Z3 "));
-                result.add(prodCar);
             }
+            result.add(prodCar);
         });
 
         return result;
@@ -252,6 +255,31 @@ public class EibCarValidator {
         Set<String> s8 = new HashSet<>();
         s8.add("SL 55");
         result.put("SL55", s8);
+
+        Set<String> s9 = new HashSet<>();
+        s9.add("560SE");
+        s9.add("560SEC");
+        s9.add("560SEL");
+        result.put("560SE", s9);
+
+        Set<String> s10 = new HashSet<>();
+        s10.add("500SE");
+        s10.add("500SEC");
+        s10.add("500SEL");
+        result.put("500SE", s10);
+
+        Set<String> s11 = new HashSet<>();
+        s11.add("420SE");
+        s11.add("420SEC");
+        s11.add("420SEL");
+        result.put("420SE", s11);
+        result.put("420SEC", s11);
+
+        Set<String> s12 = new HashSet<>();
+        s12.add("C220");
+        s12.add("C230");
+        s12.add("C280");
+        result.put("C36", s12);
 
 
         return result;
@@ -294,8 +322,10 @@ public class EibCarValidator {
                 models.forEach(corModel->{
                     ProductionCar newCar = duplicateProdCar(prodCar);
                     newCar.setModel(corModel);
-                    validateMBSubModel(model, newCar); //this made to move info from model to sub
-                    result.add(newCar);
+                    newCar = validateMBSubModel(model, newCar); //this made to move info from model to sub
+                    if (newCar!=null){
+                        result.add(newCar);
+                    }
                 });
             }
             else {
@@ -306,7 +336,7 @@ public class EibCarValidator {
         return result;
     }
 
-    private void validateMBSubModel(String model, ProductionCar newCar) {
+    private ProductionCar validateMBSubModel(String model, ProductionCar newCar) {
         switch (model){
             case "C230K":
             case "SLK230K":
@@ -314,7 +344,17 @@ public class EibCarValidator {
                 newCar.setSubModel("Kompressor");
                 break;
             }
+            case "C36":{
+                String checkM = newCar.getModel();
+                if (checkM.equals("C230")){
+                    int finish = newCar.getYearFinish();
+                    if (finish<1996){
+                        newCar = null;
+                    }
+                }
+            }
         }
+        return newCar;
     }
 
     private List<ProductionCar> validateOldsMobile(List<ProductionCar> rawCars) {

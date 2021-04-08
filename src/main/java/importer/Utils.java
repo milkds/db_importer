@@ -61,7 +61,7 @@ public class Utils {
         int counter = 0;
         for (ProductionItem item : allItems) {
             String make = item.getItemManufacturer();
-            if (!make.equals("Eibach")){
+            if (!make.equals("Zone Offroad")&&!make.equals("King Shocks")){
                 continue;
             }
             if (picDownloadNeeded(item)) {
@@ -141,8 +141,19 @@ public class Utils {
             }
             case "Skyjacker" :
             case "Eibach" : {
+                int counter = 1;
                 for (ItemPic pic: pics){
-                    String fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
+                    String url = pic.getPicUrl();
+                    String fName = "";
+                    if (url.endsWith(".main")){
+                        url = url.replace(".main", "");
+                        pic.setPicUrl(url);
+                        fName = itemMake + "-" + item.getItemPartNo() + "-" + "0" + ".jpg";
+                    }
+                     else {
+                       fName = itemMake + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                       counter++;
+                    }
                     pic.setFileName(fName);
                 }
                 break;
@@ -167,31 +178,95 @@ public class Utils {
                 }
                 break;
             }
-            case "KYB Shocks": {
+            case "King Shocks": {
                 if (pics.size()==1){
                     ItemPic pic = pics.stream().findFirst().orElse(null);
-                    String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                    String fName = "King" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
                     pic.setFileName(fName);
                 }
                 else {
                     //we suppose that shortest item url is main.
-                  ItemPic main = null;
-                  int size = 5000;
-                  for (ItemPic tmp: pics){
-                      int curSize = tmp.getPicUrl().length();
-                      if (curSize<size){
-                          main = tmp;
-                          size = curSize;
-                      }
-                  }
-                  int counter = 1;
+                    ItemPic main = null;
+                    int size = 5000;
+                    for (ItemPic tmp: pics){
+                        int curSize = tmp.getPicUrl().length();
+                        if (curSize<size){
+                            main = tmp;
+                            size = curSize;
+                        }
+                    }
+                    int counter = 1;
                     for (ItemPic tmp: pics){
                         if (tmp.equals(main)){
-                            String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                            String fName = "King" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
                             tmp.setFileName(fName);
                         }
                         else {
-                            String fName = "KYB" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                            String fName = "King" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                            tmp.setFileName(fName);
+                            counter++;
+                        }
+                    }
+                }
+                break;
+            }
+            case "KYB Shocks": {
+                    if (pics.size()==1){
+                        ItemPic pic = pics.stream().findFirst().orElse(null);
+                        String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                        pic.setFileName(fName);
+                    }
+                    else {
+                        //we suppose that shortest item url is main.
+                        ItemPic main = null;
+                        int size = 5000;
+                        for (ItemPic tmp: pics){
+                            int curSize = tmp.getPicUrl().length();
+                            if (curSize<size){
+                                main = tmp;
+                                size = curSize;
+                            }
+                        }
+                        int counter = 1;
+                        for (ItemPic tmp: pics){
+                            if (tmp.equals(main)){
+                                String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                                tmp.setFileName(fName);
+                            }
+                            else {
+                                String fName = "KYB" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                                tmp.setFileName(fName);
+                                counter++;
+                            }
+                        }
+                    }
+                    break;
+            }
+            case "Monroe": {
+                if (pics.size()==1){
+                    ItemPic pic = pics.stream().findFirst().orElse(null);
+                    String fName = "Monroe" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                    pic.setFileName(fName);
+                }
+                else {
+                    //we suppose that shortest item url is main.
+                    ItemPic main = null;
+                    int size = 5000;
+                    for (ItemPic tmp: pics){
+                        int curSize = tmp.getPicUrl().length();
+                        if (curSize<size){
+                            main = tmp;
+                            size = curSize;
+                        }
+                    }
+                    int counter = 1;
+                    for (ItemPic tmp: pics){
+                        if (tmp.equals(main)){
+                            String fName = "Monroe" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                            tmp.setFileName(fName);
+                        }
+                        else {
+                            String fName = "Monroe" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
                             tmp.setFileName(fName);
                             counter++;
                         }
@@ -254,6 +329,37 @@ public class Utils {
                         }
                         else {
                             String fName = "Rancho" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                            tmp.setFileName(fName);
+                            counter++;
+                        }
+                    }
+                }
+                break;
+            }
+            case "Zone Offroad": {
+                if (pics.size()==1){
+                    ItemPic pic = pics.stream().findFirst().orElse(null);
+                    String fName = "Zone" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                    pic.setFileName(fName);
+                }
+                else {
+                    ItemPic main = null;
+                    int size = 5000;
+                    for (ItemPic tmp: pics){
+                        int curSize = tmp.getPicUrl().length();
+                        if (curSize<size){
+                            main = tmp;
+                            size = curSize;
+                        }
+                    }
+                    int counter = 1;
+                    for (ItemPic tmp: pics){
+                        if (tmp.equals(main)){
+                            String fName = "Zone" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                            tmp.setFileName(fName);
+                        }
+                        else {
+                            String fName = "Zone" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
                             tmp.setFileName(fName);
                             counter++;
                         }

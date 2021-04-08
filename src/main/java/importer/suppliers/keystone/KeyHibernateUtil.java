@@ -23,7 +23,7 @@ public class KeyHibernateUtil {
 
                 Map<String, String> settings = new HashMap<>();
                 settings.put("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-                settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/keystone_full?useUnicode=true&useJDBCCompliantTimezoneShift=true&" +
+                settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/keystone?useUnicode=true&useJDBCCompliantTimezoneShift=true&" +
                         "useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false");
                 settings.put("hibernate.connection.username", "root");
                 settings.put("hibernate.connection.password", "root");

@@ -35,7 +35,11 @@ class KeyLiftBuilder {
 
     private List<FitmentAttribute> getWithLifts(String value) {
         List<FitmentAttribute> result = new LinkedList<>();
-        String raw = StringUtils.substringBetween(value, "With", "Inch").trim();
+        String raw = StringUtils.substringBetween(value, "With", "Inch");
+        if (raw==null){
+            return result;
+        }
+        raw = raw.trim();
         raw = raw.toLowerCase();
         String start = "";
         String finish = "";

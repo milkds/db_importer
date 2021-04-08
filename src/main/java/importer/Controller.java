@@ -8,6 +8,7 @@ import importer.service.CarService;
 import importer.service.ItemService;
 import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
+import importer.suppliers.bilstein.BilService;
 import importer.suppliers.bilstein.BilsteinDAO;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
 import importer.suppliers.eibach.EibController;
@@ -30,21 +31,25 @@ import org.hibernate.Session;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        downloadAllPics();
+        importKeystone();
+     //   downloadAllPics();
 
          /* //  importFox();
       //  importSkyjacker();
    //    updateFromKeystone();
      //   importBilstein();
-     //   importKeystone();
+
      //   fillMergingTable();
-   //     EibController.importEibach();
+      //
+     // EibController.importEibach();
+      //  importKeystone();
        // checkAlreadyParsedShocks("Bilstein");*/
     }
 
@@ -53,14 +58,18 @@ public class Controller {
         Set<KeyItem> items = KeyService.getAllItems(keySession);
         Set<ProductionItem> newItems = new HashSet<>();
         Set<String> subModels = CarService.getSubModelSet();
+        Map<String, Set<String>> bilMakeModelMap = BilService.getMakeModelMap();
         int total = items.size();
         int counter = 0;
         for (KeyItem keyItem : items) {
-            newItems.add(new KeyItemBuilder().buildItem(keyItem, subModels, keySession));
+            ProductionItem item = new KeyItemBuilder(bilMakeModelMap).buildItem(keyItem, subModels, keySession);
+           if (item!=null){
+               newItems.add(item);
+           }
             counter++;
             logger.info("Built item " + counter + " of total " + total);
         }
-        new ItemService().saveItems(newItems);
+      //  new ItemService().saveItems(newItems);
         keySession.close();
         HibernateUtil.shutdown();
         KeyHibernateUtil.shutdown();
