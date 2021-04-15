@@ -1,5 +1,7 @@
 package importer.entities;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -17,6 +19,10 @@ public class ItemPic {
 
     @Column(name = "FILE_NAME")
     private String fileName;
+
+    @Type(type= "org.hibernate.type.NumericBooleanType")
+    @Column(name = "ACTUAL")
+    private Boolean actual;
 
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
@@ -66,5 +72,13 @@ public class ItemPic {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public boolean isActual() {
+        return actual;
+    }
+
+    public void setActual(boolean actual) {
+        this.actual = actual;
     }
 }

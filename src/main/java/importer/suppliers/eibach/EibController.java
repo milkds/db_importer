@@ -1,8 +1,11 @@
 package importer.suppliers.eibach;
 
 import importer.HibernateUtil;
+import importer.entities.FitmentAttribute;
+import importer.entities.ProductionCar;
 import importer.entities.ProductionFitment;
 import importer.entities.ProductionItem;
+import importer.service.FitmentService;
 import importer.service.ItemService;
 import importer.suppliers.bilstein.BilService;
 import importer.suppliers.eibach.eib_entities.EibCar;
@@ -16,6 +19,53 @@ import java.util.*;
 
 public class EibController {
     private static final Logger logger = LogManager.getLogger(EibController.class.getName());
+
+
+    public static void updateFitNotes(){
+        Session eibSession = EibHibernateUtil.getSessionFactory().openSession();
+        Session prodSession = HibernateUtil.getSessionFactory().openSession();
+        Set<EibItem> eibItems = getItemsForImport(eibSession);
+        Set<ProductionItem> prodItems = buildProductionItems(eibItems, eibSession, prodSession);
+        Set<ProductionItem> existingEibItems =  ItemService.getAllItemsByMake("Eibach", prodSession);
+        updateFits(prodItems, existingEibItems, prodSession);
+
+    }
+
+    private static void updateFits(Set<ProductionItem> newItems, Set<ProductionItem> existingEibItems, Session prodSession) {
+        Map<String, ProductionItem> newItemMap = new HashMap<>();
+        newItems.forEach(newItem-> newItemMap.put(newItem.getItemPartNo(), newItem));
+        existingEibItems.forEach(oldItem->{
+            ProductionItem newItem = newItemMap.get(oldItem.getItemPartNo());
+            processFits(newItem, oldItem, prodSession);
+        });
+    }
+
+    private static void processFits(ProductionItem newItem, ProductionItem oldItem, Session prodSession) {
+        Map<ProductionCar, ProductionFitment> oldCarFitMap = new HashMap<>();
+        oldItem.getProductionFitments().forEach(oldFit-> oldCarFitMap.put(oldFit.getCar(), oldFit));
+        newItem.getProductionFitments().forEach(newFit->{
+            ProductionFitment oldFit = oldCarFitMap.get(newFit.getCar());
+            if  (oldFit==null){
+                oldItem.getProductionFitments().forEach(olF->{
+                    logger.info(olF.getCar());
+                });
+                logger.info("Item " + oldItem.getItemPartNo());
+                logger.info("New Car " + newFit.getCar());
+                System.exit(1);
+
+            }
+            Set<FitmentAttribute> oldAtts = oldFit.getFitmentAttributes();
+            Set<FitmentAttribute> newAtts = newFit.getFitmentAttributes();
+            if (oldAtts!=null&&newAtts!=null){
+                if (!oldAtts.equals(newAtts)){
+                    oldFit.setFitmentAttributes(newAtts);
+                    FitmentService.updateFit(oldFit, prodSession);
+                    logger.info("updated fits for " + oldItem.getItemPartNo());
+                }
+            }
+        });
+
+    }
 
     public static void importEibach(){
         Session eibSession = EibHibernateUtil.getSessionFactory().openSession();

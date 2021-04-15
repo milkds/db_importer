@@ -55,6 +55,21 @@ public class FitmentDAO {
         }
     }
 
+    public static void updateFit(ProductionFitment prodFit, Session session) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            session.update(prodFit);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
   /*  public static void prepareFitment(ProductionItem item, ProductionFitment fitment, Session session) {
         logger.debug("preparing attributes for " + fitment);
         prepareFitmentAttributes(fitment, session);

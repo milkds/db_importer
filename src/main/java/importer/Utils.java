@@ -61,7 +61,7 @@ public class Utils {
         int counter = 0;
         for (ProductionItem item : allItems) {
             String make = item.getItemManufacturer();
-            if (!make.equals("Zone Offroad")&&!make.equals("King Shocks")){
+            if (!make.equals("Icon Vehicle Dynamics")){
                 continue;
             }
             if (picDownloadNeeded(item)) {
@@ -179,197 +179,83 @@ public class Utils {
                 break;
             }
             case "King Shocks": {
-                if (pics.size()==1){
-                    ItemPic pic = pics.stream().findFirst().orElse(null);
-                    String fName = "King" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                    pic.setFileName(fName);
-                }
-                else {
-                    //we suppose that shortest item url is main.
-                    ItemPic main = null;
-                    int size = 5000;
-                    for (ItemPic tmp: pics){
-                        int curSize = tmp.getPicUrl().length();
-                        if (curSize<size){
-                            main = tmp;
-                            size = curSize;
-                        }
-                    }
-                    int counter = 1;
-                    for (ItemPic tmp: pics){
-                        if (tmp.equals(main)){
-                            String fName = "King" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                            tmp.setFileName(fName);
-                        }
-                        else {
-                            String fName = "King" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
-                            tmp.setFileName(fName);
-                            counter++;
-                        }
-                    }
-                }
+                setKeystone("King", pics, item);
                 break;
             }
             case "KYB Shocks": {
-                    if (pics.size()==1){
-                        ItemPic pic = pics.stream().findFirst().orElse(null);
-                        String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                        pic.setFileName(fName);
-                    }
-                    else {
-                        //we suppose that shortest item url is main.
-                        ItemPic main = null;
-                        int size = 5000;
-                        for (ItemPic tmp: pics){
-                            int curSize = tmp.getPicUrl().length();
-                            if (curSize<size){
-                                main = tmp;
-                                size = curSize;
-                            }
-                        }
-                        int counter = 1;
-                        for (ItemPic tmp: pics){
-                            if (tmp.equals(main)){
-                                String fName = "KYB" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                                tmp.setFileName(fName);
-                            }
-                            else {
-                                String fName = "KYB" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
-                                tmp.setFileName(fName);
-                                counter++;
-                            }
-                        }
-                    }
+                setKeystone("KYB", pics, item);
                     break;
             }
+            case "Icon Vehicle Dynamics": {
+                setKeyActual(pics);
+                setKeystone("Icon", pics, item);
+                break;
+            }
             case "Monroe": {
-                if (pics.size()==1){
-                    ItemPic pic = pics.stream().findFirst().orElse(null);
-                    String fName = "Monroe" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                    pic.setFileName(fName);
-                }
-                else {
-                    //we suppose that shortest item url is main.
-                    ItemPic main = null;
-                    int size = 5000;
-                    for (ItemPic tmp: pics){
-                        int curSize = tmp.getPicUrl().length();
-                        if (curSize<size){
-                            main = tmp;
-                            size = curSize;
-                        }
-                    }
-                    int counter = 1;
-                    for (ItemPic tmp: pics){
-                        if (tmp.equals(main)){
-                            String fName = "Monroe" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                            tmp.setFileName(fName);
-                        }
-                        else {
-                            String fName = "Monroe" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
-                            tmp.setFileName(fName);
-                            counter++;
-                        }
-                    }
-                }
+                setKeystone("Monroe", pics, item);
                 break;
             }
             case "Pro Comp Suspension": {
-                if (pics.size()==1){
-                    ItemPic pic = pics.stream().findFirst().orElse(null);
-                    String fName = "ProComp" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                    pic.setFileName(fName);
-                }
-                else {
-                    ItemPic main = null;
-                    int size = 5000;
-                    for (ItemPic tmp: pics){
-                        int curSize = tmp.getPicUrl().length();
-                        if (curSize<size){
-                            main = tmp;
-                            size = curSize;
-                        }
-                    }
-                    int counter = 1;
-                    for (ItemPic tmp: pics){
-                        if (tmp.equals(main)){
-                            String fName = "ProComp" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                            tmp.setFileName(fName);
-                        }
-                        else {
-                            String fName = "ProComp" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
-                            tmp.setFileName(fName);
-                            counter++;
-                        }
-                    }
-                }
+                setKeystone("ProComp", pics, item);
                 break;
             }
             case "Rancho": {
-                if (pics.size()==1){
-                    ItemPic pic = pics.stream().findFirst().orElse(null);
-                    String fName = "Rancho" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                    pic.setFileName(fName);
-                }
-                else {
-                    ItemPic main = null;
-                    int size = 5000;
-                    for (ItemPic tmp: pics){
-                        int curSize = tmp.getPicUrl().length();
-                        if (curSize<size){
-                            main = tmp;
-                            size = curSize;
-                        }
-                    }
-                    int counter = 1;
-                    for (ItemPic tmp: pics){
-                        if (tmp.equals(main)){
-                            String fName = "Rancho" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                            tmp.setFileName(fName);
-                        }
-                        else {
-                            String fName = "Rancho" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
-                            tmp.setFileName(fName);
-                            counter++;
-                        }
-                    }
-                }
+                setKeystone("Rancho", pics, item);
                 break;
             }
             case "Zone Offroad": {
-                if (pics.size()==1){
-                    ItemPic pic = pics.stream().findFirst().orElse(null);
-                    String fName = "Zone" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                    pic.setFileName(fName);
-                }
-                else {
-                    ItemPic main = null;
-                    int size = 5000;
-                    for (ItemPic tmp: pics){
-                        int curSize = tmp.getPicUrl().length();
-                        if (curSize<size){
-                            main = tmp;
-                            size = curSize;
-                        }
-                    }
-                    int counter = 1;
-                    for (ItemPic tmp: pics){
-                        if (tmp.equals(main)){
-                            String fName = "Zone" + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
-                            tmp.setFileName(fName);
-                        }
-                        else {
-                            String fName = "Zone" + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
-                            tmp.setFileName(fName);
-                            counter++;
-                        }
-                    }
-                }
+                setKeystone("Zone", pics, item);
                 break;
             }
 
         }
 
+    }
+
+    private static void setKeyActual(Set<ItemPic> pics) {
+        pics.forEach(pic->{
+            String url = pic.getPicUrl();
+            if (url.contains("represents actual")){
+                pic.setActual(true);
+                String actUrl = StringUtils.substringBefore(url, ".JPG&")+".jpg";
+                pic.setPicUrl(actUrl);
+            }
+            else {
+                pic.setActual(false);
+            }
+        });
+    }
+
+    private static void setKeystone(String foldName, Set<ItemPic> pics, ProductionItem item) {
+        if (pics.size()==1){
+            ItemPic pic = pics.stream().findFirst().orElse(null);
+            String fName = foldName + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+            pic.setFileName(fName);
+        }
+        else {
+            //we suppose that shortest item url is main.
+            ItemPic main = null;
+            int size = 5000;
+            for (ItemPic tmp: pics){
+                int curSize = tmp.getPicUrl().length();
+                if (curSize<size){
+                    main = tmp;
+                    size = curSize;
+                }
+            }
+            int counter = 1;
+            for (ItemPic tmp: pics){
+                if (tmp.equals(main)){
+                    String fName = foldName + "-" + item.getItemPartNo() + "-" + 0 + ".jpg";
+                    tmp.setFileName(fName);
+                }
+                else {
+                    String fName = foldName + "-" + item.getItemPartNo() + "-" + counter + ".jpg";
+                    tmp.setFileName(fName);
+                    counter++;
+                }
+            }
+        }
     }
 
     private static boolean picDownloadNeeded(ProductionItem item) {

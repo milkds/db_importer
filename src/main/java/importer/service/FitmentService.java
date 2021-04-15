@@ -14,6 +14,10 @@ import java.util.Set;
 public class FitmentService {
     private static final Logger logger = LogManager.getLogger(FitmentService.class.getName());
 
+    public static void updateFit(ProductionFitment prodFit, Session prodSession) {
+        FitmentDAO.updateFit(prodFit, prodSession);
+    }
+
     public void saveFitment(ProductionFitment fitment, Session session) {
         new CarService().saveCar(fitment, session);
         prepareFitmentAttributes(fitment, session);

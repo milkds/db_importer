@@ -103,8 +103,8 @@ public class EibToProdConverter {
                 }
                 else {
                     double[] liftsR = getLifts(rearL);
-                    fitment.getFitmentAttributes().add(new FitmentAttribute("", liftsR[0]+""));
-                    fitment.getFitmentAttributes().add(new FitmentAttribute("", liftsR[1]+""));
+                    fitment.getFitmentAttributes().add(new FitmentAttribute("Rear Lift Start", liftsR[0]+""));
+                    fitment.getFitmentAttributes().add(new FitmentAttribute("Rear Lift Finish", liftsR[1]+""));
                 }
             }
             if (frontL!=null&& !frontL.equals("n/a")){
@@ -119,8 +119,8 @@ public class EibToProdConverter {
                         prodItem.getItemAttributes().add(new ItemAttribute("Height Adjustable ", "Yes"));
                     }
                     double[] liftsF = getLifts(frontL);
-                    fitment.getFitmentAttributes().add(new FitmentAttribute("", liftsF[0]+""));
-                    fitment.getFitmentAttributes().add(new FitmentAttribute("", liftsF[1]+""));
+                    fitment.getFitmentAttributes().add(new FitmentAttribute("Front Lift Start", liftsF[0]+""));
+                    fitment.getFitmentAttributes().add(new FitmentAttribute("Front Lift Finish", liftsF[1]+""));
                 }
             }
             fitment.setCar(car);

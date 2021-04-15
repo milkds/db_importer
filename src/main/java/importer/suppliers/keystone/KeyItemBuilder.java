@@ -113,7 +113,7 @@ public class KeyItemBuilder {
         setMainCarFields(keyCar, prodCar);
         //setCarAttributes(keyCar, prodCar);
         processCarAttString(keyCar, prodCar, subModels);
-        //verifyModels(keyCar, prodCar);
+      //  verifyModels(keyCar, prodCar);
         prodFit.setCar(prodCar);
     }
 

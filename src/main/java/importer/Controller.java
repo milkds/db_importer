@@ -38,15 +38,18 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        importKeystone();
-     //   downloadAllPics();
+
+      //  fillMergingTable();
+      //EibController.updateFitNotes();
+     //     importKeystone();
+        downloadAllPics();
 
          /* //  importFox();
       //  importSkyjacker();
    //    updateFromKeystone();
      //   importBilstein();
 
-     //   fillMergingTable();
+
       //
      // EibController.importEibach();
       //  importKeystone();
@@ -69,7 +72,7 @@ public class Controller {
             counter++;
             logger.info("Built item " + counter + " of total " + total);
         }
-      //  new ItemService().saveItems(newItems);
+        new ItemService().saveItems(newItems);
         keySession.close();
         HibernateUtil.shutdown();
         KeyHibernateUtil.shutdown();
