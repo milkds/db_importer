@@ -154,6 +154,17 @@ public class ItemDAO {
         }
     }
 
+    public static List<ItemAttribute> getAllItemAttributes(Session session) {
+        List<ItemAttribute> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ItemAttribute> crQ = builder.createQuery(ItemAttribute.class);
+        Root<ItemAttribute> root = crQ.from(ItemAttribute.class);
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
     /*public static void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;

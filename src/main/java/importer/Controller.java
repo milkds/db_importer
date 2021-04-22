@@ -2,6 +2,7 @@ package importer;
 
 import importer.dao.CarDAO;
 import importer.entities.CarMergeEntity;
+import importer.entities.ItemAttribute;
 import importer.entities.ProductionItem;
 import importer.entities.ShockParameters;
 import importer.service.CarService;
@@ -11,7 +12,6 @@ import importer.suppliers.bilstein.BilHibernateUtil;
 import importer.suppliers.bilstein.BilService;
 import importer.suppliers.bilstein.BilsteinDAO;
 import importer.suppliers.bilstein.bilstein_entities.BilShock;
-import importer.suppliers.eibach.EibController;
 import importer.suppliers.fox.FoxHibernateUtil;
 import importer.suppliers.fox.FoxSupplier;
 import importer.suppliers.fox.dao.FoxItemDAO;
@@ -39,10 +39,12 @@ public class Controller {
 
     public static void main(String[] args) {
 
+        updateMounts();
+
       //  fillMergingTable();
       //EibController.updateFitNotes();
      //     importKeystone();
-        downloadAllPics();
+       // downloadAllPics();
 
          /* //  importFox();
       //  importSkyjacker();
@@ -54,6 +56,14 @@ public class Controller {
      // EibController.importEibach();
       //  importKeystone();
        // checkAlreadyParsedShocks("Bilstein");*/
+    }
+
+    private static void updateMounts() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<ItemAttribute> allAttributes = ItemService.getAllItemAttributes(session);
+        new ItemService().updateItemAttributes(allAttributes, session);
+        session.close();
+        HibernateUtil.shutdown();
     }
 
     private static void importKeystone(){

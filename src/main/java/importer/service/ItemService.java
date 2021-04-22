@@ -22,6 +22,45 @@ public class ItemService {
         return new HashSet<>(itemList);
     }
 
+    public static List<ItemAttribute> getAllItemAttributes(Session session) {
+        List<ItemAttribute> result = ItemDAO.getAllItemAttributes(session);
+        return result;
+    }
+
+    public void updateItemAttributes(List<ItemAttribute> allAttributes, Session session) {
+        Set<String> correctMounts = getCorrectMounts();
+        Map<String, String> mountMap = getMountMap();
+        allAttributes.forEach(attribute -> {
+            String name = attribute.getItemAttName();
+            if (!filterMount(name)){ return;}
+            String value = attribute.getItemAttValue();
+            if (correctMounts.contains(value)){ return;}
+            String correctValue = mountMap.get(value);
+            if (correctValue==null){
+                logger.error("Unknown Mount " + value);
+                System.exit(1);
+            }
+            attribute.setItemAttValue(correctValue);
+            ItemDAO.updateItemAttribute(session, attribute);
+            logger.info("corrected " + value + " to " + correctValue);
+        });
+
+    }
+
+    private boolean filterMount(String name) {
+        if (name==null){
+            return false;
+        }
+        if (name.length()==0){
+            return false;
+        }
+        if (!name.equals("Upper Mount Full")&&!name.equals("Lower Mount Full")){
+            return false;
+        }
+
+        return true;
+    }
+
     public void updateItem(ProductionItem item, Session prodSession) {
         checkMounts(item);
         checkLengths(item);
@@ -129,17 +168,112 @@ public class ItemService {
         }
         String upperMount = params.getUpperMount();
         if (upperMount!=null&&upperMount.length()>0){
-            if (upperMount.equals("Eye")){
-                upperMount = "Eyelet";
-            }
+            upperMount = checkMount(upperMount);
             item.getItemAttributes().add(new ItemAttribute("Upper Mount Full", upperMount));
         }
         String lowerMount = params.getLowerMount();
         if (lowerMount!=null&&lowerMount.length()>0){
-            if (lowerMount.equals("Eye")){
-                lowerMount = "Eyelet";
-            }
             item.getItemAttributes().add(new ItemAttribute("Lower Mount Full", lowerMount));
         }
     }
+
+    private String checkMount(String mount) {
+        Set<String> correctMounts = getCorrectMounts();
+        if (correctMounts.contains(mount)){
+            return mount;
+        }
+        Map<String, String> mountMap = getMountMap(); //k = wrong value, v = correct value
+        String correct = mountMap.get(mount);
+        if (correct==null){
+            logger.error("Unknown mount " + mount);
+            System.exit(1);
+        }
+
+        return correct;
+    }
+
+    private Map<String, String> getMountMap() {
+        Map<String, String> result = new HashMap<>();
+        result.put("Eye","Eyelet");
+        result.put("Bar-Pin","Bar Pin");
+        result.put("Cross Pin","Bar Pin");
+        result.put("Cross Pin Mount","Bar Pin");
+        for (int i = 1; i < 12; i++) {
+            result.put("Cross Pin Mount-XP"+i, "Bar Pin");
+        }
+        result.put("SS1","Stem");
+        result.put("SS2","Stem");
+        result.put("SS3","Stem");
+        result.put("SS4","Stem");
+        result.put("SS6","Stem");
+        result.put("SS7","Stem");
+        result.put("Stem Mount","Stem");
+        result.put("Stem Mount-S2","Stem");
+        result.put("Stem Mount-S4","Stem");
+        result.put("Stem Mount-S5","Stem");
+
+        return result;
+    }
+
+    private Set<String> getCorrectMounts() {
+        Set<String> result = new HashSet<>();
+        result.add("Axle Mount");
+        result.add("B11");
+        result.add("B4");
+        result.add("B8");
+        result.add("Ball");
+        result.add("Ball Joint");
+        result.add("Bar Pin");
+        result.add("Base");
+        result.add("Base Cup");
+        result.add("Bolt-On");
+        result.add("Bracket");
+        result.add("Cantilever");
+        result.add("Clevis");
+        result.add("Clevis Bracket");
+        result.add("Clevis/ Eyelet");
+        result.add("Clip");
+        result.add("Crossbar");
+        result.add("Double Stud");
+        result.add("Double Welded Loop");
+        result.add("Electrical Plastic Bearing");
+        result.add("Eyelet");
+        result.add("Eyelet/ Stud");
+        result.add("Factory");
+        result.add("Fork");
+        result.add("Heim");
+        result.add("Housing");
+        result.add("Key Hole");
+        result.add("Loop");
+        result.add("Loop Bushing");
+        result.add("Loop Mount-L1");
+        result.add("Loop Mount-L2");
+        result.add("Loop Mount-L3");
+        for (int i = 4; i <93 ; i++) {
+            result.add("Loop Sleeve-LS"+i);
+        }
+        result.add("Metal Ball");
+        result.add("OEM");
+        result.add("Offset Bracket");
+        result.add("Pin");
+        result.add("Plastic Ball");
+        result.add("Plastic Ball, Electric");
+        result.add("Sleeve Mount");
+        result.add("Snapeye");
+        result.add("Special Mount");
+        result.add("Stem");
+        result.add("Stem Plate");
+        result.add("Strut");
+        result.add("Stud");
+        result.add("T-Bar");
+        result.add("Threaded");
+        result.add("Tie Rod Clamp");
+        result.add("Top Mount");
+        result.add("U Bracket");
+        result.add("Yoke");
+
+        return result;
+    }
+
+
 }
