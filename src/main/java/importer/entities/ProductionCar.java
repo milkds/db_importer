@@ -145,4 +145,5 @@ public class ProductionCar {
     public int hashCode() {
         return Objects.hash(getMake(), getModel(), getSubModel());
     }
+
 }

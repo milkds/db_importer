@@ -1,5 +1,6 @@
 package importer.service;
 
+import importer.HibernateUtil;
 import importer.dao.CarDAO;
 import importer.entities.CarAttribute;
 import importer.entities.CarMergeEntity;
@@ -19,6 +20,21 @@ public class CarService {
         List<String> subModels = CarDAO.getAllSubModels();
 
         return new HashSet<>(subModels);
+    }
+
+    public static Map<String, Set<String>> getMakeModelMap(){
+        Map<String, Set<String>> result = new HashMap<>();
+        Session prodSession = HibernateUtil.getSessionFactory().openSession();
+        List<ProductionCar> allCars = CarDAO.getAllCars(prodSession);
+        allCars.forEach(car -> {
+            String make = car.getMake();
+            String model = car.getModel();
+            Set<String> models = result.computeIfAbsent(make, k -> new HashSet<>());
+            models.add(model);
+        });
+        prodSession.close();
+
+        return result;
     }
 
     public void saveCar(ProductionFitment fitment, Session session) {

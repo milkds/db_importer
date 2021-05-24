@@ -28,6 +28,8 @@ public class SumFitAttribute {
         this.value = value;
     }
 
+    public SumFitAttribute(){}
+
     @Override
     public String toString() {
         return new StringJoiner(", ", SumFitAttribute.class.getSimpleName() + "[", "]")

@@ -25,6 +25,7 @@ import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
 import importer.suppliers.skyjacker.sky_entities.SkyShock;
+import importer.suppliers.summit.SumController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -38,8 +39,10 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
+        new SumController().saveSummitToDB();
 
-        updateMounts();
+
+       // updateMounts();
 
       //  fillMergingTable();
       //EibController.updateFitNotes();

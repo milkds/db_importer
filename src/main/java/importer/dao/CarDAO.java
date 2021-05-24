@@ -234,4 +234,15 @@ public class CarDAO {
 
         return result;
     }
+
+    public static List<ProductionCar> getAllCars(Session prodSession) {
+        List<ProductionCar> result = new ArrayList<>();
+        CriteriaBuilder builder = prodSession.getCriteriaBuilder();
+        CriteriaQuery<ProductionCar> crQ = builder.createQuery(ProductionCar.class);
+        Root<ProductionCar> root = crQ.from(ProductionCar.class);
+        Query q = prodSession.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
 }

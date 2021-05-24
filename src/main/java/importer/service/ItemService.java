@@ -211,6 +211,7 @@ public class ItemService {
         result.put("Stem Mount-S2","Stem");
         result.put("Stem Mount-S4","Stem");
         result.put("Stem Mount-S5","Stem");
+        result.put("T-bar","T-Bar");
 
         return result;
     }

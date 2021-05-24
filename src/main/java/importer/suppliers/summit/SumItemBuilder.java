@@ -1,8 +1,6 @@
 package importer.suppliers.summit;
 
-import importer.entities.ItemAttribute;
-import importer.entities.ProductionItem;
-import importer.entities.ShockParameters;
+import importer.entities.*;
 import importer.suppliers.summit.entities.SumItem;
 import importer.suppliers.summit.entities.SumItemAttribute;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SumItemBuilder {
     private SumItem sumItem;
@@ -21,15 +20,46 @@ public class SumItemBuilder {
     }
 
 
-    public ProductionItem buildItem() {
+    public ProductionItem buildItem(Map<String, String> sumAppNotesMap, SummitCarValidator validator) {
         result = new ProductionItem();
         setPartNo();
         setItemMake();
         setItemType();
         setParams();//will initiate blank params object
         setItemAttributes();
+        setItemPics();
+        setFits(sumAppNotesMap, validator);
 
         return result;
+    }
+
+    private void setFits(Map<String, String> sumAppNotesMap, SummitCarValidator validator) {
+        Set<ProductionFitment> prodFits = new SumFitBuilder(sumItem, sumAppNotesMap).buildFits(result, validator);
+        prodFits.forEach(prodFit->{
+            prodFit.setItem(result);
+            result.getProductionFitments().add(prodFit);
+        });
+    }
+
+    private void setItemPics() {
+        String itemPics = sumItem.getPicUrls();
+        if (itemPics==null||itemPics.length()==0){
+            return;
+        }
+        String[] split = itemPics.split("div");
+        for (String picUrl: split){
+            ItemPic iPic = new ItemPic();
+            iPic.setActual(picUrl.endsWith("true"));
+            if (iPic.isActual()){
+                picUrl = picUrl.replace("_true", "");
+            }
+            else {
+                picUrl =  picUrl.replace("_false", "");
+            }
+            iPic.setPicUrl(picUrl);
+            iPic.setItem(result);
+            result.getPics().add(iPic);
+        }
     }
 
     private void setParams() {
@@ -39,6 +69,21 @@ public class SumItemBuilder {
     }
 
     private void setItemAttributes() {
+        processAttField();
+        result.getItemAttributes().add(new ItemAttribute("Short Description", sumItem.getShortDesc()));
+        result.getItemAttributes().add(new ItemAttribute("Description", sumItem.getDescription()));
+    }
+
+    private void processVideoField() {
+        //срус
+      /*  String videoLinks = sumItem.getVideoUrls();
+        if (videoLinks==null||videoLinks.length()==0){
+            return;
+        }
+        String[] links = videoLinks.split("div");*/
+    }
+
+    private void processAttField() {
         List<SumItemAttribute> sumAtts = sumItem.getAttributes();
         Map<String, String> attsToCheck = getAttsToCheck(); //k = att name, v = correct att name.
         sumAtts.forEach(sumAtt->{
@@ -67,6 +112,7 @@ public class SumItemBuilder {
         }
         else {
             attValue = attValue.replace(" in.","");
+            attValue = attValue.replace(" in","");
             if (mapV.contains("Collapsed")){
                 result.getParams().setColLength(Double.parseDouble(attValue));
             }
@@ -84,7 +130,9 @@ public class SumItemBuilder {
         result.put("UPC:","");
         result.put("In-Store Pickup:","");
         result.put("Collapsed Length (in):","Collapsed Length");
+        result.put("Collapsed Length (in.):","Collapsed Length");
         result.put("Extended Length (in):","Extended Length");
+        result.put("Extended Length (in.):","Extended Length");
         result.put("Lower Mount:","Lower Mount");
         result.put("Upper Mount:","Upper Mount");
 

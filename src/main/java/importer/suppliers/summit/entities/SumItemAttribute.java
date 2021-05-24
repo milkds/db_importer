@@ -27,6 +27,8 @@ public class SumItemAttribute {
         this.name = name;
         this.value = value;
     }
+    public SumItemAttribute(){
+    }
 
     public String getName() {
         return name;
