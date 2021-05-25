@@ -198,7 +198,7 @@ public class ItemService {
         result.put("Bar-Pin","Bar Pin");
         result.put("Cross Pin","Bar Pin");
         result.put("Cross Pin Mount","Bar Pin");
-        for (int i = 1; i < 12; i++) {
+        for (int i = 1; i < 16; i++) {
             result.put("Cross Pin Mount-XP"+i, "Bar Pin");
         }
         result.put("SS1","Stem");

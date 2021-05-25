@@ -181,8 +181,9 @@ public class Utils {
             case "Old Man Emu":{
                 for (ItemPic pic: pics){
                     String url = pic.getPicUrl();
-                    String picNo = StringUtils.substringAfter(url,"_");
-                    url = StringUtils.substringBefore(url, "_");
+                    String picNo = StringUtils.substringAfter(url,".jpg_");
+                    url = StringUtils.substringBefore(url, ".jpg")+".jpg";
+                    url = url.replace("large","xlarge");
                     String fName = itemMake + "-" + item.getItemPartNo() + "-" + picNo + ".jpg";
                     pic.setPicUrl(url);
                     pic.setFileName(fName);
