@@ -61,7 +61,7 @@ public class Utils {
         int counter = 0;
         for (ProductionItem item : allItems) {
             String make = item.getItemManufacturer();
-            if (!make.equals("Icon Vehicle Dynamics")){
+            if (!make.equals("Old Man Emu")){
                 continue;
             }
             if (picDownloadNeeded(item)) {
@@ -178,6 +178,18 @@ public class Utils {
                 }
                 break;
             }
+            case "Old Man Emu":{
+                for (ItemPic pic: pics){
+                    String url = pic.getPicUrl();
+                    String picNo = StringUtils.substringAfter(url,"_");
+                    url = StringUtils.substringBefore(url, "_");
+                    String fName = itemMake + "-" + item.getItemPartNo() + "-" + picNo + ".jpg";
+                    pic.setPicUrl(url);
+                    pic.setFileName(fName);
+                }
+                break;
+            }
+
             case "King Shocks": {
                 setKeystone("King", pics, item);
                 break;
