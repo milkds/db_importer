@@ -104,7 +104,7 @@ class SumFitBuilder {
 
     private void processMultiNotes(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem, String noteObj) {
         String[] objSplit = noteObj.split("/");
-        String[] noteSplit = appNote.split("~");
+        String[] noteSplit = getNoteSplit(appNote);
         for (int i = 0; i < objSplit.length; i++) {
             switch (objSplit[i]){
                 case "i": prodItem.getItemAttributes().add(new ItemAttribute("Note", noteSplit[i])); break;
@@ -113,6 +113,40 @@ class SumFitBuilder {
                 default: break;
             }
         }
+    }
+
+    private String[] getNoteSplit(String appNote) {
+        String[] tilda = appNote.split("~");
+        if (!appNote.contains(",")&& !appNote.contains(". ")){
+            return tilda;
+        }
+        List<String> res = new ArrayList<>();
+        for (String s: tilda){
+            String[] comSplit = s.split(",");
+            String[] dotsplit;
+            if (comSplit.length==1){
+                dotsplit = s.split("\\. ");
+                if (dotsplit.length==1){
+                    res.add(s);
+                }
+                else {
+                    res.addAll(Arrays.asList(dotsplit));
+                }
+            }
+            else {
+                for (String s1: comSplit){
+                    dotsplit = s1.split("\\. ");
+                    if (dotsplit.length==1){
+                       res.add(s1);
+                    }
+                    else {
+                        res.addAll(Arrays.asList(dotsplit));
+                    }
+                }
+            }
+        }
+
+        return res.toArray(String[]::new);
     }
 
     private void processExclusions(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem) {

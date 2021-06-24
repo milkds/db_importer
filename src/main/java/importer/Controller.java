@@ -39,7 +39,12 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        new SumController().saveSummitToDB();
+     //   new SumController().saveSummitToDB();
+        String s = "dsadasd. dasd  da";
+        String[] split = s.split("\\. ");
+        System.out.println(split[0]);
+        System.out.println(split.length);
+
 
 
        // updateMounts();
