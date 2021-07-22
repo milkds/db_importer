@@ -68,7 +68,13 @@ class SumFitBuilder {
         if (appNote.length()==0){
             return;
         }
-        if (appNote.contains("Incl. Strut Bearing Plates")){
+        String[] split = appNote.split(";");
+        for (String s: split){
+            processNote(s.trim(), car, fit, prodItem);
+        }
+
+
+       /* if (appNote.contains("Incl. Strut Bearing Plates")){
             processNote(appNote, car, fit, prodItem);
         }
         else {
@@ -76,12 +82,24 @@ class SumFitBuilder {
             for (String s: split){
                 processNote(s.trim(), car, fit, prodItem);
             }
-        }
+        }*/
     }
 
     private void processNote(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem) {
         String noteObj = sumAppNotesMap.get(appNote);
         if (noteObj==null){
+            List<String> noteSplit = getNoteSplit(appNote);
+            for (String s: noteSplit){
+               noteObj = sumAppNotesMap.get(s);
+               if (noteObj==null){
+                   logger.error("Unknown Application Note " + s + " at item " + prodItem.getItemPartNo() + " at appNote " + appNote);
+               }
+               else {
+                   processAppNote(noteObj, car, fit, prodItem, s);
+               }
+            }
+        }
+        /*if (noteObj==null){
             logger.error("Unknown Application Note " + appNote + " at item " + prodItem.getItemPartNo());
             return;
            // System.exit(1);
@@ -99,12 +117,29 @@ class SumFitBuilder {
             case "delete": break;
             case "Excl": processExclusions(appNote, car, fit, prodItem); break;
             default: processMultiNotes(appNote, car, fit, prodItem, noteObj);
+        }*/
+    }
+
+    private void processAppNote(String noteObj, ProductionCar car, ProductionFitment fit, ProductionItem prodItem, String appNote) {
+        switch (noteObj){
+            case "c": car.getAttributes().add(new CarAttribute("Note", appNote));  break;
+            case "f": fit.getFitmentAttributes().add(new FitmentAttribute("Note", appNote));  break;
+            case "i": prodItem.getItemAttributes().add(new ItemAttribute("Note", appNote));  break;
+            case "LIFT":  processLift(appNote, fit); break;
+            case "POS":  processPosition(appNote, fit); break;
+            case "POS/LIFT":  {
+                processPosition(appNote, fit);
+                processLift(appNote, fit);
+            } break;
+            case "delete": break;
+            case "Excl": processExclusions(appNote, car, fit, prodItem); break;
+      //     default: processMultiNotes(appNote, car, fit, prodItem, noteObj);
         }
     }
 
     private void processMultiNotes(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem, String noteObj) {
         String[] objSplit = noteObj.split("/");
-        String[] noteSplit = getNoteSplit(appNote);
+        String[] noteSplit = getNoteSplit(appNote).toArray(String[]::new);
         for (int i = 0; i < objSplit.length; i++) {
             switch (objSplit[i]){
                 case "i": prodItem.getItemAttributes().add(new ItemAttribute("Note", noteSplit[i])); break;
@@ -115,17 +150,18 @@ class SumFitBuilder {
         }
     }
 
-    private String[] getNoteSplit(String appNote) {
+    private List<String> getNoteSplit(String appNote) {
         String[] tilda = appNote.split("~");
         if (!appNote.contains(",")&& !appNote.contains(". ")){
-            return tilda;
+          return Arrays.asList(tilda);
         }
         List<String> res = new ArrayList<>();
         for (String s: tilda){
             String[] comSplit = s.split(",");
             String[] dotsplit;
             if (comSplit.length==1){
-                dotsplit = s.split("\\. ");
+          //      dotsplit = s.split("\\. ");
+                dotsplit = getDotSplit(s);
                 if (dotsplit.length==1){
                     res.add(s);
                 }
@@ -135,7 +171,7 @@ class SumFitBuilder {
             }
             else {
                 for (String s1: comSplit){
-                    dotsplit = s1.split("\\. ");
+                    dotsplit = getDotSplit(s1);
                     if (dotsplit.length==1){
                        res.add(s1);
                     }
@@ -145,8 +181,68 @@ class SumFitBuilder {
                 }
             }
         }
+        List<String> result = new ArrayList<>();
+        res.forEach(note-> result.add(note.trim()));
+
+        return result;
+    }
+
+    private String[] getDotSplit(String note) {
+       String lowerCase = note.toLowerCase();
+       if (noAbbreviates(lowerCase)){
+           return note.split("\\.");
+       }
+       List<String> res = new ArrayList<>();
+       String[] split = note.split("\\. ");
+       String curStr = "";
+       for (String s: split){
+         String end = getExclusionEnd(s);
+         if (end.length()==0){
+             if (curStr.length()==0){
+                 res.add(s);
+             }
+             else {
+                 res.add(curStr+". " + s);
+                 curStr="";
+             }
+         }
+         else {
+             if (curStr.length()==0){
+                 curStr = s;
+             }
+             else {
+                 curStr = curStr + ". " + s;
+             }
+         }
+       }
 
         return res.toArray(String[]::new);
+    }
+
+    private String getExclusionEnd(String s) {
+        String end = StringUtils.substringAfterLast(s, " ");
+        switch (end.toLowerCase()) {
+            case "in":
+            case "incl":
+            case "lbs":
+                return end;
+        }
+
+        return "";
+    }
+
+    private boolean noAbbreviates(String lowerCase) {
+        if (lowerCase.contains("in. ")){
+            return false;
+        }
+        if (lowerCase.contains("lbs. ")){
+            return false;
+        }
+        if (lowerCase.contains("incl.")){
+            return false;
+        }
+
+        return true;
     }
 
     private void processExclusions(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem) {
