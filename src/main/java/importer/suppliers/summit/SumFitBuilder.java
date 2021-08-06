@@ -40,7 +40,12 @@ class SumFitBuilder {
             return result;
         }
         sumFits.forEach(sumFit->{
-            result.add(processFitAtts(sumFit.getAttributes(), prodItem, validator));
+            try {
+                result.add(processFitAtts(sumFit.getAttributes(), prodItem, validator));
+            }
+            catch (NullPointerException e){
+                e.printStackTrace();
+            }
         });
 
         return result;
@@ -92,7 +97,7 @@ class SumFitBuilder {
             for (String s: noteSplit){
                noteObj = sumAppNotesMap.get(s);
                if (noteObj==null){
-                   logger.error("Unknown Application Note " + s + " at item " + prodItem.getItemPartNo() + " at appNote " + appNote);
+                   logger.error("Unknown Application Note at item " + prodItem.getItemPartNo() + " ::: " + s);
                }
                else {
                    processAppNote(noteObj, car, fit, prodItem, s);
@@ -190,7 +195,7 @@ class SumFitBuilder {
     private String[] getDotSplit(String note) {
        String lowerCase = note.toLowerCase();
        if (noAbbreviates(lowerCase)){
-           return note.split("\\.");
+           return note.split("\\. ");
        }
        List<String> res = new ArrayList<>();
        String[] split = note.split("\\. ");
@@ -359,7 +364,7 @@ class SumFitBuilder {
             }
             else {
                 logger.error("Unknown fit attribute " + name + " at item " + prodItem.getItemPartNo());
-                System.exit(1);
+             //   System.exit(1);
             }
         }
         checkNullMake(result, appNote, attributes, fit);
@@ -818,6 +823,14 @@ class SumFitBuilder {
                 setFields(2008, 2011, "Isuzu", "D-Max", "Base", prodCar);
                 break;
             }
+            case "Fits Workhorse W20-W24":{
+                setFields(1999, 2007, "Workhorse", "W24", "Base", prodCar);
+                break;
+            }
+            case "Fits Workhorse W16-W18":{
+                setFields(2005, 2007, "Workhorse", "W18", "Base", prodCar);
+                break;
+            }
         }
     }
     public void setFields(int yearStart, int yearFinish, String make, String model, String subModel, ProductionCar prodCar) {
@@ -888,6 +901,8 @@ class SumFitBuilder {
         result.add("Amount of Lift Rear:");
         result.add("Leaf Spring Type (Application):");
         result.add("Position (application):");
+        result.add("Amount of Drop Front:");
+        result.add("Amount of Drop Rear:");
 
         return result;
     }

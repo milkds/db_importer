@@ -30,7 +30,7 @@ public class SumController {
         Session sumSession = SumHibernateUtil.getSessionFactory().openSession();
         Set<SumItem> sumItems = new SumService().getAllItems(sumSession);
         Set<ProductionItem> prodItems = buildProdItems(sumItems);
-       // new ItemService().saveItems(prodItems);
+        new ItemService().saveItems(prodItems);
 
         sumSession.close();
         SumHibernateUtil.shutdown();
@@ -46,18 +46,20 @@ public class SumController {
         int total = sumItems.size();
         for (SumItem sumItem: sumItems){
             if(counter>0){
-                if (sumItem.getFitments().size()>1000){
-                    logger.info("build item " + counter + " of total " + total);
+                if (sumItem.getFitments().size()>100){
+                    logger.info("built item " + counter + " of total " + total);
+                    counter++;
                     continue;
                 }
                 ProductionItem item = new SumItemBuilder(sumItem).buildItem(sumAppNotesMap, validator);
                 if (itemTypeValid(item,wrontItemTypes)){
                     result.add(item);
                 }
-                logger.info("build item " + counter + " of total " + total);
+                logger.info("built item " + counter + " of total " + total);
             }
             counter++;
         }
+
 
 
         return result;

@@ -186,7 +186,7 @@ public class ItemService {
         String correct = mountMap.get(mount);
         if (correct==null){
             logger.error("Unknown mount " + mount);
-            System.exit(1);
+         //   System.exit(1);
         }
 
         return correct;
@@ -263,6 +263,7 @@ public class ItemService {
         result.add("Snapeye");
         result.add("Special Mount");
         result.add("Stem");
+        result.add("Stock");
         result.add("Stem Plate");
         result.add("Strut");
         result.add("Stud");
