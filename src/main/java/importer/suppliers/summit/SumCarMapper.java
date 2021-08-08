@@ -303,6 +303,9 @@ class SumCarMapper {
         result.put("black diamond ltz", "Black Diamond LTZ");
         result.put("sxl", "SXL");
         result.put("rtx", "RTX");
+        result.put("ln", "LN");
+        result.put("f85", "F85");
+        result.put("s-55", "S-55");
         result.put("sxl turbo", "SXL Turbo");
         result.put("sx turbo", "SX Turbo");
         result.put("sr turbo", "SR Turbo");
@@ -319,6 +322,11 @@ class SumCarMapper {
         result.put("police responder", "Police Responder");
         result.put("x l.l. bean edition", "X L.L. Bean Edition");
         result.put("couture edition", "Couture Edition");
+        result.put("225 limited", "225 Limited");
+        result.put("warlock ii", "Warlock II");
+        result.put("li'l red express", "Li'l Red Express");
+        result.put("voyager ex", "Voyager EX");
+        result.put("voyager wagon", "Voyager Wagon");
 
         return result;
     }
