@@ -326,7 +326,7 @@ class SumCarMapper {
         result.put("warlock ii", "Warlock II");
         result.put("li'l red express", "Li'l Red Express");
         result.put("voyager ex", "Voyager EX");
-        result.put("voyager wagon", "Voyager Wagon");
+        result.put("voyager ex wagon", "Voyager EX Wagon");
 
         return result;
     }
