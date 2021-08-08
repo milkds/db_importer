@@ -33,7 +33,7 @@ class SumFitBuilder {
     }
 
 
-    Set<ProductionFitment> buildFits(ProductionItem prodItem, SummitCarValidator validator) {
+    Set<ProductionFitment> buildFits(ProductionItem prodItem, SummitCarValidator validator, Map<Integer, List<SumFitAttribute>> allSumFitAtts) {
         Set<ProductionFitment> result = new HashSet<>();
         List<SumFitment> sumFits = sumItem.getFitments();
         if (sumFits.size()==0){
@@ -41,7 +41,8 @@ class SumFitBuilder {
         }
         sumFits.forEach(sumFit->{
             try {
-                result.add(processFitAtts(sumFit.getAttributes(), prodItem, validator));
+                List<SumFitAttribute> sumFitAtts = allSumFitAtts.get(sumFit.getId());
+                result.add(processFitAtts(sumFitAtts, prodItem, validator));
             }
             catch (NullPointerException e){
                 e.printStackTrace();

@@ -21,6 +21,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 public class SumController {
@@ -29,19 +31,20 @@ public class SumController {
     public void saveSummitToDB(){
         Session sumSession = SumHibernateUtil.getSessionFactory().openSession();
         Set<SumItem> sumItems = new SumService().getAllItems(sumSession);
-        Set<ProductionItem> prodItems = buildProdItems(sumItems);
-        new ItemService().saveItems(prodItems);
+        Map<Integer, List<SumFitAttribute>> allSumFitAtts = new SumService().getAllFitAttributes(sumSession);
+        Set<ProductionItem> prodItems = buildProdItems(sumItems, allSumFitAtts);
+     //   new ItemService().saveItems(prodItems);
 
         sumSession.close();
         SumHibernateUtil.shutdown();
         HibernateUtil.shutdown();
     }
 
-    private Set<ProductionItem> buildProdItems(Set<SumItem> sumItems) {
+    private Set<ProductionItem> buildProdItems(Set<SumItem> sumItems, Map<Integer, List<SumFitAttribute>> allSumFitAtts) {
         Set<ProductionItem> result = new HashSet<>();
         Map<String, String> sumAppNotesMap = getSumAppNotesMap();
         SummitCarValidator validator = new SummitCarValidator();
-        Set<String> wrontItemTypes = getWrongItemTypes();
+        Set<String> wrongItemTypes = getWrongItemTypes();
         int counter = 1;
         int total = sumItems.size();
         for (SumItem sumItem: sumItems){
@@ -51,8 +54,8 @@ public class SumController {
                     counter++;
                     continue;
                 }
-                ProductionItem item = new SumItemBuilder(sumItem).buildItem(sumAppNotesMap, validator);
-                if (itemTypeValid(item,wrontItemTypes)){
+                ProductionItem item = new SumItemBuilder(sumItem).buildItem(sumAppNotesMap, validator, allSumFitAtts);
+                if (itemTypeValid(item,wrongItemTypes)){
                     result.add(item);
                 }
                 logger.info("built item " + counter + " of total " + total);

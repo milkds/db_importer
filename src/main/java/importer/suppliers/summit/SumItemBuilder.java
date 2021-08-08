@@ -1,11 +1,14 @@
 package importer.suppliers.summit;
 
 import importer.entities.*;
+import importer.suppliers.summit.entities.SumFitAttribute;
 import importer.suppliers.summit.entities.SumItem;
 import importer.suppliers.summit.entities.SumItemAttribute;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +23,7 @@ public class SumItemBuilder {
     }
 
 
-    public ProductionItem buildItem(Map<String, String> sumAppNotesMap, SummitCarValidator validator) {
+    public ProductionItem buildItem(Map<String, String> sumAppNotesMap, SummitCarValidator validator, Map<Integer, List<SumFitAttribute>> allSumFitAtts) {
         result = new ProductionItem();
         setPartNo();
         setItemMake();
@@ -28,17 +31,21 @@ public class SumItemBuilder {
         setParams();//will initiate blank params object
         setItemAttributes();
         setItemPics();
-        setFits(sumAppNotesMap, validator);
+        setFits(sumAppNotesMap, validator, allSumFitAtts);
 
         return result;
     }
 
-    private void setFits(Map<String, String> sumAppNotesMap, SummitCarValidator validator) {
-        Set<ProductionFitment> prodFits = new SumFitBuilder(sumItem, sumAppNotesMap).buildFits(result, validator);
+    private void setFits(Map<String, String> sumAppNotesMap, SummitCarValidator validator, Map<Integer, List<SumFitAttribute>> allSumFitAtts) {
+        Instant start = Instant.now();
+        Set<ProductionFitment> prodFits = new SumFitBuilder(sumItem, sumAppNotesMap).buildFits(result, validator,allSumFitAtts);
         prodFits.forEach(prodFit->{
             prodFit.setItem(result);
             result.getProductionFitments().add(prodFit);
         });
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        logger.info("Built fits in " + timeElapsed + " ms");
     }
 
     private void setItemPics() {

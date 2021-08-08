@@ -2,6 +2,7 @@ package importer.suppliers.summit;
 
 import importer.HibernateUtil;
 import importer.entities.ProductionItem;
+import importer.suppliers.summit.entities.SumFitAttribute;
 import importer.suppliers.summit.entities.SumItem;
 import org.hibernate.Session;
 
@@ -21,6 +22,17 @@ public class SumDAO {
         CriteriaQuery<SumItem> crQ = builder.createQuery(SumItem.class);
         Root<SumItem> root = crQ.from(SumItem.class);
         Query q = sumSession.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public List<SumFitAttribute> getAllFitAttributes(Session session) {
+        List<SumFitAttribute> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<SumFitAttribute> crQ = builder.createQuery(SumFitAttribute.class);
+        Root<SumFitAttribute> root = crQ.from(SumFitAttribute.class);
+        Query q = session.createQuery(crQ);
         result = q.getResultList();
 
         return result;
