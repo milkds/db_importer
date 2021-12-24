@@ -41,12 +41,12 @@ public class Controller {
     public static void main(String[] args) {
         new SumController().saveSummitToDB();
 
-       // updateMounts();
+        // updateMounts();
 
-      //  fillMergingTable();
-      //EibController.updateFitNotes();
-     //     importKeystone();
-   //     downloadAllPics();
+        //  fillMergingTable();
+        //EibController.updateFitNotes();
+        //     importKeystone();
+      //  downloadAllPics();
 
          /* //  importFox();
       //  importSkyjacker();

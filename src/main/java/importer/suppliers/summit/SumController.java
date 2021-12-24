@@ -33,7 +33,7 @@ public class SumController {
         Set<SumItem> sumItems = new SumService().getAllItems(sumSession);
         Map<Integer, List<SumFitAttribute>> allSumFitAtts = new SumService().getAllFitAttributes(sumSession);
         Set<ProductionItem> prodItems = buildProdItems(sumItems, allSumFitAtts);
-     //   new ItemService().saveItems(prodItems);
+       // new ItemService().saveItems(prodItems);
 
         sumSession.close();
         SumHibernateUtil.shutdown();
@@ -48,17 +48,21 @@ public class SumController {
         int counter = 1;
         int total = sumItems.size();
         for (SumItem sumItem: sumItems){
+            if (new SumItemSkipper(sumItem).needSkip()) {
+                counter++;
+                continue;
+            }
             if(counter>0){
-                if (sumItem.getFitments().size()>100){
+               /* if (sumItem.getFitments().size()>100){
                     logger.info("built item " + counter + " of total " + total);
                     counter++;
                     continue;
-                }
+                }*/
                 ProductionItem item = new SumItemBuilder(sumItem).buildItem(sumAppNotesMap, validator, allSumFitAtts);
                 if (itemTypeValid(item,wrongItemTypes)){
                     result.add(item);
                 }
-                logger.info("built item " + counter + " of total " + total);
+           //     logger.info("built item " + counter + " of total " + total);
             }
             counter++;
         }

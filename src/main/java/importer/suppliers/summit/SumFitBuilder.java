@@ -42,7 +42,10 @@ class SumFitBuilder {
         sumFits.forEach(sumFit->{
             try {
                 List<SumFitAttribute> sumFitAtts = allSumFitAtts.get(sumFit.getId());
-                result.add(processFitAtts(sumFitAtts, prodItem, validator));
+                ProductionFitment fitment = processFitAtts(sumFitAtts, prodItem, validator);
+                if  (fitment!=null){
+                    result.add(fitment);
+                }
             }
             catch (NullPointerException e){
                 e.printStackTrace();
@@ -55,6 +58,9 @@ class SumFitBuilder {
     private ProductionFitment processFitAtts(List<SumFitAttribute> attributes, ProductionItem prodItem, SummitCarValidator validator) {
         ProductionFitment result = new ProductionFitment();
         ProductionCar car = getCar(attributes, prodItem, validator, result);
+        if (car==null){
+            return null;
+        }
         setProdFitAtts(attributes, result);
         processAppNotes(attributes, car, result, prodItem);
         result.setCar(car);
@@ -227,9 +233,13 @@ class SumFitBuilder {
 
     private String getExclusionEnd(String s) {
         String end = StringUtils.substringAfterLast(s, " ");
+        if  (end.length()==0){
+            end = s;
+        }
         switch (end.toLowerCase()) {
             case "in":
             case "incl":
+            case "excl":
             case "lbs":
                 return end;
         }
@@ -245,6 +255,9 @@ class SumFitBuilder {
             return false;
         }
         if (lowerCase.contains("incl.")){
+            return false;
+        }
+        if (lowerCase.contains("excl.")){
             return false;
         }
 
@@ -348,6 +361,12 @@ class SumFitBuilder {
     private ProductionCar getCar(List<SumFitAttribute> attributes, ProductionItem prodItem, SummitCarValidator validator, ProductionFitment fit) {
         ProductionCar result = new ProductionCar();
         String appNote = "";
+        if (isUniversal(attributes)){
+            for (SumFitAttribute sumAtt : attributes) {
+                prodItem.getItemAttributes().add(new ItemAttribute(sumAtt.getName(), sumAtt.getValue()));
+            }
+            return null;
+        }
         for (SumFitAttribute sumAtt : attributes) {
             String name = sumAtt.getName();
             String value = sumAtt.getValue();
@@ -370,16 +389,29 @@ class SumFitBuilder {
         }
         checkNullMake(result, appNote, attributes, fit);
         if (result.getMake()==null){
+            if (appNote.length()==0){
+                return null;
+            }
+
             logger.error("No make for car at item " + sumItem.getPartNo());
             attributes.forEach(logger::info);
             //System.exit(1);
 
-            return new ProductionCar();
+            return null;
         }
         result = validator.validateCar(result);
 
 
         return result;
+    }
+
+    private boolean isUniversal(List<SumFitAttribute> attributes) {
+        for (SumFitAttribute sumAtt : attributes) {
+            if (sumAtt.getName().equals("Universal:")){
+                return sumAtt.getValue().equals("Yes");
+            }
+        }
+        return false;
     }
 
     private void checkNullMake(ProductionCar prodCar, String appNote, List<SumFitAttribute> attributes, ProductionFitment fit) {
@@ -831,7 +863,59 @@ class SumFitBuilder {
             case "Fits Workhorse W16-W18":{
                 setFields(2005, 2007, "Workhorse", "W18", "Base", prodCar);
                 break;
+            }/*
+            case "Fits Workhorse P30,P32 and widetrack IFS.":{
+                setFields(2000, 2005, "Workhorse", "P30", "Base", prodCar);
+                break;
             }
+            case "Fits Country Coach Affinity,Concept,Magna and MAT with Neway IFS suspension.":{
+                setFields(1999, 2007, "Country Coach Motorhome", "Affinity", "Base", prodCar);
+                break;
+            }
+            case "Fits Country Coach Allure and Intrigue with Neway IFS suspension.":{
+                setFields(1999, 2007, "Country Coach Motorhome", "Allure", "Base", prodCar);
+                break;
+            }
+            case "Fits Monaco Dynasty,Executive,Signature and Windsor with 4 shocks/axle (pin/eye).":{
+                setFields(1993, 2002, "Monaco", "Dynasty", "Base", prodCar);
+                break;
+            }
+            case "Fits Monaco Dynasty,Executive,Signature and Windsor with 10 bag coach.":{
+                setFields(1993, 2006, "Monaco", "Dynasty", "Base", prodCar);
+                break;
+            }
+            case "Fits Foretravel U-280,U-300, U-320 Series":{
+                setFields(1991, 1995, "Foretravel", "U-280", "Base", prodCar);
+                break;
+            }
+            case "Fits Safari Magnum with leaf spring.":{
+                setFields(1993, 1999, "Safari", "Magnum", "Base", prodCar);
+                break;
+            }
+            case "Fits up to 2002 Bluebird LTC-40":{
+                setFields(1999, 2002, "Bluebird Wanderlodge", "LTC-40", "Base", prodCar);
+                break;
+            }
+            case "Bluebird Wanderlodge tag axle non-steerable":{
+                setFields(1982, 1992, "Bluebird Wanderlodge", "PT", "Base", prodCar);
+                break;
+            }
+            case "Fits Spartan MC 2000":{
+                setFields(1991, 1995, "Spartan Motors", "2000", "Base", prodCar);
+                break;
+            }
+            case "Fits Mack DM series only.":{
+                setFields(1966, 2005, "Mack", "DM", "Base", prodCar);
+                break;
+            }
+            case "Fits Bluebird Wanderlodge M380,450LXi.":{
+                setFields(2002, 2007, "Bluebird Wanderlodge", "M380", "Base", prodCar);
+                break;
+            }
+            case "Fits Bluebird Express.":{
+                setFields(2003, 2007, "Bluebird", "Express", "Base", prodCar);
+                break;
+            }*/
         }
     }
     public void setFields(int yearStart, int yearFinish, String make, String model, String subModel, ProductionCar prodCar) {
@@ -879,6 +963,7 @@ class SumFitBuilder {
         result.add("CID:");
         result.add("Transmission:");
         result.add("Body Style:");
+        result.add("Doors:");
 
         return result;
     }

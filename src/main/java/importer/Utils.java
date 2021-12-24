@@ -61,7 +61,7 @@ public class Utils {
         int counter = 0;
         for (ProductionItem item : allItems) {
             String make = item.getItemManufacturer();
-            if (!make.equals("Old Man Emu")){
+            if (!make.equals("Moog Chassis Parts")){
                 continue;
             }
             if (picDownloadNeeded(item)) {
@@ -96,7 +96,7 @@ public class Utils {
     public static Set<String> getDowloadedPicNameSet() {
         Set<String> result = null;
         String[] pathnames;
-        File f = new File("C:/pics/parsed/");
+        File f = new File("C:/home/pics/parsed/");
         pathnames = f.list();
         result = new HashSet<>(Arrays.asList(pathnames));
 
@@ -110,7 +110,7 @@ public class Utils {
             if (dowloadedPics.contains(rawName)){
                 continue;
             }
-            String fName = "C:/pics/parsed/" + rawName;
+            String fName = "C:/home/pics/parsed/" + rawName;
             InputStream in = new URL(pic.getPicUrl()).openStream();
             Files.copy(in, Paths.get(fName));
         }
@@ -178,7 +178,8 @@ public class Utils {
                 }
                 break;
             }
-            case "Old Man Emu":{
+            case "Old Man Emu":
+            case "Moog Chassis Parts": {
                 for (ItemPic pic: pics){
                     String url = pic.getPicUrl();
                     String picNo = StringUtils.substringAfter(url,".jpg_");

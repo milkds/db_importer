@@ -45,7 +45,7 @@ public class SumItemBuilder {
         });
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Built fits in " + timeElapsed + " ms");
+       // logger.info("Built fits in " + timeElapsed + " ms");
     }
 
     private void setItemPics() {
