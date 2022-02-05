@@ -33,7 +33,7 @@ public class SumController {
         Set<SumItem> sumItems = new SumService().getAllItems(sumSession);
         Map<Integer, List<SumFitAttribute>> allSumFitAtts = new SumService().getAllFitAttributes(sumSession);
         Set<ProductionItem> prodItems = buildProdItems(sumItems, allSumFitAtts);
-       // new ItemService().saveItems(prodItems);
+      //  new ItemService().saveItems(prodItems);
 
         sumSession.close();
         SumHibernateUtil.shutdown();

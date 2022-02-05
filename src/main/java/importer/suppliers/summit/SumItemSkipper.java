@@ -28,6 +28,19 @@ public class SumItemSkipper {
         result.add("88-1457SP1");
         result.add("8805-1006");
         result.add("88-1458SP1");
+        result.add("8805-1013");
+        result.add("8805-1004");
+        result.add("8805-1010");
+        result.add("90-2755");
+        result.add("88-1641SP3");
+        result.add("90-2694");
+        result.add("8805-1009");
+        result.add("8805-1007");
+        result.add("90-2693");
+        result.add("8805-1005");
+
+
+        result.add("8805-1006");
 
         return result;
     }
