@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e1eff1c1-3ab6-4fe9-8b02-6eebf76ea6e3" name="Default Changelist" comment="minor summit import fixes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/AppNoteManualBreaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/NoSuchModelException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/UnknownApplicationNoteError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Later_PROCESS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sum_app_notes0.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/service/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/service/ItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumCarMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumCarMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumFitBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumFitBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumItemSkipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumItemSkipper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SummitCarValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SummitCarValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sum_app_notes.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sum_app_notes.xlsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>desc</find>
+      <find>in</find>
+      <find>Rear 0 - 2 in. Lift</find>
+      <find>block</find>
+      <find>System.exit(1);</find>
+    </findStrings>
+    <dirStrings>
+      <dir>C:\Storage\IdeaProjects\Jackson\db_importer\src\main\java\importer\suppliers\summit</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/importer/entities/ProductionItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/entities/ProductionFitment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/fox/FoxHibernateUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/ExcelUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/entities/CarMergeEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/fox/FoxSupplier.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/savedPics.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/importData.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/service/ProdCarChecker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeySupplier.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/service/CarService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/bilstein/BilConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/LiftBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/SkyConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyHibernateUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyLiftBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibCarBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/new_import_steps.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibCarValidator.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j2.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibToProdConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/service/FitmentService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/entities/ProductionCar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyItemBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/entities/ItemPic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/Utils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumFitBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/service/ItemService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumItemBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="477" />
+    <option name="y" value="15" />
+    <option name="width" value="895" />
+    <option name="height" value="504" />
+  </component>
+  <component name="ProjectId" id="1zeOG5r6bf0sf7GXR1kz8KIGc9e" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="importer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="importer" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="importer" type="462c0819:PsiDirectoryNode" />
+              <item name="suppliers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="importer" type="462c0819:PsiDirectoryNode" />
+              <item name="suppliers" type="462c0819:PsiDirectoryNode" />
+              <item name="summit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="importer" type="462c0819:PsiDirectoryNode" />
+              <item name="suppliers" type="462c0819:PsiDirectoryNode" />
+              <item name="summit" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="importer.suppliers.summit" />
+      <recent name="importer.suppliers.skyjacker" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\home\Storage\IdeaProjects\Jackson\db_importer\src\main\resources" />
+      <recent name="C:\Storage\IdeaProjects\Jackson\db_importer\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="importer.Controller" />
+      <module name="db_importer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="importer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Controller" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e1eff1c1-3ab6-4fe9-8b02-6eebf76ea6e3" name="Default Changelist" comment="" />
+      <created>1574152205466</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574152205466</updated>
+      <workItem from="1574152219245" duration="2459000" />
+      <workItem from="1575666844866" duration="7297000" />
+      <workItem from="1576224310093" duration="1550000" />
+      <workItem from="1579788981228" duration="41889000" />
+      <workItem from="1581426676906" duration="52340000" />
+      <workItem from="1583244828938" duration="76521000" />
+      <workItem from="1583400112527" duration="4392000" />
+      <workItem from="1584432653761" duration="9317000" />
+      <workItem from="1584522800329" duration="16141000" />
+      <workItem from="1585298236524" duration="22656000" />
+      <workItem from="1586336434464" duration="624000" />
+      <workItem from="1587228182566" duration="4888000" />
+      <workItem from="1587375431804" duration="892000" />
+      <workItem from="1587560883441" duration="6462000" />
+      <workItem from="1587889693235" duration="13886000" />
+      <workItem from="1589783235632" duration="6815000" />
+      <workItem from="1594214765504" duration="767000" />
+      <workItem from="1594974745514" duration="1187000" />
+      <workItem from="1604305929821" duration="22817000" />
+      <workItem from="1606289200230" duration="12936000" />
+      <workItem from="1611137396217" duration="3245000" />
+      <workItem from="1616495944626" duration="22578000" />
+      <workItem from="1618475836683" duration="2750000" />
+      <workItem from="1621841580962" duration="2388000" />
+      <workItem from="1622010427398" duration="298000" />
+      <workItem from="1623839836329" duration="12004000" />
+      <workItem from="1626358293412" duration="592000" />
+      <workItem from="1626986967500" duration="138000" />
+      <workItem from="1626997403965" duration="9845000" />
+      <workItem from="1627372956136" duration="10254000" />
+      <workItem from="1628233484006" duration="1431000" />
+      <workItem from="1628414748609" duration="6622000" />
+      <workItem from="1628542044305" duration="4959000" />
+      <workItem from="1629389146069" duration="74000" />
+      <workItem from="1634505000091" duration="2369000" />
+      <workItem from="1634905295473" duration="1944000" />
+      <workItem from="1635849508375" duration="2474000" />
+      <workItem from="1636712496602" duration="285000" />
+      <workItem from="1636712817480" duration="519000" />
+      <workItem from="1638004616327" duration="41855000" />
+      <workItem from="1640358672945" duration="15709000" />
+      <workItem from="1643444687225" duration="97000" />
+      <workItem from="1643444803913" duration="26000" />
+      <workItem from="1643481469446" duration="2970000" />
+      <workItem from="1644086165916" duration="1991000" />
+      <workItem from="1644137385455" duration="5985000" />
+      <workItem from="1644315293520" duration="8591000" />
+      <workItem from="1648715068467" duration="11000" />
+      <workItem from="1648715098894" duration="1369000" />
+      <workItem from="1648716721523" duration="120000" />
+      <workItem from="1648717173599" duration="9000" />
+      <workItem from="1648717244312" duration="89000" />
+      <workItem from="1648717717855" duration="11945000" />
+      <workItem from="1649528098886" duration="26071000" />
+      <workItem from="1649864635215" duration="43924000" />
+      <workItem from="1651496147379" duration="15000" />
+      <workItem from="1651496179061" duration="13575000" />
+      <workItem from="1652099160438" duration="26286000" />
+      <workItem from="1654591637767" duration="3861000" />
+      <workItem from="1655190842206" duration="4263000" />
+      <workItem from="1655799418881" duration="9101000" />
+    </task>
+    <task id="LOCAL-00001" summary="modified keystone update launch">
+      <created>1575793869500</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1575793869500</updated>
+    </task>
+    <task id="LOCAL-00002" summary="modified shockparameters initiation">
+      <created>1575796150384</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575796150384</updated>
+    </task>
+    <task id="LOCAL-00003" summary="little polish">
+      <created>1576224408992</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1576224408993</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fixed problems with skyjacker import">
+      <created>1580832040754</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1580832040754</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fox merge check implemented">
+      <created>1581426965664</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581426965664</updated>
+    </task>
+    <task id="LOCAL-00006" summary="implemented pic saving">
+      <created>1581588246711</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1581588246711</updated>
+    </task>
+    <task id="LOCAL-00007" summary="modified key check">
+      <created>1581673592934</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1581673592934</updated>
+    </task>
+    <task id="LOCAL-00008" summary="minor fixes in keystone import">
+      <created>1582107375614</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1582107375614</updated>
+    </task>
+    <task id="LOCAL-00009" summary="minor fixes">
+      <created>1583245095734</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1583245095734</updated>
+    </task>
+    <task id="LOCAL-00010" summary="modified pic saving">
+      <created>1585298324074</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1585298324074</updated>
+    </task>
+    <task id="LOCAL-00011" summary="sj lift building process">
+      <created>1588065249867</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1588065249867</updated>
+    </task>
+    <task id="LOCAL-00012" summary="sj import cosmetics">
+      <created>1589437613228</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1589437613228</updated>
+    </task>
+    <task id="LOCAL-00013" summary="minor runtime fixes">
+      <created>1594214928086</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1594214928086</updated>
+    </task>
+    <task id="LOCAL-00014" summary="eib import fixes">
+      <created>1604907137567</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1604907137567</updated>
+    </task>
+    <task id="LOCAL-00015" summary="minor fix">
+      <created>1604907205471</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1604907205471</updated>
+    </task>
+    <task id="LOCAL-00016" summary="minor fixes">
+      <created>1605022010119</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1605022010119</updated>
+    </task>
+    <task id="LOCAL-00017" summary="implemented item type check">
+      <created>1617865135599</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617865135599</updated>
+    </task>
+    <task id="LOCAL-00018" summary="slight modifications of keystone import">
+      <created>1618480954763</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1618480954763</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fixed summit pic save">
+      <created>1621929329218</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1621929329218</updated>
+    </task>
+    <task id="LOCAL-00020" summary="minor summit import fixes">
+      <created>1624513838533</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1624513838533</updated>
+    </task>
+    <task id="LOCAL-00021" summary="minor summit import fixes">
+      <created>1628235357675</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1628235357675</updated>
+    </task>
+    <task id="LOCAL-00022" summary="minor summit import fixes">
+      <created>1640358956670</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1640358956670</updated>
+    </task>
+    <task id="LOCAL-00023" summary="minor summit import fixes">
+      <created>1644086209307</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1644086209307</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="383014000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="71" y="-7" width="1472" height="878" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2733711" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986577" weight="0.9109063" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5013423" side_tool="true" weight="0.8144476" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3286119" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3286119" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="CDI" order="6" weight="0.3295302" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="modified keystone update launch" />
+    <MESSAGE value="modified shockparameters initiation" />
+    <MESSAGE value="little polish" />
+    <MESSAGE value="fixed problems with skyjacker import" />
+    <MESSAGE value="fox merge check implemented" />
+    <MESSAGE value="implemented pic saving" />
+    <MESSAGE value="modified key check" />
+    <MESSAGE value="minor fixes in keystone import" />
+    <MESSAGE value="modified pic saving" />
+    <MESSAGE value="sj lift building process" />
+    <MESSAGE value="sj import cosmetics" />
+    <MESSAGE value="minor runtime fixes" />
+    <MESSAGE value="eib import fixes" />
+    <MESSAGE value="minor fix" />
+    <MESSAGE value="minor fixes" />
+    <MESSAGE value="implemented item type check" />
+    <MESSAGE value="slight modifications of keystone import" />
+    <MESSAGE value="fixed summit pic save" />
+    <MESSAGE value="minor summit import fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor summit import fixes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalStateException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/bilstein/bilstein_entities/BilShock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="95" column="32" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Java/jdk-12/lib/src.zip!/java.base/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="194" column="12" selection-start-line="194" selection-start-column="12" selection-end-line="194" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/FitmentNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/HibernateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-680">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeySupplier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="107" column="65" lean-forward="true" selection-start-line="107" selection-start-column="65" selection-end-line="107" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/SkyConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4556">
+          <caret line="277" column="68" selection-start-line="277" selection-start-column="68" selection-end-line="277" selection-end-column="68" />
+          <folding>
+            <element signature="method#setStartFinish#0;class#SkyConverter#0" />
+            <element signature="method#checkIfReplacementNeeded#0;class#SkyConverter#0" />
+            <element signature="method#checkIfModelPresent#0;class#SkyConverter#0" />
+            <element signature="method#checkSubPart#0;class#SkyConverter#0" />
+            <element signature="method#setMake#0;class#SkyConverter#0" />
+            <element signature="method#setShockParams#0;class#SkyConverter#0" />
+            <element signature="method#getMountMap#0;class#SkyConverter#0" />
+            <element signature="method#getLength#0;class#SkyConverter#0" />
+            <element signature="method#setItemPics#0;class#SkyConverter#0" />
+            <element signature="method#convertToPic#0;class#SkyConverter#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/LiftBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/bilstein/BilConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="107" column="76" selection-start-line="107" selection-start-column="76" selection-end-line="107" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/5.2.6.Final/hibernate-core-5.2.6.Final-sources.jar!/org/hibernate/SessionFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="64" column="12" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyLiftBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="47" column="44" lean-forward="true" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7-sources.jar!/org/apache/commons/lang3/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="3049" column="25" selection-start-line="3049" selection-start-column="25" selection-end-line="3049" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Java/jdk-12/lib/src.zip!/java.base/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="2044" selection-start-line="2044" selection-end-line="2044" />
+          <folding>
+            <element signature="e#82608#82609#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibCarValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibCarBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+          <folding>
+            <element signature="e#2029#2030#0" expanded="true" />
+            <element signature="e#2087#2088#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/readme.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyHibernateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+          <folding>
+            <element signature="e#2672#2673#0" expanded="true" />
+            <element signature="e#2728#2729#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/new_import_steps.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="69" selection-start-line="2" selection-start-column="69" selection-end-line="2" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Java/jdk-12/lib/src.zip!/java.base/java/util/Set.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="396" column="12" selection-start-line="396" selection-start-column="12" selection-end-line="396" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/FitmentAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/service/FitmentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="65" column="32" lean-forward="true" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ItemAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibToProdConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="933">
+          <caret line="104" column="38" selection-start-line="104" selection-start-column="38" selection-end-line="104" selection-end-column="38" />
+          <folding>
+            <element signature="e#13104#13105#0" expanded="true" />
+            <element signature="e#13158#13159#0" expanded="true" />
+            <element signature="e#13213#13214#0" expanded="true" />
+            <element signature="e#13272#13273#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyItemBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="115" column="8" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
+          <folding>
+            <element signature="e#447#448#0" expanded="true" />
+            <element signature="e#501#502#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="180" column="22" lean-forward="true" selection-start-line="180" selection-start-column="22" selection-end-line="180" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/eib_entities/EibCar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/eib_entities/EibItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/fox/entities/FoxCar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/fox/entities/FoxItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/fox/entities/FoxItemSpec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/Category.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/SkyFitment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/SkyShock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/SpecAndKitNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/entities/SumFitment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="26" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ItemPic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding>
+            <element signature="e#1615#1616#0" expanded="true" />
+            <element signature="e#1644#1645#0" expanded="true" />
+            <element signature="e#1689#1690#0" expanded="true" />
+            <element signature="e#1725#1726#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3298">
+          <caret line="210" column="41" selection-start-line="210" selection-start-column="41" selection-end-line="210" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionCar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionFitment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/entities/SumItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="132" column="34" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="34" />
+          <folding>
+            <element signature="e#3156#3157#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumFitBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3298">
+          <caret line="202" column="26" selection-start-line="202" selection-start-column="26" selection-end-line="202" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/service/ItemService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4318">
+          <caret line="265" column="25" selection-start-line="265" selection-start-column="25" selection-end-line="265" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumItemBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="91" column="34" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+          <folding>
+            <element signature="e#1689#1690#0" expanded="true" />
+            <element signature="e#1733#1734#0" expanded="true" />
+            <element signature="e#1879#1880#0" expanded="true" />
+            <element signature="e#1935#1936#0" expanded="true" />
+            <element signature="e#2049#2050#0" expanded="true" />
+            <element signature="e#2089#2090#0" expanded="true" />
+            <element signature="e#2142#2143#0" expanded="true" />
+            <element signature="e#2179#2180#0" expanded="true" />
+            <element signature="e#2364#2365#0" expanded="true" />
+            <element signature="e#2405#2406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/entities/SumItemAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>db_importer</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
