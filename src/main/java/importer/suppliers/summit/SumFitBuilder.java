@@ -19,6 +19,7 @@ class SumFitBuilder {
     private Set<String> fitAtts = getFitAtts();
     private Map<String, String> sumAppNotesMap;
 
+
     SumFitBuilder(SumItem sumItem, Map<String, String> sumAppNotesMap) {
         this.sumItem = sumItem;
         this.sumAppNotesMap = sumAppNotesMap;
@@ -82,7 +83,12 @@ class SumFitBuilder {
         }
         String[] split = appNote.split(";");
         for (String s: split){
-            processNote(s.trim(), car, fit, prodItem);
+            try {
+                processNote(s.trim(), car, fit, prodItem);
+            } catch (UnknownApplicationNoteError e) {
+                logger.error("Unknown Application Note at item ::: https://www.summitracing.com/parts/frs-" +
+                        prodItem.getItemPartNo() + " ::: " + appNote + System.lineSeparator() + "at car " + car);
+            }
         }
 
 
@@ -97,19 +103,22 @@ class SumFitBuilder {
         }*/
     }
 
-    private void processNote(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem) {
+    private void processNote(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem) throws UnknownApplicationNoteError {
         String noteObj = sumAppNotesMap.get(appNote);
         if (noteObj==null){
             List<String> noteSplit = getNoteSplit(appNote);
             for (String s: noteSplit){
                noteObj = sumAppNotesMap.get(s);
                if (noteObj==null){
-                   logger.error("Unknown Application Note at item " + prodItem.getItemPartNo() + " ::: " + s);
+                   throw new UnknownApplicationNoteError();
                }
                else {
                    processAppNote(noteObj, car, fit, prodItem, s);
                }
             }
+        }
+        else {
+            processAppNote(noteObj, car, fit, prodItem, appNote);
         }
         /*if (noteObj==null){
             logger.error("Unknown Application Note " + appNote + " at item " + prodItem.getItemPartNo());
@@ -143,9 +152,10 @@ class SumFitBuilder {
                 processPosition(appNote, fit);
                 processLift(appNote, fit);
             } break;
-            case "delete": break;
+            case "delete":   break;
+            case "b": new AppNoteManualBreaker(car, fit, prodItem, appNote).processNote(); break;
             case "Excl": processExclusions(appNote, car, fit, prodItem); break;
-      //     default: processMultiNotes(appNote, car, fit, prodItem, noteObj);
+            //     default: processMultiNotes(appNote, car, fit, prodItem, noteObj);
         }
     }
 
@@ -241,6 +251,8 @@ class SumFitBuilder {
             case "incl":
             case "excl":
             case "lbs":
+            case "exc":
+            case "mfg":
                 return end;
         }
 
@@ -258,6 +270,12 @@ class SumFitBuilder {
             return false;
         }
         if (lowerCase.contains("excl.")){
+            return false;
+        }
+        if (lowerCase.contains("exc.")){
+            return false;
+        }
+        if (lowerCase.contains("mfg.")){
             return false;
         }
 
@@ -399,7 +417,12 @@ class SumFitBuilder {
 
             return null;
         }
-        result = validator.validateCar(result);
+        try {
+            result = validator.validateCar(result);
+        } catch (NoSuchModelException e) {
+            logger.info("No model for car at item " + sumItem.getPartNo());
+            return null;
+        }
 
 
         return result;
@@ -989,6 +1012,7 @@ class SumFitBuilder {
         result.add("Position (application):");
         result.add("Amount of Drop Front:");
         result.add("Amount of Drop Rear:");
+        result.add("Strut Mount Position:");
 
         return result;
     }

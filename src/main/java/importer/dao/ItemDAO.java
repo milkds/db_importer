@@ -165,6 +165,19 @@ public class ItemDAO {
         return result;
     }
 
+    public static List<String> getAllItemPartsByMake(String brand, Session session) {
+        List<String> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<String> crQ = builder.createQuery(String.class);
+        Root<ProductionItem> root = crQ.from(ProductionItem.class);
+        crQ.select(root.get("itemPartNo"));
+        crQ.where(builder.equal(root.get("itemManufacturer"), brand));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
     /*public static void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;

@@ -103,7 +103,11 @@ public class ItemService {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;
         int total = newItems.size();
+        Set<String> savedItemParts = getSavedItemsParts(newItems, session);
         for (ProductionItem item : newItems) {
+            if (savedItemParts.contains(item.getItemPartNo())){
+                continue;
+            }
              prepareItemAttributes(item, session);
              ItemDAO.saveItem(item, session);
              item.getProductionFitments().forEach(fitment->{
@@ -131,6 +135,24 @@ public class ItemService {
                 transaction.rollback();
             }
         }*/
+    }
+
+    private Set<String> getSavedItemsParts(Set<ProductionItem> newItems, Session session) {
+        Set<String> result = new HashSet<>();
+        Set<String> brands = new HashSet<>();
+        newItems.forEach(item-> brands.add(item.getItemManufacturer()));
+        brands.forEach(brand->{
+            Set<String> itemParts = getItemPartsByBrand(brand, session);
+            result.addAll(itemParts);
+        });
+
+        return result;
+    }
+
+    private Set<String> getItemPartsByBrand(String brand, Session session) {
+        List<String> parts = ItemDAO.getAllItemPartsByMake(brand, session);
+
+        return new HashSet<>(parts);
     }
 
     private void prepareItemAttributes(ProductionItem item, Session session) {

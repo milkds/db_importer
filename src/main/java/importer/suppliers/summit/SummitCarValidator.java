@@ -5,10 +5,7 @@ import importer.service.CarService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class SummitCarValidator {
     private Map<String, Set<String>> makeModelMap;
@@ -26,7 +23,7 @@ public class SummitCarValidator {
     private Map<String, String> subModelMap = getSubModelMap();
 
 
-    public ProductionCar validateCar(ProductionCar car) {
+    public ProductionCar validateCar(ProductionCar car) throws NoSuchModelException {
         String make = car.getMake().toLowerCase();
         String correctMake = makeCaseMap.get(make);
         if (correctMake==null){
@@ -37,7 +34,15 @@ public class SummitCarValidator {
             }
         }
         car.setMake(correctMake);
-        String model = car.getModel().toLowerCase();
+        String model = car.getModel();
+        if (model==null){
+            model = "no model";
+         //   logger.info("no model for car " + car);
+            throw new NoSuchModelException(car);
+        }
+        else {
+            model = model.toLowerCase();
+        }
         Map<String, String> modMap = modelCaseMap.get(make); //we can't get here, if there are no this make in map
         String corModel = null;
         if (modMap != null){

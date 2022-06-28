@@ -1,10 +1,7 @@
 package importer;
 
 import importer.dao.CarDAO;
-import importer.entities.CarMergeEntity;
-import importer.entities.ItemAttribute;
-import importer.entities.ProductionItem;
-import importer.entities.ShockParameters;
+import importer.entities.*;
 import importer.service.CarService;
 import importer.service.ItemService;
 import importer.suppliers.bilstein.BilConverter;
@@ -25,6 +22,7 @@ import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
 import importer.suppliers.skyjacker.sky_entities.SkyShock;
+import importer.suppliers.summit.AppNoteManualBreaker;
 import importer.suppliers.summit.SumController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,12 +39,13 @@ public class Controller {
     public static void main(String[] args) {
         new SumController().saveSummitToDB();
 
+
         // updateMounts();
 
         //  fillMergingTable();
         //EibController.updateFitNotes();
         //     importKeystone();
-    //    downloadAllPics();
+      //  downloadAllPics();
 
          /* //  importFox();
       //  importSkyjacker();

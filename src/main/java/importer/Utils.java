@@ -61,7 +61,7 @@ public class Utils {
         int counter = 0;
         for (ProductionItem item : allItems) {
             String make = item.getItemManufacturer();
-            if (!make.equals("Koni")){
+            if (!make.equals("Gabriel")){
                 continue;
             }
             if (picDownloadNeeded(item)) {
@@ -112,10 +112,11 @@ public class Utils {
             }
             String fName = "z:/pics/parsed/" + rawName;
             InputStream in = null;
-            String url = StringUtils.replace(pic.getPicUrl(), "_xl", "");
-            url = StringUtils.replace(url, "xlarge", "large");
-            System.out.println(url);
-            in = new URL(url).openStream();
+           /* String url = StringUtils.replace(pic.getPicUrl(), "_xl", "");
+            url = StringUtils.replace(url, "xlarge", "large");*/
+           // System.out.println(url);
+            System.out.println(pic.getPicUrl());
+            in = new URL(pic.getPicUrl()).openStream();
             Files.copy(in, Paths.get(fName));
         }
     }
@@ -184,12 +185,13 @@ public class Utils {
             }
             case "Old Man Emu":
             case "Koni":
-            case "Moog Chassis Parts": {
+            case "Moog Chassis Parts":
+            case "Gabriel": {
                 for (ItemPic pic: pics){
                     String url = pic.getPicUrl();
                     String picNo = StringUtils.substringAfter(url,".jpg_");
                     url = StringUtils.substringBefore(url, ".jpg")+".jpg";
-                //    url = url.replace("large","xlarge");
+              //      url = url.replace("large","xlarge");
              //       url = url.replace("_xl","");
                     String fName = itemMake + "-" + item.getItemPartNo() + "-" + picNo + ".jpg";
                     pic.setPicUrl(url);

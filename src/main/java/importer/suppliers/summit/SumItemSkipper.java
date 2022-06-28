@@ -19,7 +19,16 @@ public class SumItemSkipper {
     private void initMap() {
         skipMap = new HashMap<>();
         List<String> koniList = getKoniList();
+        List<String> gabList = getGabrielList();
         skipMap.put("Koni", koniList);
+        skipMap.put("Gabriel", gabList);
+    }
+
+    private List<String> getGabrielList() {
+        List<String> result = new ArrayList<>();
+   //     result.add("85006");
+
+        return result;
     }
 
     private List<String> getKoniList() {
@@ -38,8 +47,6 @@ public class SumItemSkipper {
         result.add("8805-1007");
         result.add("90-2693");
         result.add("8805-1005");
-
-
         result.add("8805-1006");
 
         return result;
