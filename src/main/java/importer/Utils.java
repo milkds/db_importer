@@ -350,4 +350,16 @@ public class Utils {
     }
 
 
+    public static List<String> readErrLog() {
+        List<String> result = new ArrayList<>();
+        String fileName = "c:\\logs\\err-info.log";
+        try {
+            result = Files.readAllLines(Paths.get(fileName),
+                    Charset.defaultCharset());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

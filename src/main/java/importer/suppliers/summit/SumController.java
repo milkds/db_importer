@@ -2,6 +2,7 @@ package importer.suppliers.summit;
 
 import importer.Controller;
 import importer.HibernateUtil;
+import importer.Utils;
 import importer.entities.ProductionItem;
 import importer.service.ItemService;
 import importer.suppliers.summit.entities.SumFitAttribute;
@@ -127,5 +128,9 @@ public class SumController {
         attNames.forEach(System.out::println);
         session.close();
         SumHibernateUtil.shutdown();
+    }
+
+    public void processSumLogsUnkAppNotes(){
+        new SumLogProcesser().processUnkAppNotes();
     }
 }

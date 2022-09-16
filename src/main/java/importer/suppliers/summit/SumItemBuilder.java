@@ -37,14 +37,14 @@ public class SumItemBuilder {
     }
 
     private void setFits(Map<String, String> sumAppNotesMap, SummitCarValidator validator, Map<Integer, List<SumFitAttribute>> allSumFitAtts) {
-        Instant start = Instant.now();
+   //     Instant start = Instant.now();
         Set<ProductionFitment> prodFits = new SumFitBuilder(sumItem, sumAppNotesMap).buildFits(result, validator,allSumFitAtts);
         prodFits.forEach(prodFit->{
             prodFit.setItem(result);
             result.getProductionFitments().add(prodFit);
         });
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).toMillis();
+      //  Instant finish = Instant.now();
+      //  long timeElapsed = Duration.between(start, finish).toMillis();
        // logger.info("Built fits in " + timeElapsed + " ms");
     }
 

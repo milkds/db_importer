@@ -723,6 +723,20 @@ class SumCarMapper {
         result.put("towne coupe cabriolet", "Towne Coupe Cabriolet");
         result.put("towne coupe sport", "Towne Coupe Sport");
         result.put("towne coupe spyder", "Towne Coupe Spyder");
+        result.put("high altitude 4xe", "High Altitude 4xe");
+        result.put("rubicon 4xe", "Rubicon 4xe");
+        result.put("unlimited rubicon 4xe", "Unlimited Rubicon 4xe");
+        result.put("sahara 4xe", "Sahara 4xe");
+        result.put("unlimited sahara 4xe", "Unlimited Sahara 4xe");
+        result.put("unlimited high altitude 4xe", "Unlimited High Altitude 4xe");
+        result.put("limited longhorn", "Limited Longhorn");
+        result.put("longhorn", "Longhorn");
+        result.put("pro", "Pro");
+        result.put("elevation standard", "Elevation Standard");
+        result.put("mojave", "Mojave");
+        result.put("midnight edition", "Midnight Edition");
+        result.put("c3", "C3");
+        result.put("trx launch edition", "TRX Launch Edition");
 
 
 
@@ -914,9 +928,7 @@ class SumCarMapper {
         result.put("808", "808");
         result.put("rx-3", "RX-3");
         result.put("fiesta", "Fiesta");
-
-
-
+        result.put("silverado 1500 ltd", "Silverado 1500 LTD");
 
 
 

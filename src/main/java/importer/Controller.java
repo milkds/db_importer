@@ -38,6 +38,7 @@ public class Controller {
 
     public static void main(String[] args) {
         new SumController().saveSummitToDB();
+      //  new SumController().processSumLogsUnkAppNotes();
 
 
         // updateMounts();

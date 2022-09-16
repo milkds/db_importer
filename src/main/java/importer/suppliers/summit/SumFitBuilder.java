@@ -62,7 +62,7 @@ class SumFitBuilder {
         if (car==null){
             return null;
         }
-        setProdFitAtts(attributes, result);
+        setProdFitAtts(attributes, result, prodItem.getItemPartNo());
         processAppNotes(attributes, car, result, prodItem);
         result.setCar(car);
         car.getProductionFitments().add(result);
@@ -87,7 +87,7 @@ class SumFitBuilder {
                 processNote(s.trim(), car, fit, prodItem);
             } catch (UnknownApplicationNoteError e) {
                 logger.error("Unknown Application Note at item ::: https://www.summitracing.com/parts/frs-" +
-                        prodItem.getItemPartNo() + " ::: " + appNote + System.lineSeparator() + "at car " + car);
+                        prodItem.getItemPartNo() + " ::: " + appNote + " at car " + car + ". Unknown part is " + e.getUnknownPart());
             }
         }
 
@@ -106,11 +106,18 @@ class SumFitBuilder {
     private void processNote(String appNote, ProductionCar car, ProductionFitment fit, ProductionItem prodItem) throws UnknownApplicationNoteError {
         String noteObj = sumAppNotesMap.get(appNote);
         if (noteObj==null){
+            AppNoteBrandChecker checker = new AppNoteBrandChecker(car, fit, prodItem);
+            checker.checkAppNote(appNote);
+            if (!checker.processingNeeded()){
+                return;
+            }
             List<String> noteSplit = getNoteSplit(appNote);
             for (String s: noteSplit){
                noteObj = sumAppNotesMap.get(s);
                if (noteObj==null){
-                   throw new UnknownApplicationNoteError();
+                   UnknownApplicationNoteError e = new UnknownApplicationNoteError();
+                   e.setUnknownPart(s);
+                   throw e;
                }
                else {
                    processAppNote(noteObj, car, fit, prodItem, s);
@@ -367,11 +374,14 @@ class SumFitBuilder {
         }
     }
 
-    private void setProdFitAtts(List<SumFitAttribute> attributes, ProductionFitment prodFit) {
+    private void setProdFitAtts(List<SumFitAttribute> attributes, ProductionFitment prodFit, String itemPartNo) {
         attributes.forEach(attribute->{
             String name = attribute.getName();
             if (fitAtts.contains(name)){
                 prodFit.getFitmentAttributes().add(new FitmentAttribute(name, attribute.getValue()));
+            }
+            else {
+              //  logger.info("Unknown main page attribute at item " + itemPartNo + " ::: name = " + name + " ::: value = " + attribute.getValue() );
             }
         });
     }
@@ -380,6 +390,7 @@ class SumFitBuilder {
         ProductionCar result = new ProductionCar();
         String appNote = "";
         if (isUniversal(attributes)){
+       //     logger.info("item is Universal " + prodItem.getItemPartNo());
             for (SumFitAttribute sumAtt : attributes) {
                 prodItem.getItemAttributes().add(new ItemAttribute(sumAtt.getName(), sumAtt.getValue()));
             }
