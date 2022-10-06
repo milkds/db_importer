@@ -431,13 +431,36 @@ class SumFitBuilder {
         try {
             result = validator.validateCar(result);
         } catch (NoSuchModelException e) {
-            logger.info("No model for car at item " + sumItem.getPartNo());
-            return null;
+            boolean hasModel = setModelFromAppNote(appNote, result);
+            if (!hasModel){
+                logger.info("No model for car at item " + sumItem.getPartNo());
+                return null;
+            }
         }
 
 
         return result;
     }
+
+    private boolean setModelFromAppNote(String appNote, ProductionCar prodCar) {
+        switch (appNote){
+            case "Fits 1988-1998 Nissan Patrol Y60, does not fit leaf spring models. 1.00 in. lift.":
+            case "Fits 1988-1998 Nissan Patrol Y60, does not fit leaf spring models. Stock ride height.":
+            case "Fits 1988-1998 Nissan Patrol Y60, does not fit leaf spring models. 1.50 in. lift.": {
+                setFields(1988,1998,"Nissan", "Patrol Y60", "Base", prodCar);
+                break;
+            }
+            case "Fits 1997-2019 Nissan Patrol Y61, does not fit leaf spring models. 1.00 in. lift.":
+            case "Fits 1997-2019 Nissan Patrol Y61, does not fit leaf spring models. Stock ride height.":
+            case "Fits 1997-2019 Nissan Patrol Y61, does not fit leaf spring models. 1.50 in. lift.": {
+                setFields(1997,2019,"Nissan", "Patrol Y61", "Base", prodCar);
+                break;
+            }
+        }
+
+        return true;
+    }
+
 
     private boolean isUniversal(List<SumFitAttribute> attributes) {
         for (SumFitAttribute sumAtt : attributes) {

@@ -1,5 +1,6 @@
 package importer.suppliers.summit.brandcheckers;
 
+import importer.entities.FitmentAttribute;
 import importer.entities.ProductionCar;
 import importer.entities.ProductionFitment;
 import importer.entities.ProductionItem;
@@ -10,9 +11,26 @@ import java.util.Locale;
 public class FoxAppNoteChecker {
     public boolean checkAppNote(ProductionCar car, ProductionFitment fit, ProductionItem prodItem, String appNote) {
         String curNote = extractManBodyCode(appNote, fit);
-        curNote = extractLift(appNote, fit);
+        curNote = extractLift(curNote, fit);
+        curNote = extractReservoir(curNote, fit);
+        if (curNote!=null&&curNote.length()>0){
+            fit.getFitmentAttributes().add(new FitmentAttribute("Note",curNote));
+        }
 
         return false;
+    }
+
+    private String extractReservoir(String curNote, ProductionFitment fit) {
+        if (curNote==null||curNote.length()==0){
+            return curNote;
+        }
+        if (curNote.contains("RESERVOIR: REMOTE")||curNote.contains("RESERVOIR: EXTERNAL")){
+            fit.getFitmentAttributes().add(new FitmentAttribute("Reservoir", "Yes"));
+        }
+
+
+
+        return curNote;
     }
 
     private String extractLift(String appNote, ProductionFitment fit) {
@@ -20,10 +38,9 @@ public class FoxAppNoteChecker {
             return appNote;
         }
         //will set lift notes to product fit and return appNote without lift
-        String result = new SumFoxLiftExtractor(appNote.replace("lift","Lift")).extractLift(fit);
 
 
-        return result;
+        return new SumFoxLiftExtractor(appNote.replace("lift","Lift")).extractLift(fit);
     }
 
     private String extractManBodyCode(String appNote, ProductionFitment fit) {
@@ -36,6 +53,8 @@ public class FoxAppNoteChecker {
                 System.out.println(appNote);
                 System.exit(1);
             }
+            fit.getFitmentAttributes().add(new FitmentAttribute("Manufacturer Body Code",codeValue));
+            appNote = appNote.replace("Manufacturer Body Code: "+codeValue+".","").trim();
         }
 
         return appNote;

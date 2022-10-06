@@ -4,30 +4,19 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1eff1c1-3ab6-4fe9-8b02-6eebf76ea6e3" name="Default Changelist" comment="minor summit import fixes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/AppNoteBrandChecker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumLogProcesser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/brandcheckers/FoxAppNoteChecker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/brandcheckers/SumFoxLiftExtractor.java" afterDir="false" />
+    <list default="true" id="e1eff1c1-3ab6-4fe9-8b02-6eebf76ea6e3" name="Default Changelist" comment="implemented summit app notes check by brand">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/importer/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/importer/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumCarMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumCarMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/AppNoteBrandChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/AppNoteBrandChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumFitBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumFitBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumItemBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/UnknownApplicationNoteError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/UnknownApplicationNoteError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sum_app_notes.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sum_app_notes.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/brandcheckers/FoxAppNoteChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/brandcheckers/FoxAppNoteChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/brandcheckers/SumFoxLiftExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/brandcheckers/SumFoxLiftExtractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumCarMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumCarMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumFitBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumFitBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumItemBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/UnknownApplicationNoteError.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/UnknownApplicationNoteError.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sum_app_notes.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sum_app_notes.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,7 +318,8 @@
       <workItem from="1660211724504" duration="16502000" />
       <workItem from="1661505003862" duration="3492000" />
       <workItem from="1663313724933" duration="10000" />
-      <workItem from="1663313752932" duration="598000" />
+      <workItem from="1663313752932" duration="16187000" />
+      <workItem from="1664872866812" duration="3401000" />
     </task>
     <task id="LOCAL-00001" summary="modified keystone update launch">
       <created>1575793869500</created>
@@ -506,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656422515836</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="implemented summit app notes check by brand">
+      <created>1663315151019</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1663315151019</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -583,7 +580,8 @@
     <MESSAGE value="slight modifications of keystone import" />
     <MESSAGE value="fixed summit pic save" />
     <MESSAGE value="minor summit import fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor summit import fixes" />
+    <MESSAGE value="implemented summit app notes check by brand" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented summit app notes check by brand" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

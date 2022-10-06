@@ -61,7 +61,7 @@ public class Utils {
         int counter = 0;
         for (ProductionItem item : allItems) {
             String make = item.getItemManufacturer();
-            if (!make.equals("Gabriel")){
+            if (!make.equals("Fox Racing Shox - Truck & Offroad")){
                 continue;
             }
             if (picDownloadNeeded(item)) {
@@ -110,7 +110,7 @@ public class Utils {
             if (dowloadedPics.contains(rawName)){
                 continue;
             }
-            String fName = "z:/pics/parsed/" + rawName;
+            String fName = "c:/pics/parsed/" + rawName;
             InputStream in = null;
            /* String url = StringUtils.replace(pic.getPicUrl(), "_xl", "");
             url = StringUtils.replace(url, "xlarge", "large");*/
@@ -186,6 +186,7 @@ public class Utils {
             case "Old Man Emu":
             case "Koni":
             case "Moog Chassis Parts":
+            case "Fox Racing Shox - Truck & Offroad":
             case "Gabriel": {
                 for (ItemPic pic: pics){
                     String url = pic.getPicUrl();

@@ -26,8 +26,10 @@ public class SumFoxLiftExtractor {
         String[] lifts = appNote.split("Lift");
         int length = lifts.length;
         if (length!=2&&length!=3&&length!=4){
-            System.out.println("Lift length;;;"+lifts.length);
-            System.out.println("unsual lift appnote ;;;" + lifts[1]);
+         //   System.out.println("Lift length;;;"+lifts.length);
+      //      System.out.println("unsual lift appnote ;;;" + appNote);
+
+            return getLiftFromOnePartNote(lifts[0], fit);
         }
         if (lifts.length==3){
             String liftNotePart = getLiftFromLongNote(lifts[0], fit);
@@ -42,11 +44,23 @@ public class SumFoxLiftExtractor {
                 return lifts[0] +" " + liftNotePart;
             }
         }
-        else if (lifts.length==4){
+        else {
             return getLiftFromFourPartNote(lifts[1], fit);
         }
+    }
 
-        return appNote;
+    //appnote without word "Lift"
+    private String getLiftFromOnePartNote(String appNote, ProductionFitment fit) {
+        String[] split = appNote.split(",");
+        String liftPart = split[split.length-1];
+        if (liftPart.contains("and")){
+            return appNote;
+        }
+        liftPart = liftPart.trim();
+        liftPart = liftPart. replace("\"","");
+        setLifts(liftPart, fit);
+
+        return StringUtils.substringBeforeLast(appNote, ",");
     }
 
     private String getLiftFromFourPartNote(String lift, ProductionFitment fit) {

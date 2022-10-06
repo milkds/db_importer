@@ -37,7 +37,7 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) {
-        new SumController().saveSummitToDB();
+       // new SumController().saveSummitToDB();
       //  new SumController().processSumLogsUnkAppNotes();
 
 
@@ -46,7 +46,7 @@ public class Controller {
         //  fillMergingTable();
         //EibController.updateFitNotes();
         //     importKeystone();
-      //  downloadAllPics();
+        downloadAllPics();
 
          /* //  importFox();
       //  importSkyjacker();

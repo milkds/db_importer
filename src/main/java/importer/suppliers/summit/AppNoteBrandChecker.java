@@ -17,11 +17,11 @@ public class AppNoteBrandChecker {
         this.prodItem = prodItem;
     }
 
-    //returns true, if appNote needs further check
+    //true, if appNote needs further check
     public void checkAppNote(String appNote) {
         String brand = prodItem.getItemManufacturer();
         if (brand.equals("Fox Racing Shox - Truck & Offroad")){
-            processingNeeded = new FoxAppNoteChecker().checkAppNote(car, fit, prodItem, appNote);
+         new FoxAppNoteChecker().checkAppNote(car, fit, prodItem, appNote); //fox will be proceeded only in checker.
         }
     }
 
