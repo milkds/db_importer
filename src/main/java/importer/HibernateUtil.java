@@ -2,6 +2,7 @@ package importer;
 
 
 import importer.entities.*;
+import importer.entities.links.ItemAttributeLink;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -30,7 +31,7 @@ public class HibernateUtil {
                         "&useSSL=false");
                 settings.put("hibernate.connection.username", "root");
                 settings.put("hibernate.connection.password", "root");
-                settings.put("hibernate.show_sql", "true");
+                settings.put("hibernate.show_sql", "false");
                 settings.put("hibernate.hbm2ddl.auto", "none");
 
                 registryBuilder.applySettings(settings);
@@ -47,6 +48,7 @@ public class HibernateUtil {
                 sources.addAnnotatedClass(ItemPic.class);
                 sources.addAnnotatedClass(ShockParameters.class);
                 sources.addAnnotatedClass(CarMergeEntity.class);
+                sources.addAnnotatedClass(ItemAttributeLink.class);
 
                 Metadata metadata = sources.getMetadataBuilder().build();
 

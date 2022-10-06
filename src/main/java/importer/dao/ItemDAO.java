@@ -5,6 +5,7 @@ import importer.entities.ItemAttribute;
 import importer.entities.ItemPic;
 import importer.entities.ProductionFitment;
 import importer.entities.ProductionItem;
+import importer.entities.links.ItemAttributeLink;
 import importer.suppliers.keystone.entities.KeyItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -164,7 +165,16 @@ public class ItemDAO {
 
         return result;
     }
+    public static List<ItemAttributeLink> getAllItemAttributeLinks(Session session) {
+        List<ItemAttributeLink> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ItemAttributeLink> crQ = builder.createQuery(ItemAttributeLink.class);
+        Root<ItemAttributeLink> root = crQ.from(ItemAttributeLink.class);
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
 
+        return result;
+    }
     public static List<String> getAllItemPartsByMake(String brand, Session session) {
         List<String> result = new ArrayList<>();
         CriteriaBuilder builder = session.getCriteriaBuilder();
