@@ -3,16 +3,13 @@ package importer.dao;
 import importer.HibernateUtil;
 import importer.entities.ItemAttribute;
 import importer.entities.ItemPic;
-import importer.entities.ProductionFitment;
 import importer.entities.ProductionItem;
 import importer.entities.links.ItemAttributeLink;
-import importer.suppliers.keystone.entities.KeyItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -184,6 +181,13 @@ public class ItemDAO {
         crQ.where(builder.equal(root.get("itemManufacturer"), brand));
         Query q = session.createQuery(crQ);
         result = q.getResultList();
+
+        return result;
+    }
+
+    public static List<Object[]> getItempicItemIDsArray(Session session) {
+        Query q = session.createNativeQuery("SELECT PIC_ID, FILE_NAME  FROM production_db.item_pics");
+        List<Object[]> result= (List<Object[]>)q.getResultList();
 
         return result;
     }

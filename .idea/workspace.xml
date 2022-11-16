@@ -4,113 +4,36 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1eff1c1-3ab6-4fe9-8b02-6eebf76ea6e3" name="Default Changelist" comment="implemented summit app notes check by brand">
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/entities/links/ItemAttributeLink.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExcelExporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportEntityBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportService.java" afterDir="false" />
+    <list default="true" id="e1eff1c1-3ab6-4fe9-8b02-6eebf76ea6e3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/entities/links/CarAttributeLink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/entities/links/FitmentAttributeLink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/CSVExporter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/DuplicateAttributeRemover.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportCSVEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportEntityToCSVConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportFitEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/exportProperties.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/importer/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/importer/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/export/ExcelExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExcelExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/export/ExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/export/ExportEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/export/ExportEntityBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportEntityBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/importer/export/ExportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/importer/export/ExportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/ExcelUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/ExcelUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/HibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/HibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/TestClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/TestClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/Utils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/dao/CarDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/dao/CarDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/dao/FitmentDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/dao/FitmentDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/importer/dao/ItemDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/dao/ItemDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/CarAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/CarAttribute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/CarMergeEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/CarMergeEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/FitmentAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/FitmentAttribute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/ItemAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/ItemAttribute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/ItemPic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/ItemPic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/ProductionCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/ProductionCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/ProductionFitment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/ProductionFitment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/ProductionItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/ProductionItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/entities/ShockParameters.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/entities/ShockParameters.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/service/CarService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/service/CarService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/service/FitmentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/service/FitmentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/service/ItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/service/ProdCarChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/service/ProdCarChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/service/ProdItemAttChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/service/ProdItemAttChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilHibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilHibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilsteinDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/BilsteinDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilFitment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilFitment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilShock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilShock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilSpec.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/bilstein/bilstein_entities/BilSpec.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibCarBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibCarBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibCarValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibCarValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibHibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibHibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibToProdConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/EibToProdConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/EibCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/EibCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/EibItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/EibItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/MetBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/MetBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/StdBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_entities/StdBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibItemChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibItemChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibItemFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibItemFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibItemTitleChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibItemTitleChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibSubModelValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/EibSubModelValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/FitBrandChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/FitBrandChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/FitBrandModelChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/FitBrandModelChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/FitPresenceChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/eibach/eib_filters/FitPresenceChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/FoxHibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/FoxHibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/FoxSupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/FoxSupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/dao/FoxCarDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/dao/FoxCarDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/dao/FoxFitDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/dao/FoxFitDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/dao/FoxItemDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/dao/FoxItemDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxFit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxFit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxItemSpec.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/fox/entities/FoxItemSpec.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyHibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyHibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyItemBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyLiftBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyLiftBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeySupplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/KeySupplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/ItemCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/ItemCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/ItemCarAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/ItemCarAttribute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyCarAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyCarAttribute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyItemSpec.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/keystone/entities/KeyItemSpec.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/LiftBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/LiftBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyHibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyHibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/SkyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/Category.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/FitmentNote.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/FitmentNote.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/SkyFitment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/SkyFitment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/SkyShock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/SkyShock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/SpecAndKitNote.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/skyjacker/sky_entities/SpecAndKitNote.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/AppNoteManualBreaker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/AppNoteManualBreaker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/NoSuchModelException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/NoSuchModelException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumCarMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumCarMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumFitBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumFitBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumHibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumHibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumItemBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumItemSkipper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumItemSkipper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SumService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SummitCarValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/SummitCarValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/UnknownApplicationNoteError.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/UnknownApplicationNoteError.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumFitAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumFitAttribute.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumFitment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumFitment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumItemAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/importer/suppliers/summit/entities/SumItemAttribute.class" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,17 +44,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/importer/Controller.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportEntityToCSVConverter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="37" column="40" lean-forward="true" selection-start-line="37" selection-end-line="38" />
+            <state relative-caret-position="-189">
+              <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportEntityBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
               <folding>
-                <element signature="e#1566#1567#0" expanded="true" />
-                <element signature="e#1603#1604#0" expanded="true" />
-                <element signature="method#controllerStash#0;class#Controller#0" />
-                <element signature="method#renameProdItemAttribute#0;class#Controller#0" />
-                <element signature="method#checkAlreadyParsedShocks#0;class#Controller#0" />
+                <element signature="method#getTempItemAttMap#0;class#ExportEntityBuilder#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/DuplicateAttributeRemover.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportCSVEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+              <folding>
+                <element signature="e#1237#1238#0" expanded="true" />
+                <element signature="e#1262#1263#0" expanded="true" />
+                <element signature="e#1298#1299#0" expanded="true" />
+                <element signature="e#1326#1327#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,45 +95,37 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="85" lean-forward="true" selection-start-line="7" selection-start-column="85" selection-end-line="7" selection-end-column="85" />
+            <state relative-caret-position="80">
+              <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+              <folding>
+                <element signature="method#testCSVexport#0;class#ExportController#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportService.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/CSVExporter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5">
-              <caret line="22" column="66" lean-forward="true" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
+            <state relative-caret-position="476">
+              <caret line="38" column="59" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#198#199#0" expanded="true" />
-                <element signature="e#220#221#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportEntityBuilder.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/importer/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+            <state relative-caret-position="153">
+              <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
               <folding>
-                <element signature="method#getTempItemAttMap#0;class#ExportEntityBuilder#0" />
-                <element signature="e#431#432#0" expanded="true" />
-                <element signature="e#465#466#0" expanded="true" />
+                <element signature="method#controllerStash#0;class#Controller#0" />
+                <element signature="method#renameProdItemAttribute#0;class#Controller#0" />
+                <element signature="method#checkAlreadyParsedShocks#0;class#Controller#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="144" column="13" lean-forward="true" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -188,6 +135,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -212,9 +160,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/importer/entities/ProductionItem.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/entities/ProductionFitment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/fox/FoxHibernateUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/ExcelUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/entities/CarMergeEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/fox/FoxSupplier.java" />
@@ -223,7 +168,6 @@
         <option value="$PROJECT_DIR$/src/main/java/importer/service/ProdCarChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeySupplier.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/service/CarService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/bilstein/BilConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/LiftBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/SkyConverter.java" />
@@ -235,7 +179,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/log4j2.xml" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibToProdConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/service/FitmentService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibController.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/entities/ProductionCar.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyItemBuilder.java" />
@@ -245,22 +188,43 @@
         <option value="$PROJECT_DIR$/src/main/java/importer/service/ItemService.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumItemBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/entities/ItemAttributeLinks.java" />
-        <option value="$PROJECT_DIR$/src/main/java/importer/HibernateUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/entities/links/FitmentAttributeLink.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/HibernateUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/entities/links/CarAttributeLink.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportFitEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportTextDividers.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/exportProperties.txt" />
+        <option value="$PROJECT_DIR$/src/main/resources/exportProperties.xml" />
         <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExcelExporter.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportCSVEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/CSVExporter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/DuplicateAttributeRemower.java" />
         <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportEntityBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/ExportEntityToCSVConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/importer/export/DuplicateAttributeRemover.java" />
       </list>
     </option>
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="477" />
-    <option name="y" value="15" />
-    <option name="width" value="895" />
-    <option name="height" value="504" />
+    <option name="x" value="235" />
+    <option name="width" value="1400" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectId" id="1zeOG5r6bf0sf7GXR1kz8KIGc9e" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -311,25 +275,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="importer" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="importer" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
-              <item name="links" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="importer" type="462c0819:PsiDirectoryNode" />
               <item name="export" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -350,12 +295,19 @@
               <item name="importer" type="462c0819:PsiDirectoryNode" />
               <item name="suppliers" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="db_importer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db_importer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -375,14 +327,15 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="importer.suppliers.summit.brandcheckers" />
-      <recent name="importer.suppliers.summit" />
-      <recent name="importer.suppliers.skyjacker" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\home\Storage\IdeaProjects\Jackson\db_importer\src\main\resources" />
       <recent name="C:\Storage\IdeaProjects\Jackson\db_importer\src\main\resources" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="importer.export" />
+      <recent name="importer.suppliers.summit.brandcheckers" />
+      <recent name="importer.suppliers.summit" />
+      <recent name="importer.suppliers.skyjacker" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -499,6 +452,22 @@
       <workItem from="1663313724933" duration="10000" />
       <workItem from="1663313752932" duration="16187000" />
       <workItem from="1664872866812" duration="3401000" />
+      <workItem from="1665560769952" duration="12514000" />
+      <workItem from="1665666944123" duration="4067000" />
+      <workItem from="1665737511749" duration="10629000" />
+      <workItem from="1665914127487" duration="21293000" />
+      <workItem from="1666090165152" duration="8456000" />
+      <workItem from="1666160408210" duration="4126000" />
+      <workItem from="1666343616063" duration="6920000" />
+      <workItem from="1667380778994" duration="1186000" />
+      <workItem from="1667458521037" duration="3132000" />
+      <workItem from="1667648037951" duration="8565000" />
+      <workItem from="1667907085482" duration="16928000" />
+      <workItem from="1668109753682" duration="3251000" />
+      <workItem from="1668151562072" duration="1307000" />
+      <workItem from="1668167089401" duration="671000" />
+      <workItem from="1668424577186" duration="776000" />
+      <workItem from="1668581982436" duration="5956000" />
     </task>
     <task id="LOCAL-00001" summary="modified keystone update launch">
       <created>1575793869500</created>
@@ -682,16 +651,24 @@
       <option name="project" value="LOCAL" />
       <updated>1663315151019</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="started implementing Exporting to CSV">
+      <created>1665055099625</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1665055099626</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="395392000" />
+    <option name="totallyTimeSpent" value="510008000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27785236" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34832215" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -722,9 +699,44 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3295302" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986577" weight="0.9107649" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5013423" side_tool="true" weight="0.8144476" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3286119" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3286119" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="CDI" order="6" weight="0.3295302" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -780,7 +792,8 @@
     <MESSAGE value="fixed summit pic save" />
     <MESSAGE value="minor summit import fixes" />
     <MESSAGE value="implemented summit app notes check by brand" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented summit app notes check by brand" />
+    <MESSAGE value="started implementing Exporting to CSV" />
+    <option name="LAST_COMMIT_MESSAGE" value="started implementing Exporting to CSV" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -793,197 +806,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyLiftBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="47" column="44" lean-forward="true" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7-sources.jar!/org/apache/commons/lang3/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="3049" column="25" selection-start-line="3049" selection-start-column="25" selection-end-line="3049" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/../../../Program Files (x86)/Java/jdk-12/lib/src.zip!/java.base/java/lang/String.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibCarValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibCarBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
-          <folding>
-            <element signature="e#2029#2030#0" expanded="true" />
-            <element signature="e#2087#2088#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/readme.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyHibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-          <folding>
-            <element signature="e#2672#2673#0" expanded="true" />
-            <element signature="e#2728#2729#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/new_import_steps.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="69" selection-start-line="2" selection-start-column="69" selection-end-line="2" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/../../../Program Files (x86)/Java/jdk-12/lib/src.zip!/java.base/java/util/Set.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/FitmentAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/service/FitmentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="65" column="32" lean-forward="true" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/EibToProdConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="933">
-          <caret line="104" column="38" selection-start-line="104" selection-start-column="38" selection-end-line="104" selection-end-column="38" />
-          <folding>
-            <element signature="e#13104#13105#0" expanded="true" />
-            <element signature="e#13158#13159#0" expanded="true" />
-            <element signature="e#13213#13214#0" expanded="true" />
-            <element signature="e#13272#13273#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/keystone/KeyItemBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="115" column="8" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
-          <folding>
-            <element signature="e#447#448#0" expanded="true" />
-            <element signature="e#501#502#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="114" column="24" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/eib_entities/EibCar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/eibach/eib_entities/EibItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/fox/entities/FoxCar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/fox/entities/FoxItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/fox/entities/FoxItemSpec.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/SkyFitment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/SkyShock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/skyjacker/sky_entities/SpecAndKitNote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/entities/SumFitment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ItemPic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -993,35 +815,6 @@
             <element signature="e#1644#1645#0" expanded="true" />
             <element signature="e#1689#1690#0" expanded="true" />
             <element signature="e#1725#1726#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5695">
-          <caret line="366" selection-start-line="364" selection-start-column="5" selection-end-line="366" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionCar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="124" column="82" selection-start-line="124" selection-start-column="82" selection-end-line="124" selection-end-column="82" />
-          <folding>
-            <element signature="e#2580#2581#0" expanded="true" />
-            <element signature="e#2613#2614#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionFitment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-          <folding>
-            <element signature="e#1059#1060#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1061,20 +854,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2057">
-          <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/ExcelUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/importer/suppliers/summit/SumController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1123">
@@ -1092,59 +871,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExcelExporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="85" lean-forward="true" selection-start-line="7" selection-start-column="85" selection-end-line="7" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="49" column="64" lean-forward="true" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ItemAttribute.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="37" column="40" lean-forward="true" selection-start-line="37" selection-end-line="38" />
-          <folding>
-            <element signature="e#1566#1567#0" expanded="true" />
-            <element signature="e#1603#1604#0" expanded="true" />
-            <element signature="method#controllerStash#0;class#Controller#0" />
-            <element signature="method#renameProdItemAttribute#0;class#Controller#0" />
-            <element signature="method#checkAlreadyParsedShocks#0;class#Controller#0" />
-          </folding>
+          <caret line="7" column="32" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/links/ItemAttributeLink.java">
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="635">
+          <caret line="242" column="6" selection-start-line="242" selection-start-column="6" selection-end-line="242" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="63" column="19" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final-sources.jar!/javax/persistence/criteria/CriteriaBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="1529" column="14" selection-start-line="1529" selection-start-column="14" selection-end-line="1529" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionFitment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="31" />
+          <folding>
+            <element signature="e#1059#1060#0" expanded="true" />
+            <element signature="e#1089#1090#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="25" column="40" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="40" />
+        <state relative-caret-position="187">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="22" />
           <folding>
             <element signature="e#1689#1690#0" expanded="true" />
             <element signature="e#1733#1734#0" expanded="true" />
@@ -1160,48 +929,293 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ItemAttribute.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/FitmentAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="23" column="53" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/links/ItemAttributeLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/ProductionCar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="21" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="21" />
+          <folding>
+            <element signature="e#2580#2581#0" expanded="true" />
+            <element signature="e#2613#2614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/HibernateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/CarDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="278" column="55" selection-start-line="278" selection-start-column="55" selection-end-line="278" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/links/FitmentAttributeLink.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="7" column="32" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="32" />
+          <caret line="5" column="40" lean-forward="true" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/FitmentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-175">
+          <caret line="103" column="42" lean-forward="true" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
+          <folding>
+            <element signature="method#getAllFitAttLinks#0;class#FitmentDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/CarAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/book_new.txt" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="21" column="67" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/TreeSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2176">
+          <caret line="157" column="11" selection-start-line="157" selection-start-column="11" selection-end-line="157" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/book_new.csv" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/book_new2.csv" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-csv/1.9.0/commons-csv-1.9.0.jar!/org/apache/commons/csv/CSVPrinter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="124" column="16" selection-start-line="124" selection-start-column="16" selection-end-line="124" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-csv/1.9.0/commons-csv-1.9.0-sources.jar!/org/apache/commons/csv/CSVPrinter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="276" column="16" selection-start-line="276" selection-start-column="16" selection-end-line="276" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/ExcelUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/book_new3.csv" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/entities/links/CarAttributeLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-csv/1.9.0/commons-csv-1.9.0-sources.jar!/org/apache/commons/csv/CSVFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="331" column="23" selection-start-line="331" selection-start-column="23" selection-end-line="331" selection-end-column="23" />
+          <folding>
+            <element signature="e#10765#10766#0" expanded="true" />
+            <element signature="e#10835#10836#0" expanded="true" />
+            <element signature="e#83222#83223#0" expanded="true" />
+            <element signature="e#83286#83287#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportFitEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding>
+            <element signature="method#setAllOtherFitAttributes#0;class#ExportFitEntity#0" />
+            <element signature="e#2375#2376#0" expanded="true" />
+            <element signature="e#2415#2416#0" expanded="true" />
+            <element signature="e#2481#2482#0" expanded="true" />
+            <element signature="e#2539#2540#0" expanded="true" />
+            <element signature="e#2609#2610#0" expanded="true" />
+            <element signature="e#2643#2644#0" expanded="true" />
+            <element signature="e#2697#2698#0" expanded="true" />
+            <element signature="e#2743#2744#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/importer/dao/ItemDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="144" column="13" lean-forward="true" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
+        <state relative-caret-position="624">
+          <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/Map.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportTextDividers.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Later_PROCESS">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.17/poi-3.17-sources.jar!/org/apache/poi/ss/usermodel/Sheet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="242" column="6" selection-start-line="242" selection-start-column="6" selection-end-line="242" selection-end-column="6" />
+        <state relative-caret-position="227">
+          <caret line="83" column="8" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/exportProperties.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/3.17/poi-3.17-sources.jar!/org/apache/poi/ss/usermodel/Row.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-487">
+          <caret line="144" column="10" selection-start-line="144" selection-start-column="10" selection-end-line="144" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/export.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="289">
+          <caret line="101" column="75" lean-forward="true" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="75" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="66" column="39" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExcelExporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
+          <folding>
+            <element signature="method#saveToFile#0;class#ExcelExporter#0" />
+            <element signature="method#savetocsv#0;class#ExcelExporter#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="146" column="21" selection-start-line="142" selection-start-column="8" selection-end-line="146" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1258">
+          <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/CSVExporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="38" column="59" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+          <folding>
+            <element signature="method#controllerStash#0;class#Controller#0" />
+            <element signature="method#renameProdItemAttribute#0;class#Controller#0" />
+            <element signature="method#checkAlreadyParsedShocks#0;class#Controller#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportCSVEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding>
+            <element signature="e#1237#1238#0" expanded="true" />
+            <element signature="e#1262#1263#0" expanded="true" />
+            <element signature="e#1298#1299#0" expanded="true" />
+            <element signature="e#1326#1327#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <folding>
+            <element signature="method#testCSVexport#0;class#ExportController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/DuplicateAttributeRemover.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportEntityBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+        <state relative-caret-position="294">
+          <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
           <folding>
             <element signature="method#getTempItemAttMap#0;class#ExportEntityBuilder#0" />
-            <element signature="e#431#432#0" expanded="true" />
-            <element signature="e#465#466#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/importer/export/ExportEntityToCSVConverter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
-          <caret line="22" column="66" lean-forward="true" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#198#199#0" expanded="true" />
-            <element signature="e#220#221#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-189">
+          <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
         </state>
       </provider>
     </entry>

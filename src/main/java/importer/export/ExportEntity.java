@@ -1,16 +1,22 @@
 package importer.export;
 
+import java.util.List;
+import java.util.StringJoiner;
+
 public class ExportEntity {
     private String id;
     private String partNo;
     private String itemType;
     private String brand;
-    private String extendedLength;
-    private String collapsedLength;
-    private String upperMount;
-    private String lowerMount;
+    private String extendedLength; //itemAtts
+    private String collapsedLength; //itemAtts
+    private String upperMount; //itemAtts
+    private String lowerMount; //itemAtts
     private String imgFileNames;
-    private String itemAttributes;
+    private String itemAttributes; //itemAtts
+    private String itemPics;
+    private String carCategories;
+    private List<ExportFitEntity> fitEntities;
 
 
     public String getId() {
@@ -91,5 +97,39 @@ public class ExportEntity {
 
     public void setItemAttributes(String itemAttributes) {
         this.itemAttributes = itemAttributes;
+    }
+
+    public void setItemPics(String itemPics) {
+        this.itemPics = itemPics;
+    }
+
+    public String getItemPics() {
+        return itemPics;
+    }
+
+    public void setCarCategories(String allCarCats) {
+        this.carCategories = allCarCats;
+    }
+
+    public String getCarCategories() {
+        return carCategories;
+    }
+
+    public List<ExportFitEntity> getFitEntities() {
+        return fitEntities;
+    }
+
+    public void setFitEntities(List<ExportFitEntity> fitEntities) {
+        this.fitEntities = fitEntities;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ExportEntity.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("partNo='" + partNo + "'")
+                .add("itemType='" + itemType + "'")
+                .add("brand='" + brand + "'")
+                .toString();
     }
 }

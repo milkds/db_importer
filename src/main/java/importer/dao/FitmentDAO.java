@@ -3,6 +3,7 @@ package importer.dao;
 import importer.entities.FitmentAttribute;
 import importer.entities.ProductionFitment;
 import importer.entities.ProductionItem;
+import importer.entities.links.FitmentAttributeLink;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -69,6 +70,66 @@ public class FitmentDAO {
             }
         }
     }
+
+    public static List<ProductionFitment> getAllFits(Session session) {
+        List<ProductionFitment> allFitList = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionFitment> crQ = builder.createQuery(ProductionFitment.class);
+        Root<ProductionFitment> root = crQ.from(ProductionFitment.class);
+        Query q = session.createQuery(crQ);
+        allFitList = q.getResultList();
+
+        return allFitList;
+    }
+
+    public static List<ProductionFitment> getAllFitsForItems(Session session, List<ProductionItem> itemIDS) {
+        List<ProductionFitment> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionFitment> crQ = builder.createQuery(ProductionFitment.class);
+        Root<ProductionFitment> root = crQ.from(ProductionFitment.class);
+        crQ.where(root.get("item").in(itemIDS));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+
+    }
+
+    public static List<FitmentAttribute> getAllFitAttributes(Session session) {
+        List<FitmentAttribute> allFitAttList = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<FitmentAttribute> crQ = builder.createQuery(FitmentAttribute.class);
+        Root<FitmentAttribute> root = crQ.from(FitmentAttribute.class);
+        Query q = session.createQuery(crQ);
+        allFitAttList = q.getResultList();
+
+        return allFitAttList;
+    }
+
+    public static List<FitmentAttributeLink> getAllFitAttLinks(Session session) {
+        List<FitmentAttributeLink> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<FitmentAttributeLink> crQ = builder.createQuery(FitmentAttributeLink.class);
+        Root<FitmentAttributeLink> root = crQ.from(FitmentAttributeLink.class);
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public static List<FitmentAttributeLink> getFitAttLinksByFitIDs(Session session, Set<Integer> fitIDs) {
+        List<FitmentAttributeLink> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<FitmentAttributeLink> crQ = builder.createQuery(FitmentAttributeLink.class);
+        Root<FitmentAttributeLink> root = crQ.from(FitmentAttributeLink.class);
+        crQ.where(root.get("fitID").in(fitIDs));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+
+        return result;
+    }
+
 
   /*  public static void prepareFitment(ProductionItem item, ProductionFitment fitment, Session session) {
         logger.debug("preparing attributes for " + fitment);

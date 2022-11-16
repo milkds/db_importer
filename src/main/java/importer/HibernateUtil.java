@@ -2,6 +2,8 @@ package importer;
 
 
 import importer.entities.*;
+import importer.entities.links.CarAttributeLink;
+import importer.entities.links.FitmentAttributeLink;
 import importer.entities.links.ItemAttributeLink;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -49,6 +51,8 @@ public class HibernateUtil {
                 sources.addAnnotatedClass(ShockParameters.class);
                 sources.addAnnotatedClass(CarMergeEntity.class);
                 sources.addAnnotatedClass(ItemAttributeLink.class);
+                sources.addAnnotatedClass(FitmentAttributeLink.class);
+                sources.addAnnotatedClass(CarAttributeLink.class);
 
                 Metadata metadata = sources.getMetadataBuilder().build();
 

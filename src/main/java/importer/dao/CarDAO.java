@@ -4,6 +4,7 @@ import importer.HibernateUtil;
 import importer.entities.CarAttribute;
 import importer.entities.CarMergeEntity;
 import importer.entities.ProductionCar;
+import importer.entities.links.CarAttributeLink;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -241,6 +242,43 @@ public class CarDAO {
         CriteriaQuery<ProductionCar> crQ = builder.createQuery(ProductionCar.class);
         Root<ProductionCar> root = crQ.from(ProductionCar.class);
         Query q = prodSession.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public static List<ProductionCar> getCarsByIDs(Session session, Set<Integer> carIDS) {
+        List<ProductionCar> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionCar> crQ = builder.createQuery(ProductionCar.class);
+        Root<ProductionCar> root = crQ.from(ProductionCar.class);
+        crQ.where(root.get("carID").in(carIDS));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+
+        return result;
+    }
+
+    public static List<CarAttributeLink> getCarAttributeLinks(Set<Integer> carIDS, Session session) {
+        List<CarAttributeLink> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CarAttributeLink> crQ = builder.createQuery(CarAttributeLink.class);
+        Root<CarAttributeLink> root = crQ.from(CarAttributeLink.class);
+        crQ.where(root.get("carID").in(carIDS));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public static List<CarAttribute> getCarAttributes(Set<Integer> attIDs, Session session) {
+        List<CarAttribute> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CarAttribute> crQ = builder.createQuery(CarAttribute.class);
+        Root<CarAttribute> root = crQ.from(CarAttribute.class);
+        crQ.where(root.get("carAttID").in(attIDs));
+        Query q = session.createQuery(crQ);
         result = q.getResultList();
 
         return result;

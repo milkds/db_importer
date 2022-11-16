@@ -23,22 +23,21 @@ import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
 import importer.suppliers.skyjacker.sky_entities.SkyShock;
-import importer.suppliers.summit.AppNoteManualBreaker;
-import importer.suppliers.summit.SumController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        //new ExportController().exportToExcel("Bilstein");
         new ExportController().exportToCSV("Bilstein");
+      //  new ExportController().testCSVexport();
+
     }
 
     private static void controllerStash(){
