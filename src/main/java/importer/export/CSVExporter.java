@@ -28,24 +28,24 @@ class CSVExporter {
 
     private List<String[]> generateData(List<ExportCSVEntity> csvExportList) {
         List<String[]> result = new ArrayList<>();
-        int counter = 0;
         csvExportList.forEach(csvEntity->{
             String[] dataSet = new String[14];
             ExportEntity exportEntity = csvEntity.getExportEntity();
-            dataSet[0] = exportEntity.getPartNo();
-            dataSet[1] = exportEntity.getItemType();
-            dataSet[2] = exportEntity.getBrand();
-            dataSet[3] = exportEntity.getExtendedLength();
-            dataSet[4] = exportEntity.getCollapsedLength();
-            dataSet[5] = exportEntity.getUpperMount();
-            dataSet[6] = exportEntity.getLowerMount();
-            dataSet[7] = exportEntity.getItemAttributes();
-            dataSet[8] = exportEntity.getCarCategories();
-            dataSet[9] = csvEntity.getTitle();
-            dataSet[10] = csvEntity.getShortDesc();
-            dataSet[11] = csvEntity.getLongDesc();
-            dataSet[12] = csvEntity.getAllAttributes();
-            dataSet[13] = csvEntity.getId();
+            dataSet[0] = csvEntity.getId();
+            dataSet[1] = exportEntity.getPartNo();
+            dataSet[2] = exportEntity.getItemType();
+            dataSet[3] = exportEntity.getBrand();
+            dataSet[4] = exportEntity.getExtendedLength();
+            dataSet[5] = exportEntity.getCollapsedLength();
+            dataSet[6] = exportEntity.getUpperMount();
+            dataSet[7] = exportEntity.getLowerMount();
+            dataSet[8] = exportEntity.getItemAttributes();
+            dataSet[9] = exportEntity.getCarCategories();
+            dataSet[10] = csvEntity.getTitle();
+            dataSet[11] = csvEntity.getShortDesc();
+            dataSet[12] = csvEntity.getLongDesc();
+            dataSet[13] = csvEntity.getAllAttributes();
+
             result.add(dataSet);
         });
 

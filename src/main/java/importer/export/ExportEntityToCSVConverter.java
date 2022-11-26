@@ -1,6 +1,5 @@
 package importer.export;
 
-import importer.suppliers.skyjacker.sky_entities.Category;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +37,7 @@ class ExportEntityToCSVConverter {
             setItemFields (csvEntity, entity);
             List<ExportFitEntity> fitEntities = entity.getFitEntities();
             setMixedCategories(fitEntities, csvEntity); //mixed categories = short desc
+            //we group by carLine
             setLongDescription(fitEntities, csvEntity, entity.getItemAttributes());
             setAllAttributes(fitEntities, csvEntity, entity.getItemAttributes());
             csvEntity.setExportEntity(entity);
@@ -50,26 +50,83 @@ class ExportEntityToCSVConverter {
     }
 
     private void setAllAttributes(List<ExportFitEntity> fitEntities, ExportCSVEntity csvEntity, String itemAttributes) {
-        StringBuilder attBuilder = new StringBuilder();
+        String itemPart = getItemPart(itemAttributes); //returns itemPart with Gen Divider at the end
+        StringBuilder attBuilder = new StringBuilder(itemPart);
+
+        //we group by carLine and then by LiftLine
+        Map<String, List<ExportFitEntity>> groupedFitEntities = groupFitEntities(fitEntities); //k = carLine, v = fitEntities
+        groupedFitEntities.forEach((k,v)->{
+            Map<String, List<ExportFitEntity>> liftMap = groupFitEntitiesByLift(v); //k = lift, v = entities for lift
+            liftMap.forEach((k1,v1)->{
+               ExportCarFitEntity carFitEntity = new AttributeGrouper(v1, GEN_DIVIDER, ATT_DIVIDER).getGroupedAttributes();//car and fit
+                addCarAttributes(carFitEntity, attBuilder);
+                addFitAttributes(carFitEntity, attBuilder);
+                addFixedAttributes(carFitEntity, attBuilder, carFitEntity.getCarLine());
+            });
+        });
+
+        String allAttributes = attBuilder.toString();
+        csvEntity.setAllAttributes(allAttributes);
+    }
+
+    private void addFixedAttributes(ExportCarFitEntity carFitEntity, StringBuilder attBuilder, String carLine) {
+        Set<String> positions = carFitEntity.getPositions();
+        appendCounters(positions, attBuilder, carLine, "Position");
+        Set<String> drives = carFitEntity.getDrives();
+        appendCounters(drives, attBuilder, carLine, "Drive");
+        attBuilder.append(carFitEntity.getCarYearAttributes()).append(GEN_DIVIDER);
+        attBuilder.append(carFitEntity.getCarLiftAttributes()).append(GEN_DIVIDER);
+    }
+
+    private void addFitAttributes(ExportCarFitEntity carFitEntity, StringBuilder attBuilder) {
+        Map<String, Set<String>> fitAttributeMap = carFitEntity.getFitAttMap();
+        fitAttributeMap = new ExportAttributeFilter().filterFitAttributes(fitAttributeMap);
+        appendAttributeMap(fitAttributeMap, attBuilder, carFitEntity.getCarLine());
+    }
+
+    private void addCarAttributes(ExportCarFitEntity carFitEntity, StringBuilder attBuilder) {
+        Map<String, Set<String>> carAttributesMap = carFitEntity.getCarAttMap();
+        carAttributesMap = new ExportAttributeFilter().filterCarAttributes(carAttributesMap);
+        appendAttributeMap(carAttributesMap, attBuilder, carFitEntity.getCarLine());
+    }
+
+    private void appendAttributeMap(Map<String, Set<String>> attributesMap, StringBuilder attBuilder, String carLine) {
+        //k = name of attribute, v = list of attribute values
+        attributesMap.forEach((k,v)->{
+           appendCounters(v, attBuilder, carLine, k);
+        });
+    }
+
+    private void appendCounters(Set<String> attValues, StringBuilder attBuilder, String carLine, String attName) {
+        int counter = 1;
+        for (String attValue : attValues) {
+            attBuilder.append(carLine).append(" ");
+            attBuilder.append(attName).append(ATT_DIVIDER);
+            attBuilder.append(attValue).append(ATT_DIVIDER);
+            attBuilder.append(counter++).append(ATT_DIVIDER);
+            attBuilder.append(0).append(GEN_DIVIDER);
+        }
+    }
+
+    private Map<String, List<ExportFitEntity>> groupFitEntitiesByLift(List<ExportFitEntity> entities) {
+        Map<String, List<ExportFitEntity>> result = new HashMap<>();
+        entities.forEach(entity->{
+            String liftString = entity.getLiftStart()+entity.getLiftFinish();
+            List<ExportFitEntity> curEntities = result.computeIfAbsent(liftString, k -> new ArrayList<>());
+            curEntities.add(entity);
+        });
+
+        return result;
+    }
+
+    private String getItemPart(String itemAttributes) {
+        String result = "";
         String tempCarLine = "Carline"; //this needed because att building is common procedure including carLine
         String itemAttsLine = getAttributeLine(itemAttributes, tempCarLine);
         itemAttsLine = itemAttsLine.replaceAll(tempCarLine + " ", "");
-        attBuilder.append(itemAttsLine).append(GEN_DIVIDER);
-        Map<String, List<ExportFitEntity>> groupedFitEntities = groupFitEntities(fitEntities); //k = carLine, v = fitEntities
-        groupedFitEntities.forEach((k,v)->{
-        new DuplicateAttributeRemover(v, GEN_DIVIDER).removeAttributeDuplicates();//car and fit
-        });
+        result = itemAttsLine +GEN_DIVIDER;
 
-        fitEntities.forEach(fitEntity->{
-            String carLine = getCarLine(fitEntity);
-            setCarPart(attBuilder, fitEntity, carLine);
-            setFitPart(attBuilder, fitEntity, carLine);
-            attBuilder.append(fitEntity.getCarYearAttributes()).append(GEN_DIVIDER);
-            attBuilder.append(fitEntity.getCarLiftAttributes());
-            attBuilder.append(GEN_DIVIDER);
-        });
-        String allAttributes = attBuilder.toString();
-        csvEntity.setAllAttributes(allAttributes);
+        return result;
     }
 
     private Map<String, List<ExportFitEntity>> groupFitEntities(List<ExportFitEntity> fitEntities) {
@@ -104,33 +161,94 @@ class ExportEntityToCSVConverter {
         if (attributeLine==null||attributeLine.length()==0){
             return "";
         }
-        String[] split = attributeLine.split(GEN_DIVIDER);
-        int counter = 1;
+        Map<String, Set<String>> itemAttributes = groupItemAttributes(attributeLine);
         StringBuilder attBuilder = new StringBuilder();
-        for (String attPair: split){
-            attBuilder.append(carLine).append(" ");
-            attBuilder.append(attPair).append(ATT_DIVIDER);
-            attBuilder.append(counter++).append(ATT_DIVIDER);
-            attBuilder.append("0").append(GEN_DIVIDER);
-        }
+        appendAttributeMap(itemAttributes, attBuilder, carLine);
         String desc = attBuilder.toString();
         desc = StringUtils.substringBeforeLast(desc, GEN_DIVIDER);
 
         return desc;
     }
 
-    private void setLongDescription(List<ExportFitEntity> fitEntities, ExportCSVEntity csvEntity, String itemAttributes) {
+    private Map<String, Set<String>> groupItemAttributes(String attributeLine) {
+        Map<String, Set<String>> result = new HashMap<>();
+        String[] genSplit = attributeLine.split(GEN_DIVIDER);
+        for (String s: genSplit){
+            String[] attSplit = s.split(ATT_DIVIDER);
+            if (new ExportAttributeFilter().itemValueIsValid(attSplit[0], attSplit[1])){
+                Set<String> curAtts = result.computeIfAbsent(attSplit[0], k -> new HashSet<>());
+                curAtts.add(attSplit[1]);
+            }
+
+        }
+
+        return result;
+    }
+
+    private void setLongDescription(List<ExportFitEntity> fitEntities, ExportCSVEntity csvEntity,
+                                                                  String itemAttributes) {
+        Map<String, List<ExportFitEntity>> result = groupFitEntities(fitEntities);
         StringBuilder descBuilder = new StringBuilder();
-        fitEntities.forEach(fitEntity->{
-            String carLine = getCarLine(fitEntity);
-            descBuilder.append(carLine).append(GEN_DIVIDER);
-            descBuilder.append(fitEntity.getAllCarAttributes()).append(GEN_DIVIDER);
-            descBuilder.append(fitEntity.getAllOtherFitAttributes()).append(GEN_DIVIDER);
+        ExportAttributeFilter filter = new ExportAttributeFilter();
+        //k = carLine, v = list of grouped Entities
+        result.forEach((k,v)->{
+            Map<String, List<ExportFitEntity>> liftMap = groupFitEntitiesByLift(v); //k = lift, v = entities for lift
+            liftMap.forEach((k1,v1)-> {
+                ExportCarFitEntity carFitEntity = new AttributeGrouper(v1, GEN_DIVIDER, ATT_DIVIDER).getGroupedAttributes();//car and fit
+                descBuilder.append(carFitEntity.getCarLine()).append(GEN_DIVIDER);
+                appendCarAttributes(carFitEntity.getCarAttMap(), descBuilder, filter);
+                appendFitAttributes(carFitEntity.getFitAttMap(), descBuilder, filter);
+                /*fitEntities.forEach(fitEntity -> {
+                    String carLine = getCarLine(fitEntity);
+                    descBuilder.append(carLine).append(GEN_DIVIDER);
+                    descBuilder.append(fitEntity.getAllCarAttributes()).append(GEN_DIVIDER);
+                    descBuilder.append(fitEntity.getAllOtherFitAttributes()).append(GEN_DIVIDER);
+                });*/
+                String desc = descBuilder.toString();
+                desc = StringUtils.substringBeforeLast(desc, GEN_DIVIDER);
+                desc = itemAttributes + GEN_DIVIDER + desc;
+                csvEntity.setLongDesc(desc);
+            });
         });
-        String desc = descBuilder.toString();
-        desc = StringUtils.substringBeforeLast(desc, GEN_DIVIDER);
-        desc = itemAttributes + GEN_DIVIDER + desc;
-        csvEntity.setLongDesc(desc);
+    }
+
+    private Map<String, Set<String>> appendFitAttributes(Map<String, Set<String>> fitAttMap, StringBuilder descBuilder,
+                                                         ExportAttributeFilter filter) {
+        Map<String, Set<String>> result = new HashMap<>();
+        //k = attribute name, v = list of attribute values
+        fitAttMap.forEach((k,v)->{
+            v.forEach(value->{
+                descBuilder.append(k).append(ATT_DIVIDER).append(value);
+              /*  if (filter.fitValueIsValid(value)){
+                    Set<String> curValues = result.computeIfAbsent(k, k1 -> new HashSet<>());
+                    curValues.add(value);
+                }*/
+                descBuilder.append("{}");
+            });
+        });
+        descBuilder.append(GEN_DIVIDER);
+
+        return result;
+    }
+
+
+    private Map<String, Set<String>> appendCarAttributes(Map<String, Set<String>> carAttMap, StringBuilder descBuilder,
+                                                         ExportAttributeFilter filter) {
+        Map<String, Set<String>> result = new HashMap<>();
+        //k = attribute name, v = list of attribute values
+        carAttMap.forEach((k,v)->{
+            v.forEach(value->{
+                descBuilder.append(k).append(ATT_DIVIDER).append(value);
+               /* if (filter.carValueIsValid(value)){
+                    Set<String> curValues = result.computeIfAbsent(k, k1 -> new HashSet<>());
+                    curValues.add(value);
+                }*/
+                descBuilder.append("{}");
+            });
+        });
+        descBuilder.append(GEN_DIVIDER);
+
+        return result;
     }
 
     private void setMixedCategories(List<ExportFitEntity> fitEntities, ExportCSVEntity csvEntity) {

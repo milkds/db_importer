@@ -192,6 +192,35 @@ public class ItemDAO {
         return result;
     }
 
+    public static List<ItemAttribute> getAllItemAttributesValueContaining(Session session, String attValue) {
+        List<ItemAttribute> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ItemAttribute> crQ = builder.createQuery(ItemAttribute.class);
+        Root<ItemAttribute> root = crQ.from(ItemAttribute.class);
+        crQ.where(builder.like(root.get("itemAttValue"),"%" + attValue + "%"));
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public static void updateItemAttributes(Session session, List<ItemAttribute> attributes) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+         attributes.forEach(session::update);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+
+
+    }
+
     /*public static void saveItems(Set<ProductionItem> newItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         int counter = 0;

@@ -4,6 +4,7 @@ import importer.dao.CarDAO;
 import importer.entities.*;
 import importer.export.ExportController;
 import importer.service.CarService;
+import importer.service.DbService;
 import importer.service.ItemService;
 import importer.suppliers.bilstein.BilConverter;
 import importer.suppliers.bilstein.BilHibernateUtil;
@@ -34,9 +35,10 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class.getName());
 
     public static void main(String[] args) throws IOException {
-        //new ExportController().exportToExcel("Bilstein");
-        new ExportController().exportToCSV("Bilstein");
+      //  new ExportController().exportToExcel("Skyjacker");
+     //   new ExportController().exportToCSV("Bilstein");
       //  new ExportController().testCSVexport();
+        new DbService().updateItemAttributes();
 
     }
 

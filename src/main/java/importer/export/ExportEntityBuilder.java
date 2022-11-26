@@ -15,7 +15,9 @@ import java.util.*;
 public class ExportEntityBuilder {
     private static final Logger logger = LogManager.getLogger(ExportEntityBuilder.class.getName());
     private String GEN_DIVIDER;
+    private static final String GEN_DIVIDER_SUBSTITUTE = "| ";
     private String ATT_DIVIDER;
+    private static final String ATT_DIVIDER_SUBSTITUTE = "{ ";
     private List<ProductionItem> items;
     private Map<Integer, List<ItemAttribute>> itemAttMap; //k = item ID, v = List of attributes for this item
     private Map<Integer, List<FitmentAttribute>> fitAttMap; //k = fit ID, v = List of attributes for this fitment
@@ -38,7 +40,7 @@ public class ExportEntityBuilder {
         processItemPics(item, result);
         setCarCategories(item, result);
         processFits(item, result);
-     //   new DuplicateAttributeRemover(result, GEN_DIVIDER).removeAttributeDuplicates();//car
+     //   new AttributeGrouper(result, GEN_DIVIDER).removeAttributeDuplicates();//car
 
         return result;
     }
@@ -156,8 +158,8 @@ public class ExportEntityBuilder {
         StringBuilder carAttBuilder = new StringBuilder();
         attributes.forEach(carAttribute -> {
             carAttBuilder.append(carAttribute.getCarAttName());
-            carAttBuilder.append(": ");
-            carAttBuilder.append(carAttribute.getCarAttValue());
+            carAttBuilder.append(ATT_DIVIDER);
+            carAttBuilder.append(carAttribute.getCarAttValue().replaceAll(GEN_DIVIDER, GEN_DIVIDER_SUBSTITUTE).replaceAll(ATT_DIVIDER, ATT_DIVIDER_SUBSTITUTE));
             carAttBuilder.append(GEN_DIVIDER);
         });
         String allCarAtts = carAttBuilder.toString();
@@ -179,7 +181,7 @@ public class ExportEntityBuilder {
                 default: {
                     fitAttBuilder.append(attName);
                     fitAttBuilder.append(": ");
-                    fitAttBuilder.append(attValue);
+                    fitAttBuilder.append(attValue.replaceAll(GEN_DIVIDER, GEN_DIVIDER_SUBSTITUTE).replaceAll(ATT_DIVIDER, ATT_DIVIDER_SUBSTITUTE));
                     fitAttBuilder.append(GEN_DIVIDER);
                     break;
                 }
@@ -257,6 +259,7 @@ public class ExportEntityBuilder {
         itemAttributes.forEach(attribute -> {
             String name = attribute.getItemAttName();
             String value = attribute.getItemAttValue();
+            value = value.replaceAll(GEN_DIVIDER, GEN_DIVIDER_SUBSTITUTE).replaceAll(ATT_DIVIDER, ATT_DIVIDER_SUBSTITUTE);
             switch (name){
                 case "Upper Mount": entity.setUpperMount(value);  break;
                 case "Lower Mount": entity.setLowerMount(value); break;
