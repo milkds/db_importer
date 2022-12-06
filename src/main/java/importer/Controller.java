@@ -36,9 +36,9 @@ public class Controller {
 
     public static void main(String[] args) throws IOException {
       //  new ExportController().exportToExcel("Skyjacker");
-     //   new ExportController().exportToCSV("Bilstein");
+        new ExportController().exportToCSV("Fox Racing Shox - Truck & Offroad");
       //  new ExportController().testCSVexport();
-        new DbService().updateItemAttributes();
+      //  new DbService().updateItemAttributes();
 
     }
 

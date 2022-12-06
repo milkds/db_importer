@@ -2,7 +2,7 @@ package importer.export;
 
 public class ExportFitEntity {
 
-    private String position;
+    private String position = "N/A";
     private String liftStart;
     private String liftFinish;
     private String allOtherFitAttributes;

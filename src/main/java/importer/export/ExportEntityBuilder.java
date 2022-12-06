@@ -15,9 +15,9 @@ import java.util.*;
 public class ExportEntityBuilder {
     private static final Logger logger = LogManager.getLogger(ExportEntityBuilder.class.getName());
     private String GEN_DIVIDER;
-    private static final String GEN_DIVIDER_SUBSTITUTE = "| ";
+    private static final String GEN_DIVIDER_SUBSTITUTE = "-_ ";
     private String ATT_DIVIDER;
-    private static final String ATT_DIVIDER_SUBSTITUTE = "{ ";
+    private static final String ATT_DIVIDER_SUBSTITUTE = "_- ";
     private List<ProductionItem> items;
     private Map<Integer, List<ItemAttribute>> itemAttMap; //k = item ID, v = List of attributes for this item
     private Map<Integer, List<FitmentAttribute>> fitAttMap; //k = fit ID, v = List of attributes for this fitment
@@ -66,9 +66,25 @@ public class ExportEntityBuilder {
         if (liftStart==null||liftStart.length()==0){
             fitEntity.setLiftStart(0+"");
         }
+        else {
+            try {
+                double st = Double.parseDouble(liftStart);
+            }
+            catch (NumberFormatException e){
+                fitEntity.setLiftStart(0+"");
+            }
+        }
         String liftFinish = fitEntity.getLiftFinish();
         if (liftFinish==null||liftFinish.length()==0){
             fitEntity.setLiftFinish(0+"");
+        }
+        else {
+            try {
+                double fn = Double.parseDouble(liftFinish);
+            }
+            catch (NumberFormatException e){
+                fitEntity.setLiftFinish(0+"");
+            }
         }
     }
 
@@ -169,6 +185,11 @@ public class ExportEntityBuilder {
 
     private void processFitmentAttributes(ProductionFitment fit, ExportFitEntity fitEntity) {
         List<FitmentAttribute> fitmentAttributes = fitAttMap.get(fit.getFitmentID());
+        if (fitmentAttributes==null){
+            fitmentAttributes = new ArrayList<>();
+            fitmentAttributes.add(new FitmentAttribute("Lift Start", "0"));
+            fitmentAttributes.add(new FitmentAttribute("Lift Finish", "0"));
+        }
         StringBuilder fitAttBuilder = new StringBuilder();
         fitmentAttributes.forEach(fitmentAttribute -> {
             String attName = fitmentAttribute.getFitmentAttName();
@@ -244,8 +265,11 @@ public class ExportEntityBuilder {
         }
         StringBuilder itemPicBuilder = new StringBuilder();
         fNames.forEach(fName->{
-            itemPicBuilder.append(fName);
-            itemPicBuilder.append(GEN_DIVIDER);
+            itemPicBuilder.append("http://presta1784/img/").
+                    append(item.getItemManufacturer().toLowerCase()).
+                    append("/").
+                    append(fName).
+                    append(GEN_DIVIDER);
         });
         String allItemPics = itemPicBuilder.toString();
         allItemPics = StringUtils.substringBeforeLast(allItemPics, GEN_DIVIDER);
@@ -268,7 +292,7 @@ public class ExportEntityBuilder {
                 default:{
                     itemAttFieldBuilder.append(name);
                     itemAttFieldBuilder.append(": ");
-                    itemAttFieldBuilder.append(value);
+                    itemAttFieldBuilder.append(processWrongSymbols(value));
                     itemAttFieldBuilder.append(GEN_DIVIDER);
                     break;
                 }
@@ -281,8 +305,23 @@ public class ExportEntityBuilder {
         entity.setItemAttributes(allItemAttributes);
     }
 
+    private String processWrongSymbols(String value) {
+        String result = value.replaceAll(System.lineSeparator(), " ");
+         result = result.replaceAll("®", "");
+         result = result.replaceAll("™", "");
+         result = result.replaceAll("\t", "");
+         result = result.replaceAll("\n", "");
+         result = result.replaceAll("\r", "");
+         result = result.replaceAll("!", " ");
+
+        return result;
+    }
+
     private List<ItemAttribute> fixNullFieldsForItemAtts(List<ItemAttribute> itemAttributes) {
         List<ItemAttribute> result = new ArrayList<>();
+        if (itemAttributes==null){
+            return result;
+        }
         itemAttributes.forEach(attribute -> {
             String value = attribute.getItemAttValue();
             if (value!=null&&value.length()>0){
@@ -350,13 +389,14 @@ public class ExportEntityBuilder {
     }
 
     //0 - itemID; 1 - fileName String
-    void setItemPicMap(List<Object[]> picIds) {
+    void setItemPicMap(List<Object[]> picIds, String brand) {
         itemPicMap = new HashMap<>();
         picIds.forEach(pair->{
             String name = (String)pair[1];
             if (name==null||name.length()==0){
                 return;
             }
+            //name = "http://presta1784/img/" + brand.toLowerCase()+"/" + name;
             Integer itemID = (Integer)pair[0];
             List<String> fNames = itemPicMap.computeIfAbsent(itemID, k -> new ArrayList<>());
             fNames.add(name);

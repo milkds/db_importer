@@ -12,6 +12,9 @@ class ExportAttributeFilter {
     private Set<String> wrongFitStarterValues;
     private Set<String> wrongFitFullValues;
     private Set<String> wrongItemFullNames;
+    private Set<String> wrongItemContainNames;
+
+
     boolean carValueIsValid(String value) {
         if (wrongCarFullValues.contains(value)){
             return false;
@@ -23,14 +26,22 @@ class ExportAttributeFilter {
 
     ExportAttributeFilter() {
         initiateItemFullNames();
+        initiateItemContainNames();
         initiateCarFullValues();
         initiateFitStartValues();
         initiateFitFullValues();
     }
 
+    private void initiateItemContainNames() {
+        wrongItemContainNames = new HashSet<>();
+        wrongItemContainNames.add("Description");
+    }
+
     private void initiateItemFullNames() {
         wrongItemFullNames = new HashSet<>();
         wrongItemFullNames.add("Description");
+        wrongItemFullNames.add("Instructions");
+        wrongItemFullNames.add("Brochure");
     }
 
     private void initiateFitFullValues() {
@@ -88,8 +99,20 @@ class ExportAttributeFilter {
         if (wrongItemFullNames.contains(name)){
             return false;
         }
+        if (nameHasWrongKeywords(name)){
+            return false;
+        }
 
 
         return true;
+    }
+
+    private boolean nameHasWrongKeywords(String name) {
+        for (String keyword : wrongItemContainNames) {
+            if (name.contains(keyword)) {
+              return true;
+            }
+        }
+        return false;
     }
 }

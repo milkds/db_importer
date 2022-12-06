@@ -29,7 +29,7 @@ class CSVExporter {
     private List<String[]> generateData(List<ExportCSVEntity> csvExportList) {
         List<String[]> result = new ArrayList<>();
         csvExportList.forEach(csvEntity->{
-            String[] dataSet = new String[14];
+            String[] dataSet = new String[15];
             ExportEntity exportEntity = csvEntity.getExportEntity();
             dataSet[0] = csvEntity.getId();
             dataSet[1] = exportEntity.getPartNo();
@@ -45,6 +45,7 @@ class CSVExporter {
             dataSet[11] = csvEntity.getShortDesc();
             dataSet[12] = csvEntity.getLongDesc();
             dataSet[13] = csvEntity.getAllAttributes();
+            dataSet[14] = exportEntity.getItemPics();
 
             result.add(dataSet);
         });

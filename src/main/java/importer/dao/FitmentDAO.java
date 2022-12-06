@@ -122,7 +122,7 @@ public class FitmentDAO {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<FitmentAttributeLink> crQ = builder.createQuery(FitmentAttributeLink.class);
         Root<FitmentAttributeLink> root = crQ.from(FitmentAttributeLink.class);
-        crQ.where(root.get("fitID").in(fitIDs));
+      //  crQ.where(root.get("fitID").in(fitIDs));
         Query q = session.createQuery(crQ);
         result = q.getResultList();
 

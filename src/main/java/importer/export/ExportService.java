@@ -28,7 +28,7 @@ class ExportService {
 
     List<ExportEntity> getExportEntities(String brand) {
         List<ProductionItem> items = getItems(brand);
-        ExportEntityBuilder builder = initExportEntityBuilder(items);
+        ExportEntityBuilder builder = initExportEntityBuilder(items, brand);
         List<ExportEntity> result = new ArrayList<>();
         Instant start = Instant.now();
         items.forEach(item -> {
@@ -40,7 +40,7 @@ class ExportService {
         return result;
     }
 
-    private ExportEntityBuilder initExportEntityBuilder(List<ProductionItem> items) {
+    private ExportEntityBuilder initExportEntityBuilder(List<ProductionItem> items, String brand) {
         Instant start = Instant.now();
         ExportEntityBuilder result = new ExportEntityBuilder();
         setDividers(result);
@@ -48,7 +48,7 @@ class ExportService {
         List<ItemAttribute> itemAttributes = getItemAttributes();
         List<ItemAttributeLink> itemAttributeLinks = getItemAttributeLinks();
         result.initItemAttMap(itemAttributes, itemAttributeLinks);
-        initItemPics(result);
+        initItemPics(result, brand);
         initFits(result, items);
         initCars(result);
 
@@ -159,10 +159,10 @@ class ExportService {
         return result;
     }
 
-    private void initItemPics(ExportEntityBuilder result) {
+    private void initItemPics(ExportEntityBuilder result, String brand) {
         Instant start = Instant.now();
         List<Object[]> picIds = ItemDAO.getItempicItemIDsArray(session); //0 - itemID; 1 - fileName String
-        result.setItemPicMap(picIds);
+        result.setItemPicMap(picIds, brand);
         Instant end = Instant.now();
         logger.info(Duration.between(start, end));
         logger.info("total itempics quantity is " + picIds.size());

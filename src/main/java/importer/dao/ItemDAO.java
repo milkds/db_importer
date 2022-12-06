@@ -60,7 +60,8 @@ public class ItemDAO {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<ProductionItem> crQ = builder.createQuery(ProductionItem.class);
         Root<ProductionItem> root = crQ.from(ProductionItem.class);
-        crQ.where(builder.equal(root.get("itemManufacturer"), itemMake));
+        //crQ.where(builder.equal(root.get("itemManufacturer"), itemMake));
+        crQ.where(builder.notEqual(root.get("itemManufacturer"), itemMake));
         Query q = session.createQuery(crQ);
         allItemList = q.getResultList();
 
@@ -186,7 +187,7 @@ public class ItemDAO {
     }
 
     public static List<Object[]> getItempicItemIDsArray(Session session) {
-        Query q = session.createNativeQuery("SELECT PIC_ID, FILE_NAME  FROM production_db.item_pics");
+        Query q = session.createNativeQuery("SELECT ITEM_ID, FILE_NAME  FROM production_db.item_pics");
         List<Object[]> result= (List<Object[]>)q.getResultList();
 
         return result;

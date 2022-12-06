@@ -39,7 +39,7 @@ class ExportEntityToCSVConverter {
             setMixedCategories(fitEntities, csvEntity); //mixed categories = short desc
             //we group by carLine
             setLongDescription(fitEntities, csvEntity, entity.getItemAttributes());
-            setAllAttributes(fitEntities, csvEntity, entity.getItemAttributes());
+            setAllAttributes(fitEntities, csvEntity, entity);
             csvEntity.setExportEntity(entity);
             result.add(csvEntity);
         });
@@ -49,8 +49,8 @@ class ExportEntityToCSVConverter {
         return result;
     }
 
-    private void setAllAttributes(List<ExportFitEntity> fitEntities, ExportCSVEntity csvEntity, String itemAttributes) {
-        String itemPart = getItemPart(itemAttributes); //returns itemPart with Gen Divider at the end
+    private void setAllAttributes(List<ExportFitEntity> fitEntities, ExportCSVEntity csvEntity, ExportEntity expEntity) {
+        String itemPart = getItemPart(expEntity); //returns itemPart with Gen Divider at the end
         StringBuilder attBuilder = new StringBuilder(itemPart);
 
         //we group by carLine and then by LiftLine
@@ -60,7 +60,7 @@ class ExportEntityToCSVConverter {
             liftMap.forEach((k1,v1)->{
                ExportCarFitEntity carFitEntity = new AttributeGrouper(v1, GEN_DIVIDER, ATT_DIVIDER).getGroupedAttributes();//car and fit
                 addCarAttributes(carFitEntity, attBuilder);
-                addFitAttributes(carFitEntity, attBuilder);
+                 addFitAttributes(carFitEntity, attBuilder);
                 addFixedAttributes(carFitEntity, attBuilder, carFitEntity.getCarLine());
             });
         });
@@ -100,6 +100,9 @@ class ExportEntityToCSVConverter {
     private void appendCounters(Set<String> attValues, StringBuilder attBuilder, String carLine, String attName) {
         int counter = 1;
         for (String attValue : attValues) {
+            if (attValue.length()>60){
+                continue;
+            }
             attBuilder.append(carLine).append(" ");
             attBuilder.append(attName).append(ATT_DIVIDER);
             attBuilder.append(attValue).append(ATT_DIVIDER);
@@ -119,12 +122,31 @@ class ExportEntityToCSVConverter {
         return result;
     }
 
-    private String getItemPart(String itemAttributes) {
+    private String getItemPart(ExportEntity entity) {
         String result = "";
         String tempCarLine = "Carline"; //this needed because att building is common procedure including carLine
-        String itemAttsLine = getAttributeLine(itemAttributes, tempCarLine);
+       String itemAttsLine = getAttributeLine(entity.getItemAttributes(), tempCarLine);
+      //  String itemAttsLine = setSelectedItemAttributes(entity, tempCarLine);
         itemAttsLine = itemAttsLine.replaceAll(tempCarLine + " ", "");
         result = itemAttsLine +GEN_DIVIDER;
+
+        return result;
+    }
+
+    private String setSelectedItemAttributes(ExportEntity entity, String tempCarLine) {
+        StringBuilder attBuilder = new StringBuilder();
+        attBuilder.append("Extended Length").append(ATT_DIVIDER);
+        attBuilder.append(entity.getExtendedLength()).append(GEN_DIVIDER);
+        attBuilder.append("Collapsed Length").append(ATT_DIVIDER);
+        attBuilder.append(entity.getCollapsedLength()).append(GEN_DIVIDER);
+        attBuilder.append("Upper Mount").append(ATT_DIVIDER);
+        attBuilder.append(entity.getUpperMount()).append(GEN_DIVIDER);
+        attBuilder.append("Lower Mount").append(ATT_DIVIDER);
+        attBuilder.append(entity.getLowerMount());
+        String attLine = attBuilder.toString();
+        String result = getAttributeLine(attLine, tempCarLine);
+        result = result.replaceAll(tempCarLine + " ", "");
+        result = result +GEN_DIVIDER;
 
         return result;
     }
@@ -170,6 +192,13 @@ class ExportEntityToCSVConverter {
         return desc;
     }
 
+    private Map<String, Set<String>> getBasicItemAttributes(String attributeLine) {
+        Map<String, Set<String>> result = new HashMap<>();
+
+
+        return result;
+    }
+
     private Map<String, Set<String>> groupItemAttributes(String attributeLine) {
         Map<String, Set<String>> result = new HashMap<>();
         String[] genSplit = attributeLine.split(GEN_DIVIDER);
@@ -179,7 +208,6 @@ class ExportEntityToCSVConverter {
                 Set<String> curAtts = result.computeIfAbsent(attSplit[0], k -> new HashSet<>());
                 curAtts.add(attSplit[1]);
             }
-
         }
 
         return result;
@@ -223,7 +251,7 @@ class ExportEntityToCSVConverter {
                     Set<String> curValues = result.computeIfAbsent(k, k1 -> new HashSet<>());
                     curValues.add(value);
                 }*/
-                descBuilder.append("{}");
+                descBuilder.append("__");
             });
         });
         descBuilder.append(GEN_DIVIDER);
@@ -243,7 +271,7 @@ class ExportEntityToCSVConverter {
                     Set<String> curValues = result.computeIfAbsent(k, k1 -> new HashSet<>());
                     curValues.add(value);
                 }*/
-                descBuilder.append("{}");
+                descBuilder.append("__");
             });
         });
         descBuilder.append(GEN_DIVIDER);
@@ -270,9 +298,24 @@ class ExportEntityToCSVConverter {
             carBuilder.append(GEN_DIVIDER);
         });
         String shortDesc = carBuilder.toString();
+        shortDesc = removeShortDescDuplicates(shortDesc);
         shortDesc = StringUtils.substringBeforeLast(shortDesc, GEN_DIVIDER);
         shortDesc = csvEntity.getTitle() + " " + shortDesc;
         csvEntity.setShortDesc(shortDesc);
+    }
+
+    private String removeShortDescDuplicates(String shortDesc) {
+        String result = "";
+        String[] split = shortDesc.split(GEN_DIVIDER);
+        Set<String> tempSet = new HashSet<>(Arrays.asList(split));
+        Set<String> sortedSet = new TreeSet<>(tempSet);
+        StringBuilder sb = new StringBuilder();
+        sortedSet.forEach(line->{
+            sb.append(line).append(GEN_DIVIDER);
+        });
+        result = sb.toString();
+
+        return result;
     }
 
     private String getCarLine(ExportFitEntity fitEntity) {
