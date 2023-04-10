@@ -152,8 +152,8 @@ public class FoxSupplier {
                 prodAtts.add(new ItemAttribute(parName, parVal));
             }
         });
-        prodItem.setParams(params);
-        params.setItem(prodItem);
+      /*  prodItem.setParams(params);
+        params.setItem(prodItem);*/
     }
 
     private Map<String, String> getMountMap() {

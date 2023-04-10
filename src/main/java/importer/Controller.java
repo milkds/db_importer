@@ -24,6 +24,7 @@ import importer.suppliers.skyjacker.SkyConverter;
 import importer.suppliers.skyjacker.SkyDAO;
 import importer.suppliers.skyjacker.SkyHibernateUtil;
 import importer.suppliers.skyjacker.sky_entities.SkyShock;
+import importer.suppliers.summit.SumController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -36,10 +37,11 @@ public class Controller {
 
     public static void main(String[] args) throws IOException {
       //  new ExportController().exportToExcel("Skyjacker");
-        new ExportController().exportToCSV("Fox Racing Shox - Truck & Offroad");
+      //  new ExportController().exportToCSV("Fox Racing Shox - Truck & Offroad");
       //  new ExportController().testCSVexport();
-      //  new DbService().updateItemAttributes();
-
+        //new DbService().updateItemAttributes();
+       // new DbService().removeDuplicates();
+        new SumController().saveSummitToDB();
     }
 
     private static void controllerStash(){
@@ -191,7 +193,7 @@ public class Controller {
         allItemsForMake = ItemService.getAllItemsByMake(make, session);
         List<String> allKeyItemLinks = Utils.readImportFile();
         Set<String> linksToRemove = new HashSet<>();
-        allItemsForMake.forEach(prodItem->{
+       /* allItemsForMake.forEach(prodItem->{
             ShockParameters params = prodItem.getParams();
             if (Utils.paramsFilled(params)){
                 String partNo = prodItem.getItemPartNo();
@@ -202,7 +204,7 @@ public class Controller {
                     }
                 });
             }
-        });
+        });*/
         allKeyItemLinks.removeAll(linksToRemove);
         allKeyItemLinks.forEach(System.out::println);
         session.close();

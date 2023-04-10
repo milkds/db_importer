@@ -3,6 +3,7 @@ package importer.suppliers.summit;
 import importer.Controller;
 import importer.HibernateUtil;
 import importer.Utils;
+import importer.entities.ImportService;
 import importer.entities.ProductionItem;
 import importer.service.ItemService;
 import importer.suppliers.summit.entities.SumFitAttribute;
@@ -30,11 +31,15 @@ public class SumController {
     private static final Logger logger = LogManager.getLogger(SumController.class.getName());
 
     public void saveSummitToDB(){
+        Instant start = Instant.now();
         Session sumSession = SumHibernateUtil.getSessionFactory().openSession();
         Set<SumItem> sumItems = new SumService().getAllItems(sumSession);
         Map<Integer, List<SumFitAttribute>> allSumFitAtts = new SumService().getAllFitAttributes(sumSession);
         Set<ProductionItem> prodItems = buildProdItems(sumItems, allSumFitAtts);
-        new ItemService().saveItems(prodItems);
+      //  new ItemService().saveItems(prodItems);
+        Instant finish = Instant.now();
+        logger.info("Built all items in " + Duration.between(start,finish));
+        new ImportService().saveItems(prodItems);
 
         sumSession.close();
         SumHibernateUtil.shutdown();
@@ -66,6 +71,9 @@ public class SumController {
            //     logger.info("built item " + counter + " of total " + total);
             }
             counter++;
+           /* if (counter==3){
+                break;
+            }*/
         }
 
 

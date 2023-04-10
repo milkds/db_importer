@@ -26,7 +26,7 @@ public class EibToProdConverter {
         setManufacturer(prodItem);
         setItemType(prodItem);
         setItemPics(prodItem);
-        setShockParams(prodItem);
+        //setShockParams(prodItem);
         setItemAttributes(prodItem);
         setFitments(prodItem, bilMakeModelMap);
 
@@ -200,8 +200,8 @@ public class EibToProdConverter {
     private void setShockParams(ProductionItem prodItem) {
         //we have no info for params, need to make blank item
         ShockParameters params = new ShockParameters();
-        prodItem.setParams(params);
-        params.setItem(prodItem);
+      //  prodItem.setParams(params);
+     //   params.setItem(prodItem);
 
     }
 

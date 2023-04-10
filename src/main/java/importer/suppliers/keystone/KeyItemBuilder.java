@@ -383,7 +383,7 @@ public class KeyItemBuilder {
 
     private void setCarAttributes(KeyCar keyCar, ProductionCar prodCar) {
         Set<KeyCarAttribute> keyAtts = keyCar.getAttributes();
-        Set<CarAttribute> prodAtts = new HashSet<>();
+        List<CarAttribute> prodAtts = new ArrayList<>();
         keyAtts.forEach(keyAtt->{
             CarAttribute prodAtt = new CarAttribute();
             prodAtt.setCarAttName("Car Attribute");
@@ -550,8 +550,8 @@ public class KeyItemBuilder {
                     break;
             }
         });
-        prodItem.setParams(params);
-        params.setItem(prodItem);
+       /* prodItem.setParams(params);
+        params.setItem(prodItem);*/
     }
 
     private String getItemType(KeyItem keyItem) {

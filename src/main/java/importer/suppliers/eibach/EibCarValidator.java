@@ -40,7 +40,7 @@ public class EibCarValidator {
         rawCars.forEach(car->{
             String model = car.getModel();
             if (model.equals("Veloster")){
-                Set <CarAttribute> atts = car.getAttributes();
+                List <CarAttribute> atts = car.getAttributes();
                 atts.forEach(att->{
                     String value = att.getCarAttValue();
                     if (value.contains("Turbo")){

@@ -130,6 +130,134 @@ public class FitmentDAO {
         return result;
     }
 
+    public static void deleteFitAttributes(Session session, List<FitmentAttribute> attributes) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            attributes.forEach(session::delete);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void updateFitLinks(Session session, List<FitmentAttributeLink> linksToUpdate) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            linksToUpdate.forEach(session::update);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void updateFitAtts(Session session, Set<FitmentAttribute> updAtts) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            updAtts.forEach(session::update);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveFitAtts(Session session, Set<FitmentAttribute> newAtts) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            newAtts.forEach(session::save);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveFits(Session session, Set<ProductionFitment> newFits) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            newFits.forEach(session::save);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void updateAttributes(Session session, List<FitmentAttribute> fitAttsToUpdate) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            fitAttsToUpdate.forEach(attribute -> {
+                //        logger.info(attribute);
+                session.update(attribute);
+            });
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveFitList(Session session, List<ProductionFitment> finalFits) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            finalFits.forEach(session::save);
+            logger.info("commiting....");
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveFitAttsList(Session session, List<FitmentAttribute> fitAttsToSave) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            fitAttsToSave.forEach(att->{
+                logger.info(att);
+                session.save(att);
+            });
+            logger.info("commiting transaction at fit att save....");
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
 
   /*  public static void prepareFitment(ProductionItem item, ProductionFitment fitment, Session session) {
         logger.debug("preparing attributes for " + fitment);

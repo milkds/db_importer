@@ -1,9 +1,7 @@
 package importer.entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "car_attributes")
@@ -24,13 +22,13 @@ public class CarAttribute {
     private String carAttValue;
 
     @ManyToMany(mappedBy = "attributes")
-    private Set<ProductionCar> ProductionCars = new HashSet<>();
+    private List<ProductionCar> ProductionCars = new ArrayList<>();
 
     @Override
     public String toString() {
         return "CarAttribute{" +
                 "carAttID=" + carAttID +
-                ", carExcelID=" + carExcelID +
+           /*     ", carExcelID=" + carExcelID +*/
                 ", carAttName='" + carAttName + '\'' +
                 ", carAttValue='" + carAttValue + '\'' +
                 '}';
@@ -76,11 +74,11 @@ public class CarAttribute {
         this.carAttValue = carAttValue;
     }
 
-    public Set<ProductionCar> getProductionCars() {
+    public List<ProductionCar> getProductionCars() {
         return ProductionCars;
     }
 
-    public void setProductionCars(Set<ProductionCar> productionCars) {
+    public void setProductionCars(List<ProductionCar> productionCars) {
         this.ProductionCars = productionCars;
     }
 

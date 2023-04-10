@@ -1,9 +1,7 @@
 package importer.entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "cars")
@@ -37,7 +35,7 @@ public class ProductionCar {
             joinColumns = { @JoinColumn(name = "CAR_ID") },
             inverseJoinColumns = { @JoinColumn(name = "CAR_ATT_ID") }
     )
-    private Set<CarAttribute> attributes = new HashSet<>();
+    private List<CarAttribute> attributes = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
     private Set<ProductionFitment> ProductionFitments = new HashSet<>();
@@ -111,11 +109,11 @@ public class ProductionCar {
         this.drive = drive;
     }
 
-    public Set<CarAttribute> getAttributes() {
+    public List<CarAttribute> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(Set<CarAttribute> attributes) {
+    public void setAttributes(List<CarAttribute> attributes) {
         this.attributes = attributes;
     }
 

@@ -71,8 +71,8 @@ public class SumItemBuilder {
 
     private void setParams() {
         ShockParameters params = new ShockParameters();
-        result.setParams(params);
-        params.setItem(result);
+        /*result.setParams(params);
+        params.setItem(result);*/
     }
 
     private void setItemAttributes() {
@@ -110,22 +110,22 @@ public class SumItemBuilder {
 
     private ItemAttribute processItemAtt(String attValue, String mapV) {
         if (mapV.contains("Mount")){
-            if (mapV.contains("Upper")){
+            /*if (mapV.contains("Upper")){
                 result.getParams().setUpperMount(attValue);
             }
             else {
                 result.getParams().setLowerMount(attValue);
-            }
+            }*/
         }
         else {
             attValue = attValue.replace(" in.","");
             attValue = attValue.replace(" in","");
-            if (mapV.contains("Collapsed")){
+          /*  if (mapV.contains("Collapsed")){
                 result.getParams().setColLength(Double.parseDouble(attValue));
             }
             else {
                 result.getParams().setExtLength(Double.parseDouble(attValue));
-            }
+            }*/
         }
 
         return new ItemAttribute(mapV, attValue);

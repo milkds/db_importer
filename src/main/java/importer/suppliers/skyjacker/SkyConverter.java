@@ -524,14 +524,14 @@ public class SkyConverter {
         setItemType(shock, item);
         setItemAttributes(shock, item);
         setItemPics(shock, item);
-        setShockParams(shock, item);
+        //setShockParams(shock, item);
     }
 
     private void setShockParams(SkyShock shock, ProductionItem item) {
         Set<ItemAttribute> itemAttributes = item.getItemAttributes();
         ShockParameters params = new ShockParameters();
-        params.setItem(item);
-        item.setParams(params);
+      //  params.setItem(item);
+    //    item.setParams(params);
         Map<String, String> mountMap = getMountMap(); //k = mount name from sj site, v = mount name from prod. db.
         itemAttributes.forEach(itemAttribute -> {
             String attName = itemAttribute.getItemAttName();

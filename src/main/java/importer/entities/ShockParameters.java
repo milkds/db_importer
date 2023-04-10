@@ -23,10 +23,10 @@ public class ShockParameters {
     @Column(name = "LOWER_MOUNT")
     private String lowerMount;
 
-    @OneToOne
+    /*@OneToOne
     @JoinColumn(name = "ITEM_ID")
     private ProductionItem item;
-
+*/
 
     @Override
     public String toString() {
@@ -36,7 +36,7 @@ public class ShockParameters {
                 ", colLength=" + colLength +
                 ", upperMount='" + upperMount + '\'' +
                 ", lowerMount='" + lowerMount + '\'' +
-                ", item=" + item +
+           //     ", item=" + item +
                 '}';
     }
 
@@ -80,11 +80,11 @@ public class ShockParameters {
         this.lowerMount = lowerMount;
     }
 
-    public ProductionItem getItem() {
+  /*  public ProductionItem getItem() {
         return item;
     }
 
     public void setItem(ProductionItem item) {
         this.item = item;
-    }
+    }*/
 }

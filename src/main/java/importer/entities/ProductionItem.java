@@ -35,8 +35,8 @@ public class ProductionItem {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Set<ItemPic> pics = new HashSet<>();
 
-    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
-    private ShockParameters params;
+   /* @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
+    private ShockParameters params;*/
 
 
     @Override
@@ -97,13 +97,13 @@ public class ProductionItem {
         this.productionFitments = productionFitments;
     }
 
-    public ShockParameters getParams() {
+   /* public ShockParameters getParams() {
         return params;
     }
 
     public void setParams(ShockParameters params) {
         this.params = params;
-    }
+    }*/
 
     public Set<ItemPic> getPics() {
         return pics;

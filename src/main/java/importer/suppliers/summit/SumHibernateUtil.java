@@ -30,7 +30,7 @@ public class SumHibernateUtil {
 
                 Map<String, String> settings = new HashMap<>();
                 settings.put("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-                settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/summit?useUnicode=true&" +
+                settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/summit2?useUnicode=true&" +
                         "useJDBCCompliantTimezoneShift=true&" +
                         "useLegacyDatetimeCode=false&" +
                         "serverTimezone=UTC&" +

@@ -114,8 +114,8 @@ public class CarDAO {
 
 
     private static void prepareCarAttributes(ProductionCar car, Session session) {
-        Set<CarAttribute> attributes = car.getAttributes();
-        Set<CarAttribute> checkedAttributes = new HashSet<>();
+        List<CarAttribute> attributes = car.getAttributes();
+        List<CarAttribute> checkedAttributes = new ArrayList<>();
         attributes.forEach(attribute->{
             CarAttribute checkedAtt = checkAttribute(attribute, session);
             checkedAttributes.add(Objects.requireNonNullElse(checkedAtt, attribute));
@@ -282,5 +282,105 @@ public class CarDAO {
         result = q.getResultList();
 
         return result;
+    }
+
+    public static List<CarAttribute> getAllCarAttributes(Session session) {
+        List<CarAttribute> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CarAttribute> crQ = builder.createQuery(CarAttribute.class);
+        Root<CarAttribute> root = crQ.from(CarAttribute.class);
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public static List<CarAttributeLink> getAllCarAttributeLinks(Session session) {
+        List<CarAttributeLink> result = new ArrayList<>();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CarAttributeLink> crQ = builder.createQuery(CarAttributeLink.class);
+        Root<CarAttributeLink> root = crQ.from(CarAttributeLink.class);
+        Query q = session.createQuery(crQ);
+        result = q.getResultList();
+
+        return result;
+    }
+
+    public static void deleteCarAttributes(Session session, List<CarAttribute> attributes) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            attributes.forEach(session::delete);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void updateCarLinks(Session session, List<CarAttributeLink> linksToUpdate) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            linksToUpdate.forEach(session::update);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void updateAttributes(Session session, Set<CarAttribute> attsToUpdate) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            attsToUpdate.forEach(attribute -> {
+        //        logger.info(attribute);
+                session.update(attribute);
+            });
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveAttributes(Session session, Set<CarAttribute> attsToSave) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            attsToSave.forEach(session::save);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveCars(Session session, List<ProductionCar> carsToSave) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            carsToSave.forEach(session::save);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 }

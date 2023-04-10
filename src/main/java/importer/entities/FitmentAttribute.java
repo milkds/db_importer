@@ -1,9 +1,7 @@
 package importer.entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "fitment_attributes")
@@ -21,7 +19,7 @@ public class FitmentAttribute {
     private String fitmentAttValue;
 
     @ManyToMany(mappedBy = "fitmentAttributes")
-    private Set<ProductionFitment> ProductionFitments = new HashSet<>();
+    private List<ProductionFitment> ProductionFitments = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -56,11 +54,11 @@ public class FitmentAttribute {
         this.fitmentAttValue = fitmentAttValue;
     }
 
-    public Set<ProductionFitment> getProductionFitments() {
+    public List<ProductionFitment> getProductionFitments() {
         return ProductionFitments;
     }
 
-    public void setProductionFitments(Set<ProductionFitment> productionFitments) {
+    public void setProductionFitments(List<ProductionFitment> productionFitments) {
         this.ProductionFitments = productionFitments;
     }
 

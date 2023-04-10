@@ -39,7 +39,7 @@ public class CarService {
 
     public void saveCar(ProductionFitment fitment, Session session) {
         ProductionCar car = fitment.getCar();
-        new ProdCarChecker().checkCarFields(car);
+        new ProdCarChecker().checkCarFields(car); //for now, checks car Drives.
         car = checkCarExistence(car, session);
         if (car.getCarID()==0){
             prepareCarAttributes(car, session);
@@ -50,8 +50,8 @@ public class CarService {
     }
 
     private void prepareCarAttributes(ProductionCar car, Session session) {
-        Set<CarAttribute> attributes = car.getAttributes();
-        Set<CarAttribute> checkedAttributes = new HashSet<>();
+        List<CarAttribute> attributes = car.getAttributes();
+        List<CarAttribute> checkedAttributes = new ArrayList<>();
         attributes.forEach(attribute->{
             CarAttribute checkedAtt = CarDAO.checkAttribute(attribute, session);
             checkedAttributes.add(Objects.requireNonNullElse(checkedAtt, attribute));

@@ -173,7 +173,7 @@ public class BilConverter {
     }
 
     private void setCarAttributes(BilCar bilcar, ProductionCar resCar) {
-        Set<CarAttribute> carAttributes = new HashSet<>();
+        List<CarAttribute> carAttributes = new ArrayList<>();
 
         String body = bilcar.getBody();
         if (body!=null&&body.length()!=0){
@@ -257,7 +257,7 @@ public class BilConverter {
        // Set<ItemAttribute> shockParameters = getShockParameters(shock);
         Set<ItemAttribute> shockParameters = new HashSet<>();
         Set<BilSpec>specs = shock.getBilSpecs();
-        initParams(item);
+        //initParams(item);
         specs.forEach(spec->{
             ItemAttribute attribute = new ItemAttribute();
             checkForLength(spec, item);//sets lengths to item, if present. Also modifies spec name in that case
@@ -308,8 +308,8 @@ public class BilConverter {
 
     private void initParams(ProductionItem item) {
         ShockParameters params = new ShockParameters();
-        item.setParams(params);
-        params.setItem(item);
+      ///  item.setParams(params);
+    //   params.setItem(item);
     }
 
     private void checkForLength(BilSpec spec, ProductionItem item) {
@@ -317,12 +317,12 @@ public class BilConverter {
         if (name.equals("Extended Length (IN)")){
            spec.setSpecName("Extended Length");
            double length = checkLengthFormat(spec);
-           item.getParams().setExtLength(length);
+    //       item.getParams().setExtLength(length);
         }
         if (name.equals("Collapsed Length (IN)")){
             spec.setSpecName("Collapsed Length");
             double length = checkLengthFormat(spec);
-            item.getParams().setColLength(length);
+       //     item.getParams().setColLength(length);
         }
     }
 

@@ -60,8 +60,8 @@ public class ItemDAO {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<ProductionItem> crQ = builder.createQuery(ProductionItem.class);
         Root<ProductionItem> root = crQ.from(ProductionItem.class);
-        //crQ.where(builder.equal(root.get("itemManufacturer"), itemMake));
-        crQ.where(builder.notEqual(root.get("itemManufacturer"), itemMake));
+        crQ.where(builder.equal(root.get("itemManufacturer"), itemMake));
+        //crQ.where(builder.notEqual(root.get("itemManufacturer"), itemMake));
         Query q = session.createQuery(crQ);
         allItemList = q.getResultList();
 
@@ -220,6 +220,78 @@ public class ItemDAO {
         }
 
 
+    }
+
+    public static void updateItemAttLinks(Session session, List<ItemAttributeLink> linksToUpdate) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            linksToUpdate.forEach(session::update);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void deleteItemAttributes(Session session, List<ItemAttribute> attributes) {
+       // session.delete(attribute);
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            attributes.forEach(session::delete);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveItemAttributes(Session session, Set<ItemAttribute> attributes) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            attributes.forEach(session::save);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static void saveItems(Session session, Set<ProductionItem> items) {
+        Transaction transaction = null;
+        try {
+            transaction = session.getTransaction();
+            transaction.begin();
+            items.forEach(session::save);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public static List<ProductionItem> getAllItemsExistingSession(Session session) {
+        List<ProductionItem> allItemList;
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ProductionItem> crQ = builder.createQuery(ProductionItem.class);
+        Root<ProductionItem> root = crQ.from(ProductionItem.class);
+        Query q = session.createQuery(crQ);
+        allItemList = q.getResultList();
+
+        return allItemList;
     }
 
     /*public static void saveItems(Set<ProductionItem> newItems) {

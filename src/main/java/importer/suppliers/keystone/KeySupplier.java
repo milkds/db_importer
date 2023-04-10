@@ -116,7 +116,8 @@ public class KeySupplier {
             logger.debug("Checking item " + keyItem);
             ProductionItem currentProdItem = prodItemMap.get(keyItem.getPartNo());
             if (currentProdItem!=null){
-                boolean updateNeeded = iterateSpecs(currentProdItem, keyItem);
+               // boolean updateNeeded = iterateSpecs(currentProdItem, keyItem);
+                boolean updateNeeded = true;
                 if (updateNeeded){
                     result.add(currentProdItem);
                 }
@@ -131,7 +132,7 @@ public class KeySupplier {
 
     private boolean iterateSpecs(ProductionItem currentProdItem, KeyItem keyItem) {
         boolean result = false;
-        List<KeyItemSpec> keySpecs = keyItem.getSpecs();
+      /*  List<KeyItemSpec> keySpecs = keyItem.getSpecs();
         for (KeyItemSpec spec : keySpecs) {
             String name = spec.getSpecName();
             if (name.equals("Extended Length (IN)")) {
@@ -172,7 +173,7 @@ public class KeySupplier {
                     result = true;
                 }
             }
-        }
+        }*/
 
         return result;
     }

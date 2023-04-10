@@ -27,6 +27,17 @@ public class ItemService {
         return result;
     }
 
+    public static Map<String, ItemAttribute> getItemAttMap(Session session) {
+        Map<String, ItemAttribute> result = new HashMap<>();
+        List<ItemAttribute> attributes = ItemDAO.getAllItemAttributes(session);
+        attributes.forEach(att -> {
+            result.put(att.getItemAttName()+att.getItemAttValue(), att);
+        });
+
+
+        return result;
+    }
+
     public void updateItemAttributes(List<ItemAttribute> allAttributes, Session session) {
         Set<String> correctMounts = getCorrectMounts();
         Map<String, String> mountMap = getMountMap();
@@ -161,15 +172,15 @@ public class ItemService {
         Set<ItemAttribute> attributes = item.getItemAttributes();
         Set<ItemAttribute> checkedAttributes = new HashSet<>();
         attributes.forEach(attribute->{
-            new ProdItemAttChecker().checkAttributeContent(attribute);
-            ItemAttribute checkedAtt = ItemDAO.checkAttribute (attribute, session); //checks existence
+            new ProdItemAttChecker().checkAttributeContent(attribute); //only changes compressed to collapsed in att name for now
+            ItemAttribute checkedAtt = ItemDAO.checkAttribute (attribute, session); //checks existence - procedure needs to be changed
             checkedAttributes.add(Objects.requireNonNullElse(checkedAtt, attribute));
         });
         item.setItemAttributes(checkedAttributes);
     }
-
+    //adds item lengths attributes for old Lesha import
     private void checkLengths(ProductionItem item) {
-        ShockParameters params = item.getParams();
+        /*ShockParameters params = item.getParams();
         if (params==null){
             return;
         }
@@ -180,11 +191,12 @@ public class ItemService {
         double extLength = params.getExtLength();
         if (extLength!=0){
             item.getItemAttributes().add(new ItemAttribute("Fully Extended Length", extLength+""));
-        }
+        }*/
     }
 
+    //adds item mount attributes for old Lesha import
     private void checkMounts(ProductionItem item) {
-        ShockParameters params = item.getParams();
+        /*ShockParameters params = item.getParams();
         if (params==null){
             return;
         }
@@ -196,7 +208,7 @@ public class ItemService {
         String lowerMount = params.getLowerMount();
         if (lowerMount!=null&&lowerMount.length()>0){
             item.getItemAttributes().add(new ItemAttribute("Lower Mount Full", lowerMount));
-        }
+        }*/
     }
 
     private String checkMount(String mount) {

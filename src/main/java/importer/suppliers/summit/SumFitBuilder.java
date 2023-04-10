@@ -29,6 +29,8 @@ class SumFitBuilder {
         Set<String> result = new HashSet<>();
         result.add("Shock Model:");
         result.add("Usage:");
+        result.add("Footnotes:");
+        result.add("Kit Part Number:");
 
         return result;
     }
@@ -1021,6 +1023,14 @@ class SumFitBuilder {
         result.add("Transmission:");
         result.add("Body Style:");
         result.add("Doors:");
+        result.add("Leaf Spring Type (application):");
+        result.add("Maximum Tire Width (in.)(application):");
+        result.add("Maximum Tire Height (in.):");
+        result.add("Recommended Wheel Backspace (in.):");
+        result.add("Steering Box Type (application):");
+        result.add("Brake Line Position:");
+        result.add("Recommended Wheel Width (in.):");
+        result.add("Engine Designation:");
 
         return result;
     }
@@ -1047,6 +1057,13 @@ class SumFitBuilder {
         result.add("Amount of Drop Front:");
         result.add("Amount of Drop Rear:");
         result.add("Strut Mount Position:");
+        result.add("Amount Lowered:");
+        result.add("Block Position:");
+        result.add("Bushing Position:");
+        result.add("Tie Rod End Position:");
+        result.add("Ride Height (application):");
+        result.add("Bushing Offset:");
+        result.add("Shackle/Hanger Position:");
 
         return result;
     }

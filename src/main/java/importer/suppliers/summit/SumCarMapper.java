@@ -737,6 +737,28 @@ class SumCarMapper {
         result.put("midnight edition", "Midnight Edition");
         result.put("c3", "C3");
         result.put("trx launch edition", "TRX Launch Edition");
+        result.put("1-ton", "1-Ton");
+        result.put("463", "463");
+        result.put("473", "473");
+        result.put("cj-2", "CJ-2");
+        result.put("cj-3", "CJ-3");
+        result.put("cj-5", "CJ-5");
+        result.put("cj-6", "CJ-6");
+        result.put("dj-3", "DJ-3");
+        result.put("fj", "FJ");
+        result.put("jeepster", "Jeepster");
+        result.put("sedan delivery", "Sedan Delivery");
+        result.put("truck", "Truck");
+        result.put("utility wagon", "Utility Wagon");
+        result.put("whb", "WBH");
+        result.put("m38a1", "M38A1");
+        result.put("big bend", "Big Bend");
+        result.put("black diamond", "Black Diamond");
+        result.put("outer banks", "Outer Banks");
+        result.put("n/a", "Base");
+        result.put("unlimited high tide", "Unlimited High Tide");
+        result.put("esv", "ESV");
+        result.put("ext", "EXT");
 
 
 
@@ -929,6 +951,8 @@ class SumCarMapper {
         result.put("rx-3", "RX-3");
         result.put("fiesta", "Fiesta");
         result.put("silverado 1500 ltd", "Silverado 1500 LTD");
+        result.put("sierra denali", "Sierra Denali");
+        result.put("sj413", "SJ413");
 
 
 
