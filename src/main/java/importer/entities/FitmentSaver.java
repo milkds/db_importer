@@ -16,6 +16,7 @@ public class FitmentSaver {
     private static final Logger logger = LogManager.getLogger(FitmentSaver.class.getName());
     private Map<String, FitmentAttribute> fitAttMap;//k = att name + att val, v = att
     private Map<Integer, ProductionFitment> fitmentMap;//k = fit ID, v = fit
+    private Map<Integer, List<ProductionFitment>> attOnFitMap ;//k = attID, v = list of fits for this att
 
     public FitmentSaver(Session session) {
         Instant start = Instant.now();
@@ -44,7 +45,7 @@ public class FitmentSaver {
     private void initAttFits(Session session) {
         Instant start = Instant.now();
         List<FitmentAttributeLink> allLinks = FitmentDAO.getAllFitAttLinks(session);
-        Map<Integer, List<ProductionFitment>> attOnFitMap = new HashMap<>();//k = attID, v = list of fits for this att
+        attOnFitMap = new HashMap<>();//k = attID, v = list of fits for this att
         allLinks.forEach(link -> {
             int fitID = link.getFitID();
             int attID = link.getAttID();
@@ -56,6 +57,7 @@ public class FitmentSaver {
             int attID = v.getFitmentAttID();
             v.setProductionFitments(attOnFitMap.get(attID));
         });
+        new ObjectFromSessionDetacher(session).detachFitLinks(allLinks);
         Instant finish = Instant.now();
         logger.info("Initiated all fits at atts in " + Duration.between(start,finish));
     }
@@ -106,9 +108,14 @@ public class FitmentSaver {
             curFitment.setFitmentAttributes(finalAtts);
             finalFits.add(curFitment);
         });
-
+        detachEntities(fitAttsToUpdate, fitAttsToSave);
         updateEntities(fitAttsToUpdate);
         saveEntities(fitAttsToSave, finalFits);
+    }
+
+    private void detachEntities(List<FitmentAttribute> fitAttsToUpdate, List<FitmentAttribute> fitAttsToSave) {
+        new ObjectFromSessionDetacher(session).detachFitAndFitAtts(fitAttsToUpdate, fitAttsToSave,
+                fitAttMap, fitmentMap, attOnFitMap);
     }
 
     private void saveEntities(List<FitmentAttribute> fitAttsToSave, List<ProductionFitment> finalFits) {

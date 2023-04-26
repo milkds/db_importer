@@ -244,12 +244,19 @@ public class FitmentDAO {
         try {
             transaction = session.getTransaction();
             transaction.begin();
-            fitAttsToSave.forEach(att->{
-                logger.info(att);
-                session.save(att);
-            });
+            for (int i = 0; i < fitAttsToSave.size(); i++) {
+                FitmentAttribute attribute = fitAttsToSave.get(i);
+                logger.info(attribute);
+                session.save(attribute);
+                if (i % 20 == 0) { // 20, same as the JDBC batch size
+                    // flush a batch of inserts and release memory:
+                    session.flush();
+                    session.clear();
+                }
+            }
             logger.info("commiting transaction at fit att save....");
             transaction.commit();
+            logger.info("transaction commited");
         } catch (Exception e) {
             e.printStackTrace();
             if (transaction != null) {
